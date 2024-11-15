@@ -57,7 +57,6 @@ impl<T: AstalIOApplicationImpl> AstalIOApplicationImplExt for T {}
 
 unsafe impl<T: AstalIOApplicationImpl> IsImplementable<T> for Application {
     fn interface_init(iface: &mut glib::Interface<Self>) {
-        println!("interface_init");
         let iface = iface.as_mut();
 
         iface.request = Some(application_request::<T>);
