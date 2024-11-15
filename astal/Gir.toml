@@ -33,7 +33,6 @@ manual = [
     "Gio.ActionGroup",
     "Gio.ActionMap",
     "Gdk.Monitor",
-    "GObject.InitiallyUnowned",
 ]
 
 [[object]]

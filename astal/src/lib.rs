@@ -1,4 +1,4 @@
-#![allow(unused_imports, unused_braces)]
+#![allow(unused_imports, dead_code, unused_braces)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 /// No-op.

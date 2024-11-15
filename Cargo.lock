@@ -6,14 +6,38 @@ version = 3
 name = "astal"
 version = "0.1.0"
 dependencies = [
+ "astal-io",
  "astal-sys",
  "bitflags",
  "gdk4",
  "gio",
  "glib",
- "glib-sys",
  "gtk4",
  "libc",
+]
+
+[[package]]
+name = "astal-io"
+version = "0.1.0"
+dependencies = [
+ "astal-io-sys",
+ "bitflags",
+ "gio",
+ "glib",
+ "libc",
+]
+
+[[package]]
+name = "astal-io-sys"
+version = "0.0.1"
+dependencies = [
+ "gio-sys",
+ "glib-sys",
+ "gobject-sys",
+ "libc",
+ "shell-words",
+ "system-deps",
+ "tempfile",
 ]
 
 [[package]]

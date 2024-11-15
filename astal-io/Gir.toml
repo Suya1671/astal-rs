@@ -1,0 +1,41 @@
+[options]
+library = "AstalIO"
+version = "0.1"
+min_cfg_version = "0.1"
+target_path = "."
+girs_directories = ["../gir-files", "../gir-astal"]
+work_mode = "normal"
+single_version_file = true
+generate_safety_asserts = true
+deprecate_by_min_version = true
+genereate_builder = true
+
+generate = [
+    "AstalIO.*",
+    "AstalIO.Application",
+    "AstalIO.AppError",
+    "AstalIO.Time",
+    "AstalIO.VariableBase",
+]
+
+manual = [
+    "GLib.Error",
+    "Gio.SocketConnection",
+    "Gio.SocketService",
+    "Gio.AsyncReadyCallback",
+    "Gio.AsyncResult",
+    "GObject.Closure",
+    "Gio.FileMonitor",
+    "GObject.Value",
+]
+
+[[object]]
+name = "AstalIO.Variable"
+status = "generate"
+generate_builder = true
+
+
+[[object]]
+name = "AstalIO.Process"
+status = "generate"
+generate_builder = true

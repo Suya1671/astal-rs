@@ -6,4 +6,4 @@ target_path = "."
 girs_directories = ["../../gir-files/", "../../gir-astal"]
 work_mode = "sys"
 single_version_file = true
-external_libraries = ["Gtk", "Gdk", "Gio", "GLib"]
+external_libraries = ["Gtk", "Gdk", "Gio", "GLib", "AstalIO"]

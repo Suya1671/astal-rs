@@ -79,13 +79,19 @@
     in rec {
       # for every astal package, copy the gir files to gir-astal
       # TODO: automatic fixup of gir files
-      packages.updateGir =
-        pkgs.writeShellScriptBin "update-gir"
-        (pkgs.lib.concatLines (pkgs.lib.map (pkg: ''
-            cp -r ${pkg}/share/gir-1.0/* gir-astal
-            chmod -R u+w gir-astal
-          '')
-          astalDevLibs));
+      packages.updateGir = pkgs.writeShellApplication {
+        name = "update-gir";
+        runtimeInputs = [pkgs.xmlstarlet];
+        text = ''
+          ${(pkgs.lib.concatLines (pkgs.lib.map (pkg: ''
+              cp -r ${pkg}/share/gir-1.0/* gir-astal
+              chmod -R u+w gir-astal
+            '')
+            astalDevLibs))}
+
+          xmlstarlet ed -L -u '/repository/@version' -v '4.0' gir-astal/Astal-4.0.gir
+        '';
+      };
 
       devShells.default = pkgs.mkShell {
         packages =

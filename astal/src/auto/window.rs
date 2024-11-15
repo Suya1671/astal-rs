@@ -9,7 +9,7 @@ use std::{boxed::Box as Box_};
 
 glib::wrapper! {
     #[doc(alias = "AstalWindow")]
-    pub struct Window(Object<ffi::AstalWindow, ffi::AstalWindowClass>) @extends gtk::Window, gtk::Widget, gobject::InitiallyUnowned, @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
+    pub struct Window(Object<ffi::AstalWindow, ffi::AstalWindowClass>) @extends gtk::Window, gtk::Widget, @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 
     match fn {
         type_ => || ffi::astal_window_get_type(),

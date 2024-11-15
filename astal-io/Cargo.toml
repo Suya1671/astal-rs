@@ -1,5 +1,5 @@
 [package]
-name = "astal"
+name = "astal-io"
 version = "0.1.0"
 edition = "2021"
 
@@ -15,21 +15,8 @@ rustdoc-args = ["--cfg", "docsrs"]
 libc = "0.2"
 bitflags.workspace = true
 glib.workspace = true
-gdk.workspace = true
-gtk.workspace = true
 gio.workspace = true
 
 [dependencies.ffi]
-package = "astal-sys"
+package = "astal-io-sys"
 path = "./sys"
-
-[dependencies.astal-io]
-path = "../astal-io"
-
-[features]
-default = ["gio_v2_80", "gtk_v4_6"]
-gio_v2_28 = []
-gio_v2_32 = ["gio_v2_28"]
-gio_v2_80 = ["gio_v2_32", "gio/v2_80"]
-gtk_v4_2 = ["gtk/v4_2"]
-gtk_v4_6 = ["gtk_v4_2", "gtk/v4_6"]
