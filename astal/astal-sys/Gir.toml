@@ -1,0 +1,9 @@
+[options]
+library = "Astal"
+version = "4.0"
+min_cfg_version = "4.0"
+target_path = "."
+girs_directories = ["../../gir-files/", "../../gir-astal"]
+work_mode = "sys"
+single_version_file = true
+external_libraries = ["Gtk", "Gdk", "Gio", "GLib"]

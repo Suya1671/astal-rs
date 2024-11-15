@@ -1,0 +1,31 @@
+[package]
+name = "astal"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.docs.rs]
+all-features = true
+# For build.rs scripts
+rustc-args = ["--cfg", "docsrs"]
+# For rustdoc
+rustdoc-args = ["--cfg", "docsrs"]
+
+
+[dependencies]
+libc = "0.2"
+bitflags.workspace = true
+glib.workspace = true
+glib-sys.workspace = true
+gdk.workspace = true
+gtk.workspace = true
+gio.workspace = true
+
+[dependencies.ffi]
+package = "astal-sys"
+path = "./astal-sys"
+
+[features]
+gio_v2_28 = []
+gio_v2_80 = ["gio_v2_28", "gio/v2_80"]
+gtk_v4_2 = ["gtk/v4_2"]
+gtk_v4_6 = ["gtk_v4_2", "gtk/v4_6"]
