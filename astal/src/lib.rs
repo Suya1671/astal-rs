@@ -24,6 +24,10 @@ use ffi;
 mod auto;
 pub mod subclass;
 
+pub mod prelude {
+    pub use crate::auto::traits::*;
+}
+
 pub mod functions {
     // pub use super::auto::functions::*;
 }
