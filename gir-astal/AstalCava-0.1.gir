@@ -2,417 +2,385 @@
 <!-- This file was automatically generated from C sources - DO NOT EDIT!
 To affect the contents of this file, edit the original C definitions,
 and/or use gtk-doc annotations.  -->
-<repository xmlns="http://www.gtk.org/introspection/core/1.0"
-  xmlns:c="http://www.gtk.org/introspection/c/1.0"
-  xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
-  <include name="GObject" version="2.0" />
-  <include name="Gio" version="2.0" />
-  <package name="astal-cava-0.1" />
-  <c:include name="astal-cava.h" />
-  <namespace name="AstalCava" version="0.1"
-    shared-library="/nix/store/zkfr94byb90mpgknv5giw5dlcphlms1y-astal-cava-0.1.0/lib/libastal-cava.so.0"
-    c:identifier-prefixes="AstalCava" c:symbol-prefixes="astal_cava">
-    <class name="Cava" c:symbol-prefix="cava" c:type="AstalCavaCava" parent="GObject.Object"
-      glib:type-name="AstalCavaCava" glib:get-type="astal_cava_cava_get_type"
-      glib:type-struct="CavaClass">
-      <source-position filename="astal-cava.h" line="25" />
+<repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
+  <include name="GObject" version="2.0"/>
+  <include name="Gio" version="2.0"/>
+  <package name="astal-cava-0.1"/>
+  <c:include name="astal-cava.h"/>
+  <namespace name="AstalCava" version="0.1" shared-library="/nix/store/zkfr94byb90mpgknv5giw5dlcphlms1y-astal-cava-0.1.0/lib/libastal-cava.so.0" c:identifier-prefixes="AstalCava" c:symbol-prefixes="astal_cava">
+    <class name="Cava" c:symbol-prefix="cava" c:type="AstalCavaCava" parent="GObject.Object" glib:type-name="AstalCavaCava" glib:get-type="astal_cava_cava_get_type" glib:type-struct="CavaClass">
+      <source-position filename="astal-cava.h" line="25"/>
       <function name="get_default" c:identifier="astal_cava_cava_get_default">
         <doc xml:space="preserve" filename="cava.c" line="511">gets the default Cava object.</doc>
-        <source-position filename="astal-cava.h" line="27" />
+        <source-position filename="astal-cava.h" line="27"/>
         <return-value transfer-ownership="none" nullable="1">
-          <type name="Cava" c:type="AstalCavaCava*" />
+          <type name="Cava" c:type="AstalCavaCava*"/>
         </return-value>
       </function>
       <method name="get_active" c:identifier="astal_cava_cava_get_active" glib:get-property="active">
-        <source-position filename="astal-cava.h" line="30" />
+        <source-position filename="astal-cava.h" line="30"/>
         <return-value transfer-ownership="none">
-          <type name="gboolean" c:type="gboolean" />
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_autosens" c:identifier="astal_cava_cava_get_autosens"
-        glib:get-property="autosens">
-        <source-position filename="astal-cava.h" line="38" />
+      <method name="get_autosens" c:identifier="astal_cava_cava_get_autosens" glib:get-property="autosens">
+        <source-position filename="astal-cava.h" line="38"/>
         <return-value transfer-ownership="none">
-          <type name="gboolean" c:type="gboolean" />
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_bars" c:identifier="astal_cava_cava_get_bars" glib:get-property="bars">
-        <source-position filename="astal-cava.h" line="35" />
+        <source-position filename="astal-cava.h" line="35"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_channels" c:identifier="astal_cava_cava_get_channels"
-        glib:get-property="channels">
-        <source-position filename="astal-cava.h" line="56" />
+      <method name="get_channels" c:identifier="astal_cava_cava_get_channels" glib:get-property="channels">
+        <source-position filename="astal-cava.h" line="56"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_framerate" c:identifier="astal_cava_cava_get_framerate"
-        glib:get-property="framerate">
-        <source-position filename="astal-cava.h" line="47" />
+      <method name="get_framerate" c:identifier="astal_cava_cava_get_framerate" glib:get-property="framerate">
+        <source-position filename="astal-cava.h" line="47"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_high_cutoff" c:identifier="astal_cava_cava_get_high_cutoff"
-        glib:get-property="high-cutoff">
-        <source-position filename="astal-cava.h" line="62" />
+      <method name="get_high_cutoff" c:identifier="astal_cava_cava_get_high_cutoff" glib:get-property="high-cutoff">
+        <source-position filename="astal-cava.h" line="62"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_input" c:identifier="astal_cava_cava_get_input" glib:get-property="input">
-        <source-position filename="astal-cava.h" line="50" />
+        <source-position filename="astal-cava.h" line="50"/>
         <return-value transfer-ownership="none">
-          <type name="Input" c:type="AstalCavaInput" />
+          <type name="Input" c:type="AstalCavaInput"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_low_cutoff" c:identifier="astal_cava_cava_get_low_cutoff"
-        glib:get-property="low-cutoff">
-        <source-position filename="astal-cava.h" line="59" />
+      <method name="get_low_cutoff" c:identifier="astal_cava_cava_get_low_cutoff" glib:get-property="low-cutoff">
+        <source-position filename="astal-cava.h" line="59"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_noise_reduction" c:identifier="astal_cava_cava_get_noise_reduction"
-        glib:get-property="noise-reduction">
-        <source-position filename="astal-cava.h" line="44" />
+      <method name="get_noise_reduction" c:identifier="astal_cava_cava_get_noise_reduction" glib:get-property="noise-reduction">
+        <source-position filename="astal-cava.h" line="44"/>
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="get_samplerate" c:identifier="astal_cava_cava_get_samplerate"
-        glib:get-property="samplerate">
-        <source-position filename="astal-cava.h" line="65" />
+      <method name="get_samplerate" c:identifier="astal_cava_cava_get_samplerate" glib:get-property="samplerate">
+        <source-position filename="astal-cava.h" line="65"/>
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_source" c:identifier="astal_cava_cava_get_source" glib:get-property="source">
-        <source-position filename="astal-cava.h" line="53" />
+        <source-position filename="astal-cava.h" line="53"/>
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_stereo" c:identifier="astal_cava_cava_get_stereo" glib:get-property="stereo">
-        <source-position filename="astal-cava.h" line="41" />
+        <source-position filename="astal-cava.h" line="41"/>
         <return-value transfer-ownership="none">
-          <type name="gboolean" c:type="gboolean" />
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_values" c:identifier="astal_cava_cava_get_values" glib:get-property="values">
-        <source-position filename="astal-cava.h" line="33" />
+        <source-position filename="astal-cava.h" line="33"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve" filename="cava.c" line="286">a list of values</doc>
           <array name="GLib.Array" c:type="GArray*">
-            <type name="gdouble" />
+            <type name="gdouble"/>
           </array>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve" filename="cava.c" line="284">the AstalCavaCava object</doc>
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_active" c:identifier="astal_cava_cava_set_active" glib:set-property="active">
-        <source-position filename="astal-cava.h" line="31" />
+        <source-position filename="astal-cava.h" line="31"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="active" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean" />
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_autosens" c:identifier="astal_cava_cava_set_autosens"
-        glib:set-property="autosens">
-        <source-position filename="astal-cava.h" line="39" />
+      <method name="set_autosens" c:identifier="astal_cava_cava_set_autosens" glib:set-property="autosens">
+        <source-position filename="astal-cava.h" line="39"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="autosens" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean" />
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
       <method name="set_bars" c:identifier="astal_cava_cava_set_bars" glib:set-property="bars">
-        <source-position filename="astal-cava.h" line="36" />
+        <source-position filename="astal-cava.h" line="36"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="bars" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_channels" c:identifier="astal_cava_cava_set_channels"
-        glib:set-property="channels">
-        <source-position filename="astal-cava.h" line="57" />
+      <method name="set_channels" c:identifier="astal_cava_cava_set_channels" glib:set-property="channels">
+        <source-position filename="astal-cava.h" line="57"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="channels" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_framerate" c:identifier="astal_cava_cava_set_framerate"
-        glib:set-property="framerate">
-        <source-position filename="astal-cava.h" line="48" />
+      <method name="set_framerate" c:identifier="astal_cava_cava_set_framerate" glib:set-property="framerate">
+        <source-position filename="astal-cava.h" line="48"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="framerate" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_high_cutoff" c:identifier="astal_cava_cava_set_high_cutoff"
-        glib:set-property="high-cutoff">
-        <source-position filename="astal-cava.h" line="63" />
+      <method name="set_high_cutoff" c:identifier="astal_cava_cava_set_high_cutoff" glib:set-property="high-cutoff">
+        <source-position filename="astal-cava.h" line="63"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="high_cutoff" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <method name="set_input" c:identifier="astal_cava_cava_set_input" glib:set-property="input">
-        <source-position filename="astal-cava.h" line="51" />
+        <source-position filename="astal-cava.h" line="51"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="input" transfer-ownership="none">
-            <type name="Input" c:type="AstalCavaInput" />
+            <type name="Input" c:type="AstalCavaInput"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_low_cutoff" c:identifier="astal_cava_cava_set_low_cutoff"
-        glib:set-property="low-cutoff">
-        <source-position filename="astal-cava.h" line="60" />
+      <method name="set_low_cutoff" c:identifier="astal_cava_cava_set_low_cutoff" glib:set-property="low-cutoff">
+        <source-position filename="astal-cava.h" line="60"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="low_cutoff" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_noise_reduction" c:identifier="astal_cava_cava_set_noise_reduction"
-        glib:set-property="noise-reduction">
-        <source-position filename="astal-cava.h" line="45" />
+      <method name="set_noise_reduction" c:identifier="astal_cava_cava_set_noise_reduction" glib:set-property="noise-reduction">
+        <source-position filename="astal-cava.h" line="45"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="noise" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
-      <method name="set_samplerate" c:identifier="astal_cava_cava_set_samplerate"
-        glib:set-property="samplerate">
-        <source-position filename="astal-cava.h" line="66" />
+      <method name="set_samplerate" c:identifier="astal_cava_cava_set_samplerate" glib:set-property="samplerate">
+        <source-position filename="astal-cava.h" line="66"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="samplerate" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <method name="set_source" c:identifier="astal_cava_cava_set_source" glib:set-property="source">
-        <source-position filename="astal-cava.h" line="54" />
+        <source-position filename="astal-cava.h" line="54"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="source" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="set_stereo" c:identifier="astal_cava_cava_set_stereo" glib:set-property="stereo">
-        <source-position filename="astal-cava.h" line="42" />
+        <source-position filename="astal-cava.h" line="42"/>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Cava" c:type="AstalCavaCava*" />
+            <type name="Cava" c:type="AstalCavaCava*"/>
           </instance-parameter>
           <parameter name="stereo" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean" />
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
-      <property name="active" writable="1" construct="1" transfer-ownership="none"
-        setter="set_active" getter="get_active" default-value="TRUE">
+      <property name="active" writable="1" construct="1" transfer-ownership="none" setter="set_active" getter="get_active" default-value="TRUE">
         <doc xml:space="preserve" filename="cava.c" line="562">whether or not the audio capture and visualization is running. if false the values array will
 not be updated.</doc>
-        <type name="gboolean" c:type="gboolean" />
+        <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="autosens" writable="1" construct="1" transfer-ownership="none"
-        setter="set_autosens" getter="get_autosens" default-value="TRUE">
+      <property name="autosens" writable="1" construct="1" transfer-ownership="none" setter="set_autosens" getter="get_autosens" default-value="TRUE">
         <doc xml:space="preserve" filename="cava.c" line="578">When set, the sensitivity will automatically be adjusted.</doc>
-        <type name="gboolean" c:type="gboolean" />
+        <type name="gboolean" c:type="gboolean"/>
       </property>
-      <property name="bars" writable="1" construct="1" transfer-ownership="none" setter="set_bars"
-        getter="get_bars" default-value="20">
+      <property name="bars" writable="1" construct="1" transfer-ownership="none" setter="set_bars" getter="get_bars" default-value="20">
         <doc xml:space="preserve" filename="cava.c" line="570">the number of bars the visualizer should create.</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="channels" writable="1" construct="1" transfer-ownership="none"
-        setter="set_channels" getter="get_channels" default-value="2">
+      <property name="channels" writable="1" construct="1" transfer-ownership="none" setter="set_channels" getter="get_channels" default-value="2">
         <doc xml:space="preserve" filename="cava.c" line="610">how many input channels to consider</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="framerate" writable="1" construct="1" transfer-ownership="none"
-        setter="set_framerate" getter="get_framerate" default-value="60">
+      <property name="framerate" writable="1" construct="1" transfer-ownership="none" setter="set_framerate" getter="get_framerate" default-value="60">
         <doc xml:space="preserve" filename="cava.c" line="602">how often the values should be updated</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="high-cutoff" writable="1" construct="1" transfer-ownership="none"
-        setter="set_high_cutoff" getter="get_high_cutoff" default-value="10000">
+      <property name="high-cutoff" writable="1" construct="1" transfer-ownership="none" setter="set_high_cutoff" getter="get_high_cutoff" default-value="10000">
         <doc xml:space="preserve" filename="cava.c" line="625">cut off frequencies above this value</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="input" writable="1" construct="1" transfer-ownership="none" setter="set_input"
-        getter="get_input" default-value="ASTAL_CAVA_INPUT_PIPEWIRE">
+      <property name="input" writable="1" construct="1" transfer-ownership="none" setter="set_input" getter="get_input" default-value="ASTAL_CAVA_INPUT_PIPEWIRE">
         <doc xml:space="preserve" filename="cava.c" line="641">specifies which audio server should be used.</doc>
-        <type name="Input" />
+        <type name="Input"/>
       </property>
-      <property name="low-cutoff" writable="1" construct="1" transfer-ownership="none"
-        setter="set_low_cutoff" getter="get_low_cutoff" default-value="50">
+      <property name="low-cutoff" writable="1" construct="1" transfer-ownership="none" setter="set_low_cutoff" getter="get_low_cutoff" default-value="50">
         <doc xml:space="preserve" filename="cava.c" line="617">cut off frequencies below this value</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="noise-reduction" writable="1" construct="1" transfer-ownership="none"
-        setter="set_noise_reduction" getter="get_noise_reduction" default-value="0.770000">
+      <property name="noise-reduction" writable="1" construct="1" transfer-ownership="none" setter="set_noise_reduction" getter="get_noise_reduction" default-value="0.770000">
         <doc xml:space="preserve" filename="cava.c" line="593">adjusts the noise-reduction filter. low values are fast and noisy, large values are slow and
 smooth.</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <type name="gdouble" c:type="gdouble"/>
       </property>
-      <property name="samplerate" writable="1" construct="1" transfer-ownership="none"
-        setter="set_samplerate" getter="get_samplerate" default-value="44100">
+      <property name="samplerate" writable="1" construct="1" transfer-ownership="none" setter="set_samplerate" getter="get_samplerate" default-value="44100">
         <doc xml:space="preserve" filename="cava.c" line="633">the samplerate of the input</doc>
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
-      <property name="source" writable="1" construct="1" transfer-ownership="none"
-        setter="set_source" getter="get_source" default-value="auto">
+      <property name="source" writable="1" construct="1" transfer-ownership="none" setter="set_source" getter="get_source" default-value="auto">
         <doc xml:space="preserve" filename="cava.c" line="649">specifies which audio source should be used. Refer to the cava docs on how to use this
 property.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
-      <property name="stereo" writable="1" construct="1" transfer-ownership="none"
-        setter="set_stereo" getter="get_stereo" default-value="FALSE">
-        <type name="gboolean" c:type="gboolean" />
+      <property name="stereo" writable="1" construct="1" transfer-ownership="none" setter="set_stereo" getter="get_stereo" default-value="FALSE">
+        <type name="gboolean" c:type="gboolean"/>
       </property>
       <property name="values" transfer-ownership="none" getter="get_values">
         <doc xml:space="preserve" filename="cava.c" line="549">A list of values, each represent the height of one bar. The values are generally between 0
@@ -423,18 +391,18 @@ half of the array will represent the left channel and the second half the right 
 there will be only bars/2 bars per channel. If the number of bars is odd, the last value will
 be 0.</doc>
         <array name="GLib.Array" c:type="gpointer">
-          <type name="gdouble" />
+          <type name="gdouble"/>
         </array>
       </property>
     </class>
     <record name="CavaClass" c:type="AstalCavaCavaClass" glib:is-gtype-struct-for="Cava">
-      <source-position filename="astal-cava.h" line="25" />
+      <source-position filename="astal-cava.h" line="25"/>
       <field name="parent_class">
-        <type name="GObject.ObjectClass" c:type="GObjectClass" />
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
       </field>
     </record>
     <enumeration name="Input" c:type="AstalCavaInput">
-      <source-position filename="astal-cava.h" line="21" />
+      <source-position filename="astal-cava.h" line="21"/>
       <member name="fifo" value="0" c:identifier="ASTAL_CAVA_INPUT_FIFO">
       </member>
       <member name="portaudio" value="1" c:identifier="ASTAL_CAVA_INPUT_PORTAUDIO">
@@ -458,9 +426,9 @@ be 0.</doc>
     </enumeration>
     <function name="get_default" c:identifier="astal_cava_get_default">
       <doc xml:space="preserve" filename="cava.c" line="502">gets the default Cava object.</doc>
-      <source-position filename="astal-cava.h" line="28" />
+      <source-position filename="astal-cava.h" line="28"/>
       <return-value transfer-ownership="none" nullable="1">
-        <type name="Cava" c:type="AstalCavaCava*" />
+        <type name="Cava" c:type="AstalCavaCava*"/>
       </return-value>
     </function>
   </namespace>

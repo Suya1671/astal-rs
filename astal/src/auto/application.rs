@@ -93,9 +93,9 @@ pub struct ApplicationBuilder {
                             Self { builder: self.builder.property("cursor-theme", cursor_theme.into()), }
                         }
 
-                            //pub fn menubar(self, menubar: &impl IsA</*Ignored*/gio::MenuModel>) -> Self {
-                        //    Self { builder: self.builder.property("menubar", menubar.clone().upcast()), }
-                        //}
+                            pub fn menubar(self, menubar: &impl IsA<gio::MenuModel>) -> Self {
+                            Self { builder: self.builder.property("menubar", menubar.clone().upcast()), }
+                        }
 
                             pub fn register_session(self, register_session: bool) -> Self {
                             Self { builder: self.builder.property("register-session", register_session), }
@@ -107,11 +107,11 @@ pub struct ApplicationBuilder {
                             Self { builder: self.builder.property("application-id", application_id.into()), }
                         }
 
-                        //    #[cfg(feature = "gio_v2_28")]
+                            #[cfg(feature = "gio_v2_28")]
     #[cfg_attr(docsrs, doc(cfg(feature = "gio_v2_28")))]
-    //pub fn flags(self, flags: /*Ignored*/gio::ApplicationFlags) -> Self {
-                        //    Self { builder: self.builder.property("flags", flags), }
-                        //}
+    pub fn flags(self, flags: gio::ApplicationFlags) -> Self {
+                            Self { builder: self.builder.property("flags", flags), }
+                        }
 
                             #[cfg(feature = "gio_v2_28")]
     #[cfg_attr(docsrs, doc(cfg(feature = "gio_v2_28")))]

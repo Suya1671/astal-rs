@@ -75,6 +75,7 @@
         io
         mpris
         cava
+        notifd
       ];
 
       astalDevLibs = pkgs.lib.map (pkg: pkg.dev) astalLibs;
@@ -127,6 +128,15 @@
             # remove repository -> namespace -> record (name = PlayerClass) -> field (name = appeared) and field (name = closed)
             xmlstarlet ed -L -d '//_:repository/_:namespace/_:record[@name="PlayerClass"]/_:field[@name="appeared"]' gir-astal/AstalMpris-0.1.gir
             xmlstarlet ed -L -d '//_:repository/_:namespace/_:record[@name="PlayerClass"]/_:field[@name="closed"]' gir-astal/AstalMpris-0.1.gir
+
+            # AstalNotifd-0.1.gir
+            echo "Updating AstalNotifd-0.1.gir"
+            # get constants with *_VERSION as name, and add type attribute
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_NOTIFD_MAJOR_VERSION gir-astal/AstalNotifd-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_NOTIFD_MINOR_VERSION gir-astal/AstalNotifd-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_NOTIFD_MICRO_VERSION gir-astal/AstalNotifd-0.1.gir
+            # add shared-library to namespace
+            xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-notifd.so gir-astal/AstalNotifd-0.1.gir
         '';
       };
 

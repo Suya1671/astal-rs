@@ -1,9 +1,9 @@
 [options]
-library = "Astal"
-version = "4.0"
-min_cfg_version = "4.0"
+library = "AstalNotifd"
+version = "0.1"
+min_cfg_version = "0.1"
 target_path = "."
 girs_directories = ["../../gir-files/", "../../gir-astal"]
 work_mode = "sys"
 single_version_file = true
-external_libraries = ["Gtk", "Gdk", "Gio", "GLib"]
+external_libraries = ["GObject", "GLib"]

@@ -1,0 +1,35 @@
+[package]
+name = "astal-notifd-sys"
+version = "0.0.1"
+edition = "2021"
+build = "build.rs"
+
+[package.metadata.system-deps.astal_notifd]
+name = "astal-notifd-0.1"
+version = "0.1"
+
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
+all-features = true
+
+[lib]
+name = "astal_notifd_sys"
+
+[dependencies]
+libc = "0.2"
+
+[dependencies.gobject-sys]
+workspace = true
+
+[dependencies.glib-sys]
+workspace = true
+
+[build-dependencies]
+system-deps = "7"
+
+[dev-dependencies]
+shell-words = "1.0.0"
+tempfile = "3"
+
+[features]

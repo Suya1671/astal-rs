@@ -138,9 +138,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("destroy-with-parent", destroy_with_parent), }
                         }
 
-                            //pub fn display(self, display: /*Ignored*/&gdk::Display) -> Self {
-                        //    Self { builder: self.builder.property("display", display), }
-                        //}
+                            pub fn display(self, display: &gdk::Display) -> Self {
+                            Self { builder: self.builder.property("display", display.clone()), }
+                        }
 
                             pub fn focus_visible(self, focus_visible: bool) -> Self {
                             Self { builder: self.builder.property("focus-visible", focus_visible), }
@@ -230,9 +230,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("focusable", focusable), }
                         }
 
-                            //pub fn halign(self, halign: /*Ignored*/gtk::Align) -> Self {
-                        //    Self { builder: self.builder.property("halign", halign), }
-                        //}
+                            pub fn halign(self, halign: gtk::Align) -> Self {
+                            Self { builder: self.builder.property("halign", halign), }
+                        }
 
                             pub fn has_tooltip(self, has_tooltip: bool) -> Self {
                             Self { builder: self.builder.property("has-tooltip", has_tooltip), }
@@ -250,9 +250,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("hexpand-set", hexpand_set), }
                         }
 
-                            //pub fn layout_manager(self, layout_manager: &impl IsA</*Ignored*/gtk::LayoutManager>) -> Self {
-                        //    Self { builder: self.builder.property("layout-manager", layout_manager.clone().upcast()), }
-                        //}
+                            pub fn layout_manager(self, layout_manager: &impl IsA<gtk::LayoutManager>) -> Self {
+                            Self { builder: self.builder.property("layout-manager", layout_manager.clone().upcast()), }
+                        }
 
                             pub fn margin_end(self, margin_end: i32) -> Self {
                             Self { builder: self.builder.property("margin-end", margin_end), }
@@ -270,9 +270,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("opacity", opacity), }
                         }
 
-                            //pub fn overflow(self, overflow: /*Ignored*/gtk::Overflow) -> Self {
-                        //    Self { builder: self.builder.property("overflow", overflow), }
-                        //}
+                            pub fn overflow(self, overflow: gtk::Overflow) -> Self {
+                            Self { builder: self.builder.property("overflow", overflow), }
+                        }
 
                             pub fn receives_default(self, receives_default: bool) -> Self {
                             Self { builder: self.builder.property("receives-default", receives_default), }
@@ -290,9 +290,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("tooltip-text", tooltip_text.into()), }
                         }
 
-                            //pub fn valign(self, valign: /*Ignored*/gtk::Align) -> Self {
-                        //    Self { builder: self.builder.property("valign", valign), }
-                        //}
+                            pub fn valign(self, valign: gtk::Align) -> Self {
+                            Self { builder: self.builder.property("valign", valign), }
+                        }
 
                             pub fn vexpand(self, vexpand: bool) -> Self {
                             Self { builder: self.builder.property("vexpand", vexpand), }
@@ -310,9 +310,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("width-request", width_request), }
                         }
 
-                            //pub fn accessible_role(self, accessible_role: /*Ignored*/gtk::AccessibleRole) -> Self {
-                        //    Self { builder: self.builder.property("accessible-role", accessible_role), }
-                        //}
+                            pub fn accessible_role(self, accessible_role: gtk::AccessibleRole) -> Self {
+                            Self { builder: self.builder.property("accessible-role", accessible_role), }
+                        }
 
     // rustdoc-stripper-ignore-next
     /// Build the [`Window`].

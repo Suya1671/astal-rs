@@ -8,6 +8,8 @@ members = [
     "mpris/sys",
     "cava",
     "cava/sys",
+    "notifd",
+    "notifd/sys",
 ]
 resolver = "2"
 
