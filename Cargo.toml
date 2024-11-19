@@ -1,5 +1,14 @@
 [workspace]
-members = ["astal", "astal/sys", "astal-io", "astal-io/sys"]
+members = [
+    "astal",
+    "astal/sys",
+    "astal-io",
+    "astal-io/sys",
+    "mpris",
+    "mpris/sys",
+    "cava",
+    "cava/sys",
+]
 resolver = "2"
 
 [workspace.package]
@@ -15,6 +24,8 @@ glib-sys = "0.20"
 glib = "0.20"
 gio = "0.20"
 gio-sys = "0.20"
+gdk-pixbuf-sys = "0.20"
+gdk-pixbuf = "0.20"
 gdk-sys = { package = "gdk4-sys", version = "0.9" }
 gdk = { package = "gdk4", version = "0.9" }
 gtk-sys = { package = "gtk4-sys", version = "0.9" }

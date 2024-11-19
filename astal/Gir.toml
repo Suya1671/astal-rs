@@ -33,6 +33,7 @@ manual = [
     "Gio.ActionGroup",
     "Gio.ActionMap",
     "Gdk.Monitor",
+    "Gdk.Cursor",
 ]
 
 [[object]]

@@ -1,0 +1,26 @@
+[options]
+library = "AstalMpris"
+version = "0.1"
+min_cfg_version = "0.1"
+target_path = "."
+girs_directories = ["../gir-files", "../gir-astal"]
+work_mode = "normal"
+single_version_file = true
+generate_safety_asserts = true
+deprecate_by_min_version = true
+genereate_builder = true
+
+generate = [
+    "AstalMpris.*",
+    "AstalMpris.Mpris",
+    "AstalMpris.Shuffle",
+    "AstalMpris.Loop",
+    "AstalMpris.PlaybackStatus",
+]
+
+manual = ["GLib.Variant"]
+
+[[object]]
+name = "AstalMpris.Player"
+status = "generate"
+generate_builder = true

@@ -1,20 +1,12 @@
 [package]
-name = "astal-sys"
+name = "astal-mpris-sys"
 version = "0.0.1"
+edition = "2021"
 build = "build.rs"
 
-[package.authors]
-workspace = true
-
-[package.edition]
-workspace = true
-
-[package.license]
-workspace = true
-
-[package.metadata.system-deps.astal_4]
-name = "astal-4-4.0"
-version = "4"
+[package.metadata.system-deps.astal_mpris]
+name = "astal-mpris-0.1"
+version = "0.1"
 
 [package.metadata.docs.rs]
 rustc-args = ["--cfg", "docsrs"]
@@ -22,15 +14,12 @@ rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
 all-features = true
 
 [lib]
-name = "astal_sys"
+name = "astal_mpris_sys"
 
 [dependencies]
 libc = "0.2"
 
-[dependencies.gtk-sys]
-workspace = true
-
-[dependencies.gdk-sys]
+[dependencies.gobject-sys]
 workspace = true
 
 [dependencies.gio-sys]
@@ -38,9 +27,6 @@ workspace = true
 
 [dependencies.glib-sys]
 workspace = true
-
-[dependencies.astal-io-sys]
-path = "../../astal-io/sys"
 
 [build-dependencies]
 system-deps = "7"
@@ -50,4 +36,3 @@ shell-words = "1.0.0"
 tempfile = "3"
 
 [features]
-v4 = []

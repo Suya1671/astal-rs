@@ -11,6 +11,7 @@ use gtk_sys as gtk;
 use gdk_sys as gdk;
 use gio_sys as gio;
 use glib_sys as glib;
+use astal_io_sys as astal_io;
 
 #[allow(unused_imports)]
 use std::ffi::{c_int, c_char, c_uchar, c_float, c_uint, c_double,

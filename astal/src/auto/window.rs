@@ -218,9 +218,9 @@ pub struct WindowBuilder {
                             Self { builder: self.builder.property("css-name", css_name.into()), }
                         }
 
-                            //pub fn cursor(self, cursor: /*Ignored*/&gdk::Cursor) -> Self {
-                        //    Self { builder: self.builder.property("cursor", cursor), }
-                        //}
+                            pub fn cursor(self, cursor: &gdk::Cursor) -> Self {
+                            Self { builder: self.builder.property("cursor", cursor.clone()), }
+                        }
 
                             pub fn focus_on_click(self, focus_on_click: bool) -> Self {
                             Self { builder: self.builder.property("focus-on-click", focus_on_click), }

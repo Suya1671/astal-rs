@@ -1,0 +1,9 @@
+[options]
+library = "AstalMpris"
+version = "0.1"
+min_cfg_version = "0.1"
+target_path = "."
+girs_directories = ["../../gir-files/", "../../gir-astal"]
+work_mode = "sys"
+single_version_file = true
+external_libraries = ["GObject", "Gio", "GLib"]

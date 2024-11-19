@@ -73,10 +73,12 @@
       astalLibs = with astalPkgs; [
         astal4
         io
+        mpris
+        cava
       ];
 
       astalDevLibs = pkgs.lib.map (pkg: pkg.dev) astalLibs;
-    in rec {
+    in {
       # for every astal package, copy the gir files to gir-astal
       # TODO: automatic fixup of gir files
       packages.updateGir = pkgs.writeShellApplication {
@@ -89,7 +91,42 @@
             '')
             astalDevLibs))}
 
-          xmlstarlet ed -L -u '/repository/@version' -v '4.0' gir-astal/Astal-4.0.gir
+            # remove repository -> namespace -> constant where name is VERSION
+            # this is a workaround for the fact that gir-rs does not support constants with utf-8 characters
+            echo "Removing constants with name VERSION"
+            xmlstarlet ed -L -d '//_:repository/_:namespace/_:constant[@name="VERSION"]' gir-astal/*.gir
+
+            # Astal-4.0.gir
+            echo "Updating Astal-4.0.gir"
+            # get constants with *_VERSION as name, and add type attribute
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_MAJOR_VERSION gir-astal/Astal-4.0.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_MINOR_VERSION gir-astal/Astal-4.0.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_MICRO_VERSION gir-astal/Astal-4.0.gir
+            # add repository -> include (name = AstalIO version = 0.1)
+            ${"xmlstarlet ed -L -s '//_:repository' -t elem -n include -v '' -i '//_:repository/include[not(@name)]' -t attr -n name -v AstalIO -i '//_:repository/include[@name=\"AstalIO\"]' -t attr -n version -v 0.1 gir-astal/Astal-4.0.gir"}
+            # add shared-library to namespace
+            xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-4.so gir-astal/Astal-4.0.gir
+
+            # AstalIO-0.1.gir
+            echo "Updating AstalIO-0.1.gir"
+            # get constants with *_VERSION as name, and add type attribute
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_IO_MAJOR_VERSION gir-astal/AstalIO-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_IO_MINOR_VERSION gir-astal/AstalIO-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_IO_MICRO_VERSION gir-astal/AstalIO-0.1.gir
+            # add shared-library to namespace
+            xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-io.so gir-astal/AstalIO-0.1.gir
+
+            # AstalMpris-0.1.gir
+            echo "Updating AstalMpris-0.1.gir"
+            # get constants with *_VERSION as name, and add type attribute
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_MPRIS_MAJOR_VERSION gir-astal/AstalMpris-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_MPRIS_MINOR_VERSION gir-astal/AstalMpris-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_MPRIS_MICRO_VERSION gir-astal/AstalMpris-0.1.gir
+            # add shared-library to namespace
+            xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-mpris.so gir-astal/AstalMpris-0.1.gir
+            # remove repository -> namespace -> record (name = PlayerClass) -> field (name = appeared) and field (name = closed)
+            xmlstarlet ed -L -d '//_:repository/_:namespace/_:record[@name="PlayerClass"]/_:field[@name="appeared"]' gir-astal/AstalMpris-0.1.gir
+            xmlstarlet ed -L -d '//_:repository/_:namespace/_:record[@name="PlayerClass"]/_:field[@name="closed"]' gir-astal/AstalMpris-0.1.gir
         '';
       };
 
@@ -99,7 +136,7 @@
             pkgs.nixd
             pkgs.alejandra
             pkgs.pkg-config
-            packages.updateGir
+            pkgs.glib
             toolchain
             gir-rs
 

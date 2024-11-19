@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="utf-8"?>
+<repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
+  <include name="GObject" version="2.0"/>
+  <include name="GLib" version="2.0"/>
+  <package name="astal-mpris"/>
+  <c:include name="astal-mpris.h"/>
+  <namespace name="AstalMpris" version="0.1" c:prefix="AstalMpris" c:identifier-prefixes="AstalMpris" c:symbol-prefixes="astal_mpris" shared-library="libastal-mpris.so">
+    <enumeration name="PlaybackStatus" c:type="AstalMprisPlaybackStatus" glib:type-name="AstalMprisPlaybackStatus" glib:get-type="astal_mpris_playback_status_get_type">
+      <member name="playing" c:identifier="ASTAL_MPRIS_PLAYBACK_STATUS_PLAYING" value="0"/>
+      <member name="paused" c:identifier="ASTAL_MPRIS_PLAYBACK_STATUS_PAUSED" value="1"/>
+      <member name="stopped" c:identifier="ASTAL_MPRIS_PLAYBACK_STATUS_STOPPED" value="2"/>
+    </enumeration>
+    <enumeration name="Loop" c:type="AstalMprisLoop" glib:type-name="AstalMprisLoop" glib:get-type="astal_mpris_loop_get_type">
+      <member name="unsupported" c:identifier="ASTAL_MPRIS_LOOP_UNSUPPORTED" value="0"/>
+      <member name="none" c:identifier="ASTAL_MPRIS_LOOP_NONE" value="1">
+        <doc xml:whitespace="preserve">The playback will stop when there are no more tracks to play.</doc>
+      </member>
+      <member name="track" c:identifier="ASTAL_MPRIS_LOOP_TRACK" value="2">
+        <doc xml:whitespace="preserve">The current track will start again from the begining once it has finished playing.</doc>
+      </member>
+      <member name="playlist" c:identifier="ASTAL_MPRIS_LOOP_PLAYLIST" value="3">
+        <doc xml:whitespace="preserve">The playback loops through a list of tracks.</doc>
+      </member>
+    </enumeration>
+    <enumeration name="Shuffle" c:type="AstalMprisShuffle" glib:type-name="AstalMprisShuffle" glib:get-type="astal_mpris_shuffle_get_type">
+      <member name="unsupported" c:identifier="ASTAL_MPRIS_SHUFFLE_UNSUPPORTED" value="0"/>
+      <member name="on" c:identifier="ASTAL_MPRIS_SHUFFLE_ON" value="1">
+        <doc xml:whitespace="preserve">Playback is progressing through a playlist in some other order.</doc>
+      </member>
+      <member name="off" c:identifier="ASTAL_MPRIS_SHUFFLE_OFF" value="2">
+        <doc xml:whitespace="preserve">Playback is progressing linearly through a playlist.</doc>
+      </member>
+    </enumeration>
+    <class name="Mpris" c:type="AstalMprisMpris" c:symbol-prefix="mpris" glib:type-name="AstalMprisMpris" glib:get-type="astal_mpris_mpris_get_type" glib:type-struct="MprisClass" parent="GObject.Object">
+      <doc xml:whitespace="preserve">Object that monitors dbus for players to appear and disappear.</doc>
+      <field name="parent_instance" readable="0" private="1">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="MprisPrivate" c:type="AstalMprisMprisPrivate*"/>
+      </field>
+      <function name="get_default" c:identifier="astal_mpris_mpris_get_default">
+        <doc xml:whitespace="preserve">Gets the default singleton Mpris instance.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalMpris.Mpris" c:type="AstalMprisMpris*"/>
+        </return-value>
+      </function>
+      <constructor name="new" c:identifier="astal_mpris_mpris_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalMpris.Mpris" c:type="AstalMprisMpris*"/>
+        </return-value>
+      </constructor>
+      <property name="players">
+        <doc xml:whitespace="preserve">List of currently available players.</doc>
+        <type name="GLib.List" c:type="GList*">
+          <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+        </type>
+      </property>
+      <method name="get_players" c:identifier="astal_mpris_mpris_get_players">
+        <return-value transfer-ownership="container">
+          <type name="GLib.List" c:type="GList*">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </type>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Mpris" c:type="AstalMprisMpris*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <glib:signal name="player-added">
+        <doc xml:whitespace="preserve">Emitted when a new mpris Player appears.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="player" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="player-closed">
+        <doc xml:whitespace="preserve">Emitted when a Player disappears.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="player" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <record name="MprisClass" c:type="AstalMprisMprisClass" glib:is-gtype-struct-for="Mpris">
+      <field name="parent_class" readable="0" private="1">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="MprisPrivate" c:type="AstalMprisMprisPrivate" disguised="1"/>
+    <class name="Player" c:type="AstalMprisPlayer" c:symbol-prefix="player" glib:type-name="AstalMprisPlayer" glib:get-type="astal_mpris_player_get_type" glib:type-struct="PlayerClass" parent="GObject.Object">
+      <doc xml:whitespace="preserve">Object which tracks players through their mpris dbus interface. The most simple way is to use [class@AstalMpris.Mpris] which tracks 
+every player, but [class@AstalMpris.Player] can be constructed for a dedicated players too.</doc>
+      <field name="parent_instance" readable="0" private="1">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="PlayerPrivate" c:type="AstalMprisPlayerPrivate*"/>
+      </field>
+      <method name="raise" c:identifier="astal_mpris_player_raise">
+        <doc xml:whitespace="preserve">Brings the player's user interface to the front using any appropriate mechanism available.
+The media player may be unable to control how its user interface is displayed, or it may not have a graphical user interface at all. In this 
+case, the [property@AstalMpris.Player:can_raise] is `false` and this method does nothing.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="quit" c:identifier="astal_mpris_player_quit">
+        <doc xml:whitespace="preserve">Causes the media player to stop running.
+The media player may refuse to allow clients to shut it down. In this case, the [property@AstalMpris.Player:can_quit] property is false 
+and this method does nothing.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="toggle_fullscreen" c:identifier="astal_mpris_player_toggle_fullscreen">
+        <doc xml:whitespace="preserve">Toggle [property@AstalMpris.Player:fullscreen] state.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="next" c:identifier="astal_mpris_player_next">
+        <doc xml:whitespace="preserve">Skips to the next track in the tracklist. If there is no next track (and endless playback and track repeat are both off), stop 
+playback. If [property@AstalMpris.Player:can_go_next] is `false` this method has no effect.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="previous" c:identifier="astal_mpris_player_previous">
+        <doc xml:whitespace="preserve">Skips to the previous track in the tracklist. If there is no previous track (and endless playback and track repeat are both off), 
+stop playback. If [property@AstalMpris.Player:can_go_previous] is `false` this method has no effect.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="pause" c:identifier="astal_mpris_player_pause">
+        <doc xml:whitespace="preserve">Pauses playback. If playback is already paused, this has no effect. If [property@AstalMpris.Player:can_pause] is `false` this method has 
+no effect.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="play_pause" c:identifier="astal_mpris_player_play_pause">
+        <doc xml:whitespace="preserve">Pauses playback. If playback is already paused, resumes playback. If playback is stopped, starts playback.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="stop" c:identifier="astal_mpris_player_stop">
+        <doc xml:whitespace="preserve">Stops playback. If playback is already stopped, this has no effect. If [property@AstalMpris.Player:can_control] is `false` this method 
+has no effect.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="play" c:identifier="astal_mpris_player_play">
+        <doc xml:whitespace="preserve">Starts or resumes playback. If already playing, this has no effect. If paused, playback resumes from the current position. If [property@
+AstalMpris.Player:can_play] is `false` this method has no effect.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="open_uri" c:identifier="astal_mpris_player_open_uri">
+        <doc xml:whitespace="preserve">uri scheme should be an element of [property@AstalMpris.Player:supported_uri_schemas] and the mime-type should match one of the elements 
+of [property@AstalMpris.Player:supported_mime_types].</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Uri of the track to load. </doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="loop" c:identifier="astal_mpris_player_loop">
+        <doc xml:whitespace="preserve">Change [property@AstalMpris.Player:loop_status] from none to track, from track to playlist, from playlist to none.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="shuffle" c:identifier="astal_mpris_player_shuffle">
+        <doc xml:whitespace="preserve">Toggle [property@AstalMpris.Player:shuffle_status].</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_meta" c:identifier="astal_mpris_player_get_meta">
+        <doc xml:whitespace="preserve">Lookup a key from [property@AstalMpris.Player:metadata]. This method is useful for languages that fail to introspect hashtables.</doc>
+        <return-value transfer-ownership="full" nullable="1">
+          <type name="GLib.Variant" c:type="GVariant*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="key" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <constructor name="new" c:identifier="astal_mpris_player_new">
+        <doc xml:whitespace="preserve">Construct a Player that tracks a dbus name. For example "org.mpris.MediaPlayer2.spotify". The "org.mpris.MediaPlayer2." 
+prefix can be leftout so simply "spotify" would mean the same. [property@AstalMpris.Player:available] indicates whether the player 
+is actually running or not.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+        </return-value>
+        <parameters>
+          <parameter name="name" transfer-ownership="none">
+            <doc xml:whitespace="preserve">dbus name of the player. </doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <property name="bus-name" writable="1">
+        <doc xml:whitespace="preserve">Full dbus namae of this player.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_bus_name" c:identifier="astal_mpris_player_get_bus_name">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="available" writable="1">
+        <doc xml:whitespace="preserve">Indicates if [property@AstalMpris.Player:bus_name] is available on dbus.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_available" c:identifier="astal_mpris_player_get_available">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-quit" writable="1">
+        <doc xml:whitespace="preserve">Indicates if [method@AstalMpris.Player.quit] has any effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_quit" c:identifier="astal_mpris_player_get_can_quit">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="fullscreen" writable="1">
+        <doc xml:whitespace="preserve">Indicates if the player is occupying the fullscreen. This is typically used for videos. Use [method@AstalMpris.Player.toggle_fullscreen] 
+to toggle fullscreen state.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_fullscreen" c:identifier="astal_mpris_player_get_fullscreen">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-set-fullscreen" writable="1">
+        <doc xml:whitespace="preserve">Indicates if [method@AstalMpris.Player.toggle_fullscreen] has any effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_set_fullscreen" c:identifier="astal_mpris_player_get_can_set_fullscreen">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-raise" writable="1">
+        <doc xml:whitespace="preserve">Indicates if [method@AstalMpris.Player.raise] has any effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_raise" c:identifier="astal_mpris_player_get_can_raise">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="identity" writable="1">
+        <doc xml:whitespace="preserve">A human friendly name to identify the player.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_identity" c:identifier="astal_mpris_player_get_identity">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="entry" writable="1">
+        <doc xml:whitespace="preserve">The base name of a .desktop file</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_entry" c:identifier="astal_mpris_player_get_entry">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="supported-uri-schemas" writable="1">
+        <doc xml:whitespace="preserve">The URI schemes supported by the media player.
+This can be viewed as protocols supported by the player in almost all cases. Almost every media player will include support for the "file
+" scheme. Other common schemes are "http" and "rtsp".</doc>
+        <array c:type="gchar**">
+          <type name="utf8" c:type="gchar*"/>
+        </array>
+      </property>
+      <method name="get_supported_uri_schemas" c:identifier="astal_mpris_player_get_supported_uri_schemas">
+        <return-value transfer-ownership="full">
+          <array length="0" c:type="gchar**">
+            <type name="utf8" c:type="gchar*"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="result_length1" direction="out" transfer-ownership="none">
+            <type name="gint" c:type="gint*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="supported-mime-types" writable="1">
+        <doc xml:whitespace="preserve">The mime-types supported by the player.</doc>
+        <array c:type="gchar**">
+          <type name="utf8" c:type="gchar*"/>
+        </array>
+      </property>
+      <method name="get_supported_mime_types" c:identifier="astal_mpris_player_get_supported_mime_types">
+        <return-value transfer-ownership="full">
+          <array length="0" c:type="gchar**">
+            <type name="utf8" c:type="gchar*"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="result_length1" direction="out" transfer-ownership="none">
+            <type name="gint" c:type="gint*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="loop-status" writable="1">
+        <doc xml:whitespace="preserve">The current loop/repeat status.</doc>
+        <type name="AstalMpris.Loop" c:type="AstalMprisLoop"/>
+      </property>
+      <method name="get_loop_status" c:identifier="astal_mpris_player_get_loop_status">
+        <return-value transfer-ownership="none">
+          <type name="AstalMpris.Loop" c:type="AstalMprisLoop"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_loop_status" c:identifier="astal_mpris_player_set_loop_status">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="AstalMpris.Loop" c:type="AstalMprisLoop"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="rate" writable="1">
+        <doc xml:whitespace="preserve">The current playback rate.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_rate" c:identifier="astal_mpris_player_get_rate">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_rate" c:identifier="astal_mpris_player_set_rate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="shuffle-status" writable="1">
+        <doc xml:whitespace="preserve">The current shuffle status.</doc>
+        <type name="AstalMpris.Shuffle" c:type="AstalMprisShuffle"/>
+      </property>
+      <method name="get_shuffle_status" c:identifier="astal_mpris_player_get_shuffle_status">
+        <return-value transfer-ownership="none">
+          <type name="AstalMpris.Shuffle" c:type="AstalMprisShuffle"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_shuffle_status" c:identifier="astal_mpris_player_set_shuffle_status">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="AstalMpris.Shuffle" c:type="AstalMprisShuffle"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="volume" writable="1">
+        <doc xml:whitespace="preserve">The current volume level between 0 and 1.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_volume" c:identifier="astal_mpris_player_get_volume">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_volume" c:identifier="astal_mpris_player_set_volume">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="position" writable="1">
+        <doc xml:whitespace="preserve">The current position of the track in seconds. To get a progress percentage simply divide this with [property@AstalMpris.Player:length].
+</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_position" c:identifier="astal_mpris_player_get_position">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_position" c:identifier="astal_mpris_player_set_position">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="playback-status" writable="1">
+        <doc xml:whitespace="preserve">The current playback status.</doc>
+        <type name="AstalMpris.PlaybackStatus" c:type="AstalMprisPlaybackStatus"/>
+      </property>
+      <method name="get_playback_status" c:identifier="astal_mpris_player_get_playback_status">
+        <return-value transfer-ownership="none">
+          <type name="AstalMpris.PlaybackStatus" c:type="AstalMprisPlaybackStatus"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="minimum-rate" writable="1">
+        <doc xml:whitespace="preserve">The minimum value which the [property@AstalMpris.Player:rate] can take.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_minimum_rate" c:identifier="astal_mpris_player_get_minimum_rate">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="maximum-rate" writable="1">
+        <doc xml:whitespace="preserve">The maximum value which the [property@AstalMpris.Player:rate] can take.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_maximum_rate" c:identifier="astal_mpris_player_get_maximum_rate">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-go-next" writable="1">
+        <doc xml:whitespace="preserve">Indicates if invoking [method@AstalMpris.Player.next] has effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_go_next" c:identifier="astal_mpris_player_get_can_go_next">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-go-previous" writable="1">
+        <doc xml:whitespace="preserve">Indicates if invoking [method@AstalMpris.Player.previous] has effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_go_previous" c:identifier="astal_mpris_player_get_can_go_previous">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-play" writable="1">
+        <doc xml:whitespace="preserve">Indicates if invoking [method@AstalMpris.Player.play] has effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_play" c:identifier="astal_mpris_player_get_can_play">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-pause" writable="1">
+        <doc xml:whitespace="preserve">Indicates if invoking [method@AstalMpris.Player.pause] has effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_pause" c:identifier="astal_mpris_player_get_can_pause">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-seek" writable="1">
+        <doc xml:whitespace="preserve">Indicates if setting [property@AstalMpris.Player:position] has effect.</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_seek" c:identifier="astal_mpris_player_get_can_seek">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="can-control" writable="1">
+        <doc xml:whitespace="preserve">Indicates if the player can be controlled with methods such as [method@AstalMpris.Player.play_pause].</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_can_control" c:identifier="astal_mpris_player_get_can_control">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="metadata" writable="1">
+        <doc xml:whitespace="preserve">Metadata hashtable of this player. In languages that cannot introspect this use [method@AstalMpris.Player.get_meta].</doc>
+        <type name="GLib.HashTable" c:type="GHashTable*">
+          <type name="utf8" c:type="gchar*"/>
+          <type name="GLib.Variant" c:type="GVariant*"/>
+        </type>
+      </property>
+      <method name="get_metadata" c:identifier="astal_mpris_player_get_metadata">
+        <return-value transfer-ownership="full">
+          <type name="GLib.HashTable" c:type="GHashTable*">
+            <type name="utf8" c:type="gchar*"/>
+            <type name="GLib.Variant" c:type="GVariant*"/>
+          </type>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="trackid" writable="1">
+        <doc xml:whitespace="preserve">Currently playing track's id.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_trackid" c:identifier="astal_mpris_player_get_trackid">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="length" writable="1">
+        <doc xml:whitespace="preserve">Length of the currently playing track in seconds.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_length" c:identifier="astal_mpris_player_get_length">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="art-url" writable="1">
+        <doc xml:whitespace="preserve">The location of an image representing the track or album. You should always prefer to use [property@AstalMpris.Player:cover_art].</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_art_url" c:identifier="astal_mpris_player_get_art_url">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="album" writable="1">
+        <doc xml:whitespace="preserve">Title of the currently playing album.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_album" c:identifier="astal_mpris_player_get_album">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="album-artist" writable="1">
+        <doc xml:whitespace="preserve">Artists of the currently playing album.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_album_artist" c:identifier="astal_mpris_player_get_album_artist">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="artist" writable="1">
+        <doc xml:whitespace="preserve">Artists of the currently playing track.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_artist" c:identifier="astal_mpris_player_get_artist">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="lyrics" writable="1">
+        <doc xml:whitespace="preserve">Lyrics of the currently playing track.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_lyrics" c:identifier="astal_mpris_player_get_lyrics">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="title" writable="1">
+        <doc xml:whitespace="preserve">Title of the currently playing track.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_title" c:identifier="astal_mpris_player_get_title">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="composer" writable="1">
+        <doc xml:whitespace="preserve">Composers of the currently playing track.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_composer" c:identifier="astal_mpris_player_get_composer">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="comments" writable="1">
+        <doc xml:whitespace="preserve">Comments of the currently playing track.</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_comments" c:identifier="astal_mpris_player_get_comments">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="cover-art" writable="1">
+        <doc xml:whitespace="preserve">Path of the cached [property@AstalMpris.Player:art_url].</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_cover_art" c:identifier="astal_mpris_player_get_cover_art">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalMpris.Player" c:type="AstalMprisPlayer*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+    </class>
+    <record name="PlayerClass" c:type="AstalMprisPlayerClass" glib:is-gtype-struct-for="Player">
+      <field name="parent_class" readable="0" private="1">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="PlayerPrivate" c:type="AstalMprisPlayerPrivate" disguised="1"/>
+    <constant name="MAJOR_VERSION" c:identifier="ASTAL_MPRIS_MAJOR_VERSION" value="0" type="ASTAL_MPRIS_MAJOR_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="MINOR_VERSION" c:identifier="ASTAL_MPRIS_MINOR_VERSION" value="1" type="ASTAL_MPRIS_MINOR_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="MICRO_VERSION" c:identifier="ASTAL_MPRIS_MICRO_VERSION" value="0" type="ASTAL_MPRIS_MICRO_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <function name="get_default" c:identifier="astal_mpris_get_default">
+      <doc xml:whitespace="preserve">Gets the default singleton Mpris instance.</doc>
+      <return-value transfer-ownership="full">
+        <type name="AstalMpris.Mpris" c:type="AstalMprisMpris*"/>
+      </return-value>
+    </function>
+  </namespace>
+</repository>

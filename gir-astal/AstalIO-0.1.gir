@@ -1,1248 +1,1190 @@
-<?xml version='1.0' encoding='utf-8'?>
-<repository xmlns="http://www.gtk.org/introspection/core/1.0"
-	xmlns:c="http://www.gtk.org/introspection/c/1.0"
-	xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
-	<include name="GObject" version="2.0" />
-	<include name="Gio" version="2.0" />
-	<include name="GLib" version="2.0" />
-	<package name="astal-io" />
-	<c:include name="astal-io.h" />
-	<namespace name="AstalIO" version="0.1" c:prefix="AstalIO" c:identifier-prefixes="AstalIO"
-		c:symbol-prefixes="astal_io" shared-library="libastal-io.so">
-		<enumeration name="AppError" c:type="AstalIOAppError" glib:type-name="AstalIOAppError"
-			glib:get-type="astal_io_app_error_get_type" glib:error-domain="astal-io-app-error-quark">
-			<member name="name_occupied" c:identifier="ASTAL_IO_APP_ERROR_NAME_OCCUPIED" value="0" />
-			<member name="takeover_failed" c:identifier="ASTAL_IO_APP_ERROR_TAKEOVER_FAILED"
-				value="1" />
-		</enumeration>
-		<class name="Process" c:type="AstalIOProcess" c:symbol-prefix="process"
-			glib:type-name="AstalIOProcess" glib:get-type="astal_io_process_get_type"
-			glib:type-struct="ProcessClass" parent="GObject.Object">
-			<doc xml:whitespace="preserve">`Process` provides shortcuts for [class@Gio.Subprocess]
-				with sane defaults.</doc>
-			<field name="parent_instance" readable="0" private="1">
-				<type name="GObject.Object" c:type="GObject" />
-			</field>
-			<field name="priv" readable="0" private="1">
-				<type name="ProcessPrivate" c:type="AstalIOProcessPrivate*" />
-			</field>
-			<method name="kill" c:identifier="astal_io_process_kill">
-				<doc xml:whitespace="preserve">Force quit the subprocess.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="signal" c:identifier="astal_io_process_signal">
-				<doc xml:whitespace="preserve">Send a signal to the subprocess.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-					<parameter name="signal_num" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="write" c:identifier="astal_io_process_write" throws="1">
-				<doc xml:whitespace="preserve">Write a line to the subprocess' stdin synchronously.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-					<parameter name="in" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="write_async" c:identifier="astal_io_process_write_async">
-				<doc xml:whitespace="preserve">Write a line to the subprocess' stdin asynchronously.</doc>
-				<return-value transfer-ownership="none">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-					<parameter name="in" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2"
-						scope="async">
-						<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-					</parameter>
-					<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-						<type name="gpointer" c:type="void*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="write_finish" c:identifier="astal_io_process_write_finish">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-					<parameter name="_res_" transfer-ownership="none">
-						<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-					</parameter>
-				</parameters>
-			</method>
-			<constructor name="subprocessv" c:identifier="astal_io_process_new_subprocessv"
-				throws="1">
-				<doc xml:whitespace="preserve">Start a new subprocess with the given command.
-					The first element of the vector is executed with the remaining elements as the
-					argument list.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<array length="1" c:type="gchar**">
-							<type name="utf8" c:type="gchar*" />
-						</array>
-					</parameter>
-					<parameter name="cmd_length1" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-				</parameters>
-			</constructor>
-			<function name="subprocess" c:identifier="astal_io_process_subprocess" throws="1">
-				<doc xml:whitespace="preserve">Start a new subprocess with the given command which
-					is parsed using [func@GLib.shell_parse_argv].</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="execv" c:identifier="astal_io_process_execv" throws="1">
-				<doc xml:whitespace="preserve">Execute a command synchronously. The first element of
-					the vector is executed with the remaining elements as the argument list.</doc>
-				<return-value transfer-ownership="full">
-					<doc xml:whitespace="preserve">stdout of the subprocess </doc>
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<array length="1" c:type="gchar**">
-							<type name="utf8" c:type="gchar*" />
-						</array>
-					</parameter>
-					<parameter name="cmd_length1" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="exec" c:identifier="astal_io_process_exec" throws="1">
-				<doc xml:whitespace="preserve">Execute a command synchronously. The command is
-					parsed using [func@GLib.shell_parse_argv].</doc>
-				<return-value transfer-ownership="full">
-					<doc xml:whitespace="preserve">stdout of the subprocess </doc>
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="exec_asyncv" c:identifier="astal_io_process_exec_asyncv">
-				<doc xml:whitespace="preserve">Execute a command asynchronously. The first element
-					of the vector is executed with the remaining elements as the argument list.</doc>
-				<return-value transfer-ownership="none">
-					<doc xml:whitespace="preserve">stdout of the subprocess </doc>
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<array length="1" c:type="gchar**">
-							<type name="utf8" c:type="gchar*" />
-						</array>
-					</parameter>
-					<parameter name="cmd_length1" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3"
-						scope="async">
-						<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-					</parameter>
-					<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-						<type name="gpointer" c:type="void*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="exec_asyncv_finish" c:identifier="astal_io_process_exec_asyncv_finish"
-				throws="1">
-				<return-value transfer-ownership="full">
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<parameter name="_res_" transfer-ownership="none">
-						<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="exec_async" c:identifier="astal_io_process_exec_async">
-				<doc xml:whitespace="preserve">Execute a command asynchronously. The command is
-					parsed using [func@GLib.shell_parse_argv].</doc>
-				<return-value transfer-ownership="none">
-					<doc xml:whitespace="preserve">stdout of the subprocess </doc>
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<parameter name="cmd" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2"
-						scope="async">
-						<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-					</parameter>
-					<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-						<type name="gpointer" c:type="void*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="exec_finish" c:identifier="astal_io_process_exec_finish" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<parameter name="_res_" transfer-ownership="none">
-						<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-					</parameter>
-				</parameters>
-			</function>
-			<constructor name="new" c:identifier="astal_io_process_new">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-				</return-value>
-			</constructor>
-			<property name="argv" writable="1" construct-only="1">
-				<array c:type="gchar**">
-					<type name="utf8" c:type="gchar*" />
-				</array>
-			</property>
-			<method name="get_argv" c:identifier="astal_io_process_get_argv">
-				<return-value transfer-ownership="none">
-					<array length="0" c:type="gchar**">
-						<type name="utf8" c:type="gchar*" />
-					</array>
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Process" c:type="AstalIOProcess*" />
-					</instance-parameter>
-					<parameter name="result_length1" direction="out" transfer-ownership="none">
-						<type name="gint" c:type="gint*" />
-					</parameter>
-				</parameters>
-			</method>
-			<glib:signal name="stdout">
-				<doc xml:whitespace="preserve">When the underlying subprocess writes to its stdout
-					this signal is emitted with that line.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<parameter name="out" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</glib:signal>
-			<glib:signal name="stderr">
-				<doc xml:whitespace="preserve">When the underlying subprocess writes to its stderr
-					this signal is emitted with that line.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<parameter name="err" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</glib:signal>
-		</class>
-		<record name="ProcessClass" c:type="AstalIOProcessClass" glib:is-gtype-struct-for="Process">
-			<field name="parent_class" readable="0" private="1">
-				<type name="GObject.ObjectClass" c:type="GObjectClass" />
-			</field>
-		</record>
-		<record name="ProcessPrivate" c:type="AstalIOProcessPrivate" disguised="1" />
-		<class name="Time" c:type="AstalIOTime" c:symbol-prefix="time" glib:type-name="AstalIOTime"
-			glib:get-type="astal_io_time_get_type" glib:type-struct="TimeClass"
-			parent="GObject.Object">
-			<doc xml:whitespace="preserve">`Time` provides shortcuts for GLib timeout functions.</doc>
-			<field name="parent_instance" readable="0" private="1">
-				<type name="GObject.Object" c:type="GObject" />
-			</field>
-			<field name="priv" readable="0" private="1">
-				<type name="TimePrivate" c:type="AstalIOTimePrivate*" />
-			</field>
-			<constructor name="interval_prio" c:identifier="astal_io_time_new_interval_prio">
-				<doc xml:whitespace="preserve">Start an interval timer with default Priority.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="interval" transfer-ownership="none">
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="prio" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</constructor>
-			<constructor name="timeout_prio" c:identifier="astal_io_time_new_timeout_prio">
-				<doc xml:whitespace="preserve">Start a timeout timer with default Priority.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="timeout" transfer-ownership="none">
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="prio" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</constructor>
-			<constructor name="idle_prio" c:identifier="astal_io_time_new_idle_prio">
-				<doc xml:whitespace="preserve">Start an idle timer with default priority.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="prio" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</constructor>
-			<function name="interval" c:identifier="astal_io_time_interval">
-				<doc xml:whitespace="preserve">Start an interval timer. Ticks immediately then every
-					`interval` milliseconds.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="interval" transfer-ownership="none">
-						<doc xml:whitespace="preserve">Tick every milliseconds. </doc>
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<doc xml:whitespace="preserve">Optional callback. </doc>
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="timeout" c:identifier="astal_io_time_timeout">
-				<doc xml:whitespace="preserve">Start a timeout timer which ticks after `timeout`
-					milliseconds.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="timeout" transfer-ownership="none">
-						<doc xml:whitespace="preserve">Tick after milliseconds. </doc>
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<doc xml:whitespace="preserve">Optional callback. </doc>
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</function>
-			<function name="idle" c:identifier="astal_io_time_idle">
-				<doc xml:whitespace="preserve">Start a timer which will tick when there are no
-					higher priority tasks pending.</doc>
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-				<parameters>
-					<parameter name="fn" transfer-ownership="none" nullable="1">
-						<doc xml:whitespace="preserve">Optional callback. </doc>
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</function>
-			<method name="cancel" c:identifier="astal_io_time_cancel">
-				<doc xml:whitespace="preserve">Cancel timer and emit
-					[signal@AstalIO.Time::cancelled]</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Time" c:type="AstalIOTime*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<constructor name="new" c:identifier="astal_io_time_new">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Time" c:type="AstalIOTime*" />
-				</return-value>
-			</constructor>
-			<glib:signal name="now">
-				<doc xml:whitespace="preserve">Emitted when the timer ticks.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-			</glib:signal>
-			<glib:signal name="cancelled">
-				<doc xml:whitespace="preserve">Emitted when the timere is cancelled.</doc>
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-			</glib:signal>
-		</class>
-		<record name="TimeClass" c:type="AstalIOTimeClass" glib:is-gtype-struct-for="Time">
-			<field name="parent_class" readable="0" private="1">
-				<type name="GObject.ObjectClass" c:type="GObjectClass" />
-			</field>
-		</record>
-		<record name="TimePrivate" c:type="AstalIOTimePrivate" disguised="1" />
-		<class name="VariableBase" c:type="AstalIOVariableBase" c:symbol-prefix="variable_base"
-			glib:type-name="AstalIOVariableBase" glib:get-type="astal_io_variable_base_get_type"
-			glib:type-struct="VariableBaseClass" parent="GObject.Object">
-			<field name="parent_instance" readable="0" private="1">
-				<type name="GObject.Object" c:type="GObject" />
-			</field>
-			<field name="priv" readable="0" private="1">
-				<type name="VariableBasePrivate" c:type="AstalIOVariableBasePrivate*" />
-			</field>
-			<method name="emit_changed" c:identifier="astal_io_variable_base_emit_changed">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="emit_dropped" c:identifier="astal_io_variable_base_emit_dropped">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="emit_error" c:identifier="astal_io_variable_base_emit_error">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*" />
-					</instance-parameter>
-					<parameter name="err" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</method>
-			<constructor name="new" c:identifier="astal_io_variable_base_new">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*" />
-				</return-value>
-			</constructor>
-			<glib:signal name="changed">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-			</glib:signal>
-			<glib:signal name="dropped">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-			</glib:signal>
-			<glib:signal name="error">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<parameter name="err" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</glib:signal>
-		</class>
-		<record name="VariableBaseClass" c:type="AstalIOVariableBaseClass"
-			glib:is-gtype-struct-for="VariableBase">
-			<field name="parent_class" readable="0" private="1">
-				<type name="GObject.ObjectClass" c:type="GObjectClass" />
-			</field>
-		</record>
-		<record name="VariableBasePrivate" c:type="AstalIOVariableBasePrivate" disguised="1" />
-		<class name="Variable" c:type="AstalIOVariable" c:symbol-prefix="variable"
-			glib:type-name="AstalIOVariable" glib:get-type="astal_io_variable_get_type"
-			glib:type-struct="VariableClass" parent="AstalIO.VariableBase">
-			<field name="parent_instance" readable="0" private="1">
-				<type name="AstalIO.VariableBase" c:type="AstalIOVariableBase" />
-			</field>
-			<field name="priv" readable="0" private="1">
-				<type name="VariablePrivate" c:type="AstalIOVariablePrivate*" />
-			</field>
-			<constructor name="new" c:identifier="astal_io_variable_new">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<parameter name="init" transfer-ownership="none">
-						<type name="GObject.Value" c:type="GValue*" />
-					</parameter>
-				</parameters>
-			</constructor>
-			<method name="poll" c:identifier="astal_io_variable_poll" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="interval" transfer-ownership="none">
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="exec" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="transform" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="pollv" c:identifier="astal_io_variable_pollv" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="interval" transfer-ownership="none">
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="execv" transfer-ownership="none">
-						<array length="2" c:type="gchar**">
-							<type name="utf8" c:type="gchar*" />
-						</array>
-					</parameter>
-					<parameter name="execv_length1" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="transform" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="pollfn" c:identifier="astal_io_variable_pollfn" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="interval" transfer-ownership="none">
-						<type name="guint" c:type="guint" />
-					</parameter>
-					<parameter name="fn" transfer-ownership="none">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="watch" c:identifier="astal_io_variable_watch" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="exec" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="transform" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="watchv" c:identifier="astal_io_variable_watchv" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="execv" transfer-ownership="none">
-						<array length="1" c:type="gchar**">
-							<type name="utf8" c:type="gchar*" />
-						</array>
-					</parameter>
-					<parameter name="execv_length1" transfer-ownership="none">
-						<type name="gint" c:type="gint" />
-					</parameter>
-					<parameter name="transform" transfer-ownership="none" nullable="1">
-						<type name="GObject.Closure" c:type="GClosure*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="start_poll" c:identifier="astal_io_variable_start_poll" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="start_watch" c:identifier="astal_io_variable_start_watch" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="stop_poll" c:identifier="astal_io_variable_stop_poll">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="stop_watch" c:identifier="astal_io_variable_stop_watch">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="is_polling" c:identifier="astal_io_variable_is_polling">
-				<return-value transfer-ownership="full">
-					<type name="gboolean" c:type="gboolean" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<method name="is_watching" c:identifier="astal_io_variable_is_watching">
-				<return-value transfer-ownership="full">
-					<type name="gboolean" c:type="gboolean" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<property name="value" writable="1">
-				<type name="GObject.Value" c:type="GValue" />
-			</property>
-			<method name="get_value" c:identifier="astal_io_variable_get_value">
-				<return-value transfer-ownership="none">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="result" direction="out" transfer-ownership="full"
-						caller-allocates="1">
-						<type name="GObject.Value" c:type="GValue*" />
-					</parameter>
-				</parameters>
-			</method>
-			<method name="set_value" c:identifier="astal_io_variable_set_value">
-				<return-value transfer-ownership="none">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Variable" c:type="AstalIOVariable*" />
-					</instance-parameter>
-					<parameter name="value" transfer-ownership="none">
-						<type name="GObject.Value" c:type="GValue*" />
-					</parameter>
-				</parameters>
-			</method>
-		</class>
-		<record name="VariableClass" c:type="AstalIOVariableClass"
-			glib:is-gtype-struct-for="Variable">
-			<field name="parent_class" readable="0" private="1">
-				<type name="AstalIO.VariableBaseClass" c:type="AstalIOVariableBaseClass" />
-			</field>
-		</record>
-		<record name="VariablePrivate" c:type="AstalIOVariablePrivate" disguised="1" />
-		<interface name="Application" c:type="AstalIOApplication" c:symbol-prefix="application"
-			glib:type-name="AstalIOApplication" glib:get-type="astal_io_application_get_type"
-			glib:type-struct="ApplicationIface">
-			<doc xml:whitespace="preserve">This interface is used as a placeholder for the Astal
-				Application class. It is not meant to be used by consumers.</doc>
-			<prerequisite name="GObject.Object" />
-			<method name="quit" c:identifier="astal_io_application_quit" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<virtual-method name="quit" invoker="quit" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</virtual-method>
-			<method name="inspector" c:identifier="astal_io_application_inspector" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<virtual-method name="inspector" invoker="inspector" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</virtual-method>
-			<method name="toggle_window" c:identifier="astal_io_application_toggle_window"
-				throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="window" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</method>
-			<virtual-method name="toggle_window" invoker="toggle_window" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="window" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</virtual-method>
-			<method name="acquire_socket" c:identifier="astal_io_application_acquire_socket"
-				throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<virtual-method name="acquire_socket" invoker="acquire_socket" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</virtual-method>
-			<method name="request" c:identifier="astal_io_application_request" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="msg" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="conn" transfer-ownership="none">
-						<type name="Gio.SocketConnection" c:type="GSocketConnection*" />
-					</parameter>
-				</parameters>
-			</method>
-			<virtual-method name="request" invoker="request" throws="1">
-				<return-value transfer-ownership="full">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="msg" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-					<parameter name="conn" transfer-ownership="none">
-						<type name="Gio.SocketConnection" c:type="GSocketConnection*" />
-					</parameter>
-				</parameters>
-			</virtual-method>
-			<property name="instance-name" writable="1" construct="1">
-				<type name="utf8" c:type="gchar*" />
-			</property>
-			<method name="get_instance_name" c:identifier="astal_io_application_get_instance_name">
-				<return-value transfer-ownership="full">
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</method>
-			<virtual-method name="get_instance_name" invoker="get_instance_name">
-				<return-value transfer-ownership="full">
-					<type name="utf8" c:type="gchar*" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-				</parameters>
-			</virtual-method>
-			<method name="set_instance_name" c:identifier="astal_io_application_set_instance_name">
-				<return-value transfer-ownership="none">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="value" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</method>
-			<virtual-method name="set_instance_name" invoker="set_instance_name">
-				<return-value transfer-ownership="none">
-					<type name="none" c:type="void" />
-				</return-value>
-				<parameters>
-					<instance-parameter name="self" transfer-ownership="none">
-						<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-					</instance-parameter>
-					<parameter name="value" transfer-ownership="none">
-						<type name="utf8" c:type="const gchar*" />
-					</parameter>
-				</parameters>
-			</virtual-method>
-		</interface>
-		<record name="ApplicationIface" c:type="AstalIOApplicationIface"
-			glib:is-gtype-struct-for="Application">
-			<field name="parent_iface" readable="0" private="1">
-				<type name="GObject.TypeInterface" c:type="GTypeInterface" />
-			</field>
-			<field name="quit">
-				<callback name="quit" c:type="quit" throws="1">
-					<return-value transfer-ownership="full">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="inspector">
-				<callback name="inspector" c:type="inspector" throws="1">
-					<return-value transfer-ownership="full">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="toggle_window">
-				<callback name="toggle_window" c:type="toggle_window" throws="1">
-					<return-value transfer-ownership="full">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-						<parameter name="window" transfer-ownership="none">
-							<type name="utf8" c:type="const gchar*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="acquire_socket">
-				<callback name="acquire_socket" c:type="acquire_socket" throws="1">
-					<return-value transfer-ownership="full">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="request">
-				<callback name="request" c:type="request" throws="1">
-					<return-value transfer-ownership="full">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-						<parameter name="msg" transfer-ownership="none">
-							<type name="utf8" c:type="const gchar*" />
-						</parameter>
-						<parameter name="conn" transfer-ownership="none">
-							<type name="Gio.SocketConnection" c:type="GSocketConnection*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="get_instance_name">
-				<callback name="get_instance_name" c:type="get_instance_name">
-					<return-value transfer-ownership="full">
-						<type name="utf8" c:type="gchar*" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-			<field name="set_instance_name">
-				<callback name="set_instance_name" c:type="set_instance_name">
-					<return-value transfer-ownership="none">
-						<type name="none" c:type="void" />
-					</return-value>
-					<parameters>
-						<parameter name="self" transfer-ownership="none">
-							<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-						</parameter>
-						<parameter name="value" transfer-ownership="none">
-							<type name="utf8" c:type="const gchar*" />
-						</parameter>
-					</parameters>
-				</callback>
-			</field>
-		</record>
-		<constant name="MAJOR_VERSION" c:identifier="ASTAL_IO_MAJOR_VERSION" value="0"
-			type="ASTAL_IO_MAJOR_VERSION">
-			<type name="gint" c:type="gint" />
-		</constant>
-		<constant name="MINOR_VERSION" c:identifier="ASTAL_IO_MINOR_VERSION" value="1"
-			type="ASTAL_IO_MINOR_VERSION">
-			<type name="gint" c:type="gint" />
-		</constant>
-		<constant name="MICRO_VERSION" c:identifier="ASTAL_IO_MICRO_VERSION" value="0"
-			type="ASTAL_IO_MICRO_VERSION">
-			<type name="gint" c:type="gint" />
-		</constant>
-		<function name="acquire_socket" c:identifier="astal_io_acquire_socket" throws="1">
-			<doc xml:whitespace="preserve">Starts a [class@Gio.SocketService] and binds
-				`XDG_RUNTIME_DIR/astal/&lt;instance_name&gt;.sock`. This socket is then used by the
-				astal
-				cli. Not meant for public usage, but for
-				[method@AstalIO.Application.acquire_socket].</doc>
-			<return-value transfer-ownership="full">
-				<type name="Gio.SocketService" c:type="GSocketService*" />
-			</return-value>
-			<parameters>
-				<parameter name="app" transfer-ownership="none">
-					<type name="AstalIO.Application" c:type="AstalIOApplication*" />
-				</parameter>
-				<parameter name="sock" direction="out" transfer-ownership="full">
-					<type name="utf8" c:type="gchar**" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="get_instances" c:identifier="astal_io_get_instances">
-			<doc xml:whitespace="preserve">Get a list of running Astal.Application instances. It is
-				the equivalent of `astal --list`.</doc>
-			<return-value transfer-ownership="full">
-				<type name="GLib.List" c:type="GList*">
-					<type name="utf8" c:type="gchar*" />
-				</type>
-			</return-value>
-		</function>
-		<function name="quit_instance" c:identifier="astal_io_quit_instance" throws="1">
-			<doc xml:whitespace="preserve">Quit an an Astal instances. It is the equivalent of
-				`astal --quit -i instance`.</doc>
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="instance" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="open_inspector" c:identifier="astal_io_open_inspector" throws="1">
-			<doc xml:whitespace="preserve">Open the Gtk debug tool of an an Astal instances. It is
-				the equivalent of `astal --inspector -i instance`.</doc>
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="instance" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="toggle_window_by_name" c:identifier="astal_io_toggle_window_by_name"
-			throws="1">
-			<doc xml:whitespace="preserve">Toggle a Window of an Astal instances. It is the
-				equivalent of `astal -i instance --toggle window`.</doc>
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="instance" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="window" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="send_message" c:identifier="astal_io_send_message" throws="1">
-			<doc xml:whitespace="preserve">Send a message to an Astal instances. It is the
-				equivalent of `astal -i instance content of the message`.</doc>
-			<return-value transfer-ownership="full">
-				<type name="utf8" c:type="gchar*" />
-			</return-value>
-			<parameters>
-				<parameter name="instance" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="msg" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="read_sock" c:identifier="astal_io_read_sock">
-			<doc xml:whitespace="preserve">Read the socket of an Astal.Application instance.</doc>
-			<return-value transfer-ownership="none">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="conn" transfer-ownership="none">
-					<type name="Gio.SocketConnection" c:type="GSocketConnection*" />
-				</parameter>
-				<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2"
-					scope="async">
-					<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-				</parameter>
-				<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-					<type name="gpointer" c:type="void*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="read_sock_finish" c:identifier="astal_io_read_sock_finish" throws="1">
-			<return-value transfer-ownership="full">
-				<type name="utf8" c:type="gchar*" />
-			</return-value>
-			<parameters>
-				<parameter name="_res_" transfer-ownership="none">
-					<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="write_sock" c:identifier="astal_io_write_sock">
-			<doc xml:whitespace="preserve">Write the socket of an Astal.Application instance.</doc>
-			<return-value transfer-ownership="none">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="conn" transfer-ownership="none">
-					<type name="Gio.SocketConnection" c:type="GSocketConnection*" />
-				</parameter>
-				<parameter name="response" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3"
-					scope="async">
-					<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-				</parameter>
-				<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-					<type name="gpointer" c:type="void*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="write_sock_finish" c:identifier="astal_io_write_sock_finish" throws="1">
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="_res_" transfer-ownership="none">
-					<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="read_file" c:identifier="astal_io_read_file">
-			<doc xml:whitespace="preserve">Read the contents of a file synchronously.</doc>
-			<return-value transfer-ownership="full">
-				<type name="utf8" c:type="gchar*" />
-			</return-value>
-			<parameters>
-				<parameter name="path" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="read_file_async" c:identifier="astal_io_read_file_async">
-			<doc xml:whitespace="preserve">Read the contents of a file asynchronously.</doc>
-			<return-value transfer-ownership="none">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="path" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2"
-					scope="async">
-					<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-				</parameter>
-				<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-					<type name="gpointer" c:type="void*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="read_file_finish" c:identifier="astal_io_read_file_finish" throws="1">
-			<return-value transfer-ownership="full">
-				<type name="utf8" c:type="gchar*" />
-			</return-value>
-			<parameters>
-				<parameter name="_res_" transfer-ownership="none">
-					<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="write_file" c:identifier="astal_io_write_file">
-			<doc xml:whitespace="preserve">Write content to a file synchronously.</doc>
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="path" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="content" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="write_file_async" c:identifier="astal_io_write_file_async">
-			<doc xml:whitespace="preserve">Write content to a file asynchronously.</doc>
-			<return-value transfer-ownership="none">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="path" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="content" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3"
-					scope="async">
-					<type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback" />
-				</parameter>
-				<parameter name="_callback__target" transfer-ownership="none" nullable="1">
-					<type name="gpointer" c:type="void*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="write_file_finish" c:identifier="astal_io_write_file_finish" throws="1">
-			<return-value transfer-ownership="full">
-				<type name="none" c:type="void" />
-			</return-value>
-			<parameters>
-				<parameter name="_res_" transfer-ownership="none">
-					<type name="Gio.AsyncResult" c:type="GAsyncResult*" />
-				</parameter>
-			</parameters>
-		</function>
-		<function name="monitor_file" c:identifier="astal_io_monitor_file">
-			<doc xml:whitespace="preserve">Monitor a file for changes. If the path is a directory,
-				monitor it recursively. The callback will be called passed two parameters: the path
-				of
-				the file that changed and an [enum@Gio.FileMonitorEvent] indicating the reason.</doc>
-			<return-value transfer-ownership="full" nullable="1">
-				<type name="Gio.FileMonitor" c:type="GFileMonitor*" />
-			</return-value>
-			<parameters>
-				<parameter name="path" transfer-ownership="none">
-					<type name="utf8" c:type="const gchar*" />
-				</parameter>
-				<parameter name="callback" transfer-ownership="none">
-					<type name="GObject.Closure" c:type="GClosure*" />
-				</parameter>
-			</parameters>
-		</function>
-	</namespace>
+<?xml version="1.0" encoding="utf-8"?>
+<repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
+  <include name="GObject" version="2.0"/>
+  <include name="Gio" version="2.0"/>
+  <include name="GLib" version="2.0"/>
+  <package name="astal-io"/>
+  <c:include name="astal-io.h"/>
+  <namespace name="AstalIO" version="0.1" c:prefix="AstalIO" c:identifier-prefixes="AstalIO" c:symbol-prefixes="astal_io" shared-library="libastal-io.so">
+    <enumeration name="AppError" c:type="AstalIOAppError" glib:type-name="AstalIOAppError" glib:get-type="astal_io_app_error_get_type" glib:error-domain="astal-io-app-error-quark">
+      <member name="name_occupied" c:identifier="ASTAL_IO_APP_ERROR_NAME_OCCUPIED" value="0"/>
+      <member name="takeover_failed" c:identifier="ASTAL_IO_APP_ERROR_TAKEOVER_FAILED" value="1"/>
+    </enumeration>
+    <class name="Process" c:type="AstalIOProcess" c:symbol-prefix="process" glib:type-name="AstalIOProcess" glib:get-type="astal_io_process_get_type" glib:type-struct="ProcessClass" parent="GObject.Object">
+      <doc xml:whitespace="preserve">`Process` provides shortcuts for [class@Gio.Subprocess] with sane defaults.</doc>
+      <field name="parent_instance" readable="0" private="1">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ProcessPrivate" c:type="AstalIOProcessPrivate*"/>
+      </field>
+      <method name="kill" c:identifier="astal_io_process_kill">
+        <doc xml:whitespace="preserve">Force quit the subprocess.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="signal" c:identifier="astal_io_process_signal">
+        <doc xml:whitespace="preserve">Send a signal to the subprocess.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+          <parameter name="signal_num" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="write" c:identifier="astal_io_process_write" throws="1">
+        <doc xml:whitespace="preserve">Write a line to the subprocess' stdin synchronously.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+          <parameter name="in" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="write_async" c:identifier="astal_io_process_write_async">
+        <doc xml:whitespace="preserve">Write a line to the subprocess' stdin asynchronously.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+          <parameter name="in" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2" scope="async">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+            <type name="gpointer" c:type="void*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="write_finish" c:identifier="astal_io_process_write_finish">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+          <parameter name="_res_" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <constructor name="subprocessv" c:identifier="astal_io_process_new_subprocessv" throws="1">
+        <doc xml:whitespace="preserve">Start a new subprocess with the given command.
+The first element of the vector is executed with the remaining elements as the argument list.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <array length="1" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="cmd_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <function name="subprocess" c:identifier="astal_io_process_subprocess" throws="1">
+        <doc xml:whitespace="preserve">Start a new subprocess with the given command which is parsed using [func@GLib.shell_parse_argv].</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="execv" c:identifier="astal_io_process_execv" throws="1">
+        <doc xml:whitespace="preserve">Execute a command synchronously. The first element of the vector is executed with the remaining elements as the argument list.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:whitespace="preserve">stdout of the subprocess </doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <array length="1" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="cmd_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="exec" c:identifier="astal_io_process_exec" throws="1">
+        <doc xml:whitespace="preserve">Execute a command synchronously. The command is parsed using [func@GLib.shell_parse_argv].</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:whitespace="preserve">stdout of the subprocess </doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="exec_asyncv" c:identifier="astal_io_process_exec_asyncv">
+        <doc xml:whitespace="preserve">Execute a command asynchronously. The first element of the vector is executed with the remaining elements as the argument list.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:whitespace="preserve">stdout of the subprocess </doc>
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <array length="1" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="cmd_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3" scope="async">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+            <type name="gpointer" c:type="void*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="exec_asyncv_finish" c:identifier="astal_io_process_exec_asyncv_finish" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="_res_" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="exec_async" c:identifier="astal_io_process_exec_async">
+        <doc xml:whitespace="preserve">Execute a command asynchronously. The command is parsed using [func@GLib.shell_parse_argv].</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:whitespace="preserve">stdout of the subprocess </doc>
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2" scope="async">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+            <type name="gpointer" c:type="void*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="exec_finish" c:identifier="astal_io_process_exec_finish" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="_res_" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <constructor name="new" c:identifier="astal_io_process_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+        </return-value>
+      </constructor>
+      <property name="argv" writable="1" construct-only="1">
+        <array c:type="gchar**">
+          <type name="utf8" c:type="gchar*"/>
+        </array>
+      </property>
+      <method name="get_argv" c:identifier="astal_io_process_get_argv">
+        <return-value transfer-ownership="none">
+          <array length="0" c:type="gchar**">
+            <type name="utf8" c:type="gchar*"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+          </instance-parameter>
+          <parameter name="result_length1" direction="out" transfer-ownership="none">
+            <type name="gint" c:type="gint*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <glib:signal name="stdout">
+        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stdout this signal is emitted with that line.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="out" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="stderr">
+        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stderr this signal is emitted with that line.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="err" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <record name="ProcessClass" c:type="AstalIOProcessClass" glib:is-gtype-struct-for="Process">
+      <field name="parent_class" readable="0" private="1">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="ProcessPrivate" c:type="AstalIOProcessPrivate" disguised="1"/>
+    <class name="Time" c:type="AstalIOTime" c:symbol-prefix="time" glib:type-name="AstalIOTime" glib:get-type="astal_io_time_get_type" glib:type-struct="TimeClass" parent="GObject.Object">
+      <doc xml:whitespace="preserve">`Time` provides shortcuts for GLib timeout functions.</doc>
+      <field name="parent_instance" readable="0" private="1">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="TimePrivate" c:type="AstalIOTimePrivate*"/>
+      </field>
+      <constructor name="interval_prio" c:identifier="astal_io_time_new_interval_prio">
+        <doc xml:whitespace="preserve">Start an interval timer with default Priority.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="interval" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="prio" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="timeout_prio" c:identifier="astal_io_time_new_timeout_prio">
+        <doc xml:whitespace="preserve">Start a timeout timer with default Priority.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="timeout" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="prio" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="idle_prio" c:identifier="astal_io_time_new_idle_prio">
+        <doc xml:whitespace="preserve">Start an idle timer with default priority.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="prio" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <function name="interval" c:identifier="astal_io_time_interval">
+        <doc xml:whitespace="preserve">Start an interval timer. Ticks immediately then every `interval` milliseconds.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="interval" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Tick every milliseconds. </doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <doc xml:whitespace="preserve">Optional callback. </doc>
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="timeout" c:identifier="astal_io_time_timeout">
+        <doc xml:whitespace="preserve">Start a timeout timer which ticks after `timeout` milliseconds.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="timeout" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Tick after milliseconds. </doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <doc xml:whitespace="preserve">Optional callback. </doc>
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="idle" c:identifier="astal_io_time_idle">
+        <doc xml:whitespace="preserve">Start a timer which will tick when there are no higher priority tasks pending.</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+        <parameters>
+          <parameter name="fn" transfer-ownership="none" nullable="1">
+            <doc xml:whitespace="preserve">Optional callback. </doc>
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <method name="cancel" c:identifier="astal_io_time_cancel">
+        <doc xml:whitespace="preserve">Cancel timer and emit [signal@AstalIO.Time::cancelled]</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <constructor name="new" c:identifier="astal_io_time_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Time" c:type="AstalIOTime*"/>
+        </return-value>
+      </constructor>
+      <glib:signal name="now">
+        <doc xml:whitespace="preserve">Emitted when the timer ticks.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+      <glib:signal name="cancelled">
+        <doc xml:whitespace="preserve">Emitted when the timere is cancelled.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+    </class>
+    <record name="TimeClass" c:type="AstalIOTimeClass" glib:is-gtype-struct-for="Time">
+      <field name="parent_class" readable="0" private="1">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="TimePrivate" c:type="AstalIOTimePrivate" disguised="1"/>
+    <class name="VariableBase" c:type="AstalIOVariableBase" c:symbol-prefix="variable_base" glib:type-name="AstalIOVariableBase" glib:get-type="astal_io_variable_base_get_type" glib:type-struct="VariableBaseClass" parent="GObject.Object">
+      <field name="parent_instance" readable="0" private="1">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="VariableBasePrivate" c:type="AstalIOVariableBasePrivate*"/>
+      </field>
+      <method name="emit_changed" c:identifier="astal_io_variable_base_emit_changed">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="emit_dropped" c:identifier="astal_io_variable_base_emit_dropped">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="emit_error" c:identifier="astal_io_variable_base_emit_error">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*"/>
+          </instance-parameter>
+          <parameter name="err" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <constructor name="new" c:identifier="astal_io_variable_base_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.VariableBase" c:type="AstalIOVariableBase*"/>
+        </return-value>
+      </constructor>
+      <glib:signal name="changed">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+      <glib:signal name="dropped">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </glib:signal>
+      <glib:signal name="error">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="err" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <record name="VariableBaseClass" c:type="AstalIOVariableBaseClass" glib:is-gtype-struct-for="VariableBase">
+      <field name="parent_class" readable="0" private="1">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="VariableBasePrivate" c:type="AstalIOVariableBasePrivate" disguised="1"/>
+    <class name="Variable" c:type="AstalIOVariable" c:symbol-prefix="variable" glib:type-name="AstalIOVariable" glib:get-type="astal_io_variable_get_type" glib:type-struct="VariableClass" parent="AstalIO.VariableBase">
+      <field name="parent_instance" readable="0" private="1">
+        <type name="AstalIO.VariableBase" c:type="AstalIOVariableBase"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="VariablePrivate" c:type="AstalIOVariablePrivate*"/>
+      </field>
+      <constructor name="new" c:identifier="astal_io_variable_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <parameter name="init" transfer-ownership="none">
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="poll" c:identifier="astal_io_variable_poll" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="interval" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="exec" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="transform" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="pollv" c:identifier="astal_io_variable_pollv" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="interval" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="execv" transfer-ownership="none">
+            <array length="2" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="execv_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="transform" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="pollfn" c:identifier="astal_io_variable_pollfn" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="interval" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="fn" transfer-ownership="none">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="watch" c:identifier="astal_io_variable_watch" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="exec" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="transform" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="watchv" c:identifier="astal_io_variable_watchv" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="execv" transfer-ownership="none">
+            <array length="1" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="execv_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="transform" transfer-ownership="none" nullable="1">
+            <type name="GObject.Closure" c:type="GClosure*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="start_poll" c:identifier="astal_io_variable_start_poll" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="start_watch" c:identifier="astal_io_variable_start_watch" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="stop_poll" c:identifier="astal_io_variable_stop_poll">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="stop_watch" c:identifier="astal_io_variable_stop_watch">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_polling" c:identifier="astal_io_variable_is_polling">
+        <return-value transfer-ownership="full">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="is_watching" c:identifier="astal_io_variable_is_watching">
+        <return-value transfer-ownership="full">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="value" writable="1">
+        <type name="GObject.Value" c:type="GValue"/>
+      </property>
+      <method name="get_value" c:identifier="astal_io_variable_get_value">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="result" direction="out" transfer-ownership="full" caller-allocates="1">
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_value" c:identifier="astal_io_variable_set_value">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Variable" c:type="AstalIOVariable*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+    </class>
+    <record name="VariableClass" c:type="AstalIOVariableClass" glib:is-gtype-struct-for="Variable">
+      <field name="parent_class" readable="0" private="1">
+        <type name="AstalIO.VariableBaseClass" c:type="AstalIOVariableBaseClass"/>
+      </field>
+    </record>
+    <record name="VariablePrivate" c:type="AstalIOVariablePrivate" disguised="1"/>
+    <interface name="Application" c:type="AstalIOApplication" c:symbol-prefix="application" glib:type-name="AstalIOApplication" glib:get-type="astal_io_application_get_type" glib:type-struct="ApplicationIface">
+      <doc xml:whitespace="preserve">This interface is used as a placeholder for the Astal Application class. It is not meant to be used by consumers.</doc>
+      <prerequisite name="GObject.Object"/>
+      <method name="quit" c:identifier="astal_io_application_quit" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <virtual-method name="quit" invoker="quit" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="inspector" c:identifier="astal_io_application_inspector" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <virtual-method name="inspector" invoker="inspector" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="toggle_window" c:identifier="astal_io_application_toggle_window" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="window" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <virtual-method name="toggle_window" invoker="toggle_window" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="window" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <method name="acquire_socket" c:identifier="astal_io_application_acquire_socket" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <virtual-method name="acquire_socket" invoker="acquire_socket" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="request" c:identifier="astal_io_application_request" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="msg" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="conn" transfer-ownership="none">
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <virtual-method name="request" invoker="request" throws="1">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="msg" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="conn" transfer-ownership="none">
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <property name="instance-name" writable="1" construct="1">
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <method name="get_instance_name" c:identifier="astal_io_application_get_instance_name">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <virtual-method name="get_instance_name" invoker="get_instance_name">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="set_instance_name" c:identifier="astal_io_application_set_instance_name">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <virtual-method name="set_instance_name" invoker="set_instance_name">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+    </interface>
+    <record name="ApplicationIface" c:type="AstalIOApplicationIface" glib:is-gtype-struct-for="Application">
+      <field name="parent_iface" readable="0" private="1">
+        <type name="GObject.TypeInterface" c:type="GTypeInterface"/>
+      </field>
+      <field name="quit">
+        <callback name="quit" c:type="quit" throws="1">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="inspector">
+        <callback name="inspector" c:type="inspector" throws="1">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="toggle_window">
+        <callback name="toggle_window" c:type="toggle_window" throws="1">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+            <parameter name="window" transfer-ownership="none">
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="acquire_socket">
+        <callback name="acquire_socket" c:type="acquire_socket" throws="1">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="request">
+        <callback name="request" c:type="request" throws="1">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+            <parameter name="msg" transfer-ownership="none">
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+            <parameter name="conn" transfer-ownership="none">
+              <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="get_instance_name">
+        <callback name="get_instance_name" c:type="get_instance_name">
+          <return-value transfer-ownership="full">
+            <type name="utf8" c:type="gchar*"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="set_instance_name">
+        <callback name="set_instance_name" c:type="set_instance_name">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+            </parameter>
+            <parameter name="value" transfer-ownership="none">
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
+    <constant name="MAJOR_VERSION" c:identifier="ASTAL_IO_MAJOR_VERSION" value="0" type="ASTAL_IO_MAJOR_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="MINOR_VERSION" c:identifier="ASTAL_IO_MINOR_VERSION" value="1" type="ASTAL_IO_MINOR_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <constant name="MICRO_VERSION" c:identifier="ASTAL_IO_MICRO_VERSION" value="0" type="ASTAL_IO_MICRO_VERSION">
+      <type name="gint" c:type="gint"/>
+    </constant>
+    <function name="acquire_socket" c:identifier="astal_io_acquire_socket" throws="1">
+      <doc xml:whitespace="preserve">Starts a [class@Gio.SocketService] and binds `XDG_RUNTIME_DIR/astal/&lt;instance_name&gt;.sock`. This socket is then used by the astal 
+cli. Not meant for public usage, but for [method@AstalIO.Application.acquire_socket].</doc>
+      <return-value transfer-ownership="full">
+        <type name="Gio.SocketService" c:type="GSocketService*"/>
+      </return-value>
+      <parameters>
+        <parameter name="app" transfer-ownership="none">
+          <type name="AstalIO.Application" c:type="AstalIOApplication*"/>
+        </parameter>
+        <parameter name="sock" direction="out" transfer-ownership="full">
+          <type name="utf8" c:type="gchar**"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="get_instances" c:identifier="astal_io_get_instances">
+      <doc xml:whitespace="preserve">Get a list of running Astal.Application instances. It is the equivalent of `astal --list`.</doc>
+      <return-value transfer-ownership="full">
+        <type name="GLib.List" c:type="GList*">
+          <type name="utf8" c:type="gchar*"/>
+        </type>
+      </return-value>
+    </function>
+    <function name="quit_instance" c:identifier="astal_io_quit_instance" throws="1">
+      <doc xml:whitespace="preserve">Quit an an Astal instances. It is the equivalent of `astal --quit -i instance`.</doc>
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="instance" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="open_inspector" c:identifier="astal_io_open_inspector" throws="1">
+      <doc xml:whitespace="preserve">Open the Gtk debug tool of an an Astal instances. It is the equivalent of `astal --inspector -i instance`.</doc>
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="instance" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="toggle_window_by_name" c:identifier="astal_io_toggle_window_by_name" throws="1">
+      <doc xml:whitespace="preserve">Toggle a Window of an Astal instances. It is the equivalent of `astal -i instance --toggle window`.</doc>
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="instance" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="window" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="send_message" c:identifier="astal_io_send_message" throws="1">
+      <doc xml:whitespace="preserve">Send a message to an Astal instances. It is the equivalent of `astal -i instance content of the message`.</doc>
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="instance" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="msg" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="read_sock" c:identifier="astal_io_read_sock">
+      <doc xml:whitespace="preserve">Read the socket of an Astal.Application instance.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="conn" transfer-ownership="none">
+          <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+        </parameter>
+        <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2" scope="async">
+          <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+        </parameter>
+        <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+          <type name="gpointer" c:type="void*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="read_sock_finish" c:identifier="astal_io_read_sock_finish" throws="1">
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="_res_" transfer-ownership="none">
+          <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="write_sock" c:identifier="astal_io_write_sock">
+      <doc xml:whitespace="preserve">Write the socket of an Astal.Application instance.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="conn" transfer-ownership="none">
+          <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+        </parameter>
+        <parameter name="response" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3" scope="async">
+          <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+        </parameter>
+        <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+          <type name="gpointer" c:type="void*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="write_sock_finish" c:identifier="astal_io_write_sock_finish" throws="1">
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="_res_" transfer-ownership="none">
+          <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="read_file" c:identifier="astal_io_read_file">
+      <doc xml:whitespace="preserve">Read the contents of a file synchronously.</doc>
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="path" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="read_file_async" c:identifier="astal_io_read_file_async">
+      <doc xml:whitespace="preserve">Read the contents of a file asynchronously.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="path" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2" scope="async">
+          <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+        </parameter>
+        <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+          <type name="gpointer" c:type="void*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="read_file_finish" c:identifier="astal_io_read_file_finish" throws="1">
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="_res_" transfer-ownership="none">
+          <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="write_file" c:identifier="astal_io_write_file">
+      <doc xml:whitespace="preserve">Write content to a file synchronously.</doc>
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="path" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="content" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="write_file_async" c:identifier="astal_io_write_file_async">
+      <doc xml:whitespace="preserve">Write content to a file asynchronously.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="path" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="content" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="3" scope="async">
+          <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+        </parameter>
+        <parameter name="_callback__target" transfer-ownership="none" nullable="1">
+          <type name="gpointer" c:type="void*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="write_file_finish" c:identifier="astal_io_write_file_finish" throws="1">
+      <return-value transfer-ownership="full">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="_res_" transfer-ownership="none">
+          <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="monitor_file" c:identifier="astal_io_monitor_file">
+      <doc xml:whitespace="preserve">Monitor a file for changes. If the path is a directory, monitor it recursively. The callback will be called passed two parameters: the path of 
+the file that changed and an [enum@Gio.FileMonitorEvent] indicating the reason.</doc>
+      <return-value transfer-ownership="full" nullable="1">
+        <type name="Gio.FileMonitor" c:type="GFileMonitor*"/>
+      </return-value>
+      <parameters>
+        <parameter name="path" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="callback" transfer-ownership="none">
+          <type name="GObject.Closure" c:type="GClosure*"/>
+        </parameter>
+      </parameters>
+    </function>
+  </namespace>
 </repository>

@@ -17,6 +17,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "astal-cava"
+version = "0.1.0"
+dependencies = [
+ "astal-cava-sys",
+ "bitflags",
+ "gio",
+ "glib",
+ "libc",
+]
+
+[[package]]
+name = "astal-cava-sys"
+version = "0.0.1"
+dependencies = [
+ "glib-sys",
+ "gobject-sys",
+ "libc",
+ "shell-words",
+ "system-deps",
+ "tempfile",
+]
+
+[[package]]
 name = "astal-io"
 version = "0.1.0"
 dependencies = [
@@ -41,9 +64,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "astal-mpris"
+version = "0.1.0"
+dependencies = [
+ "astal-mpris-sys",
+ "bitflags",
+ "glib",
+ "libc",
+]
+
+[[package]]
+name = "astal-mpris-sys"
+version = "0.0.1"
+dependencies = [
+ "gio-sys",
+ "glib-sys",
+ "gobject-sys",
+ "libc",
+ "shell-words",
+ "system-deps",
+ "tempfile",
+]
+
+[[package]]
 name = "astal-sys"
 version = "0.0.1"
 dependencies = [
+ "astal-io-sys",
  "gdk4-sys",
  "gio-sys",
  "glib-sys",
