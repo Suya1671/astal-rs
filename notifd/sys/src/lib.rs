@@ -4,20 +4,26 @@
 // DO NOT EDIT
 
 #![allow(non_camel_case_types, non_upper_case_globals, non_snake_case)]
-#![allow(clippy::approx_constant, clippy::type_complexity, clippy::unreadable_literal, clippy::upper_case_acronyms)]
+#![allow(
+    clippy::approx_constant,
+    clippy::type_complexity,
+    clippy::unreadable_literal,
+    clippy::upper_case_acronyms
+)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-use gobject_sys as gobject;
 use glib_sys as glib;
+use gobject_sys as gobject;
 
-#[allow(unused_imports)]
-use std::ffi::{c_int, c_char, c_uchar, c_float, c_uint, c_double,
-    c_short, c_ushort, c_long, c_ulong, c_void};
-#[allow(unused_imports)]
-use libc::{size_t, ssize_t, time_t, off_t, intptr_t, uintptr_t, FILE};
 #[cfg(unix)]
 #[allow(unused_imports)]
 use libc::{dev_t, gid_t, pid_t, socklen_t, uid_t};
+#[allow(unused_imports)]
+use libc::{intptr_t, off_t, size_t, ssize_t, time_t, uintptr_t, FILE};
+#[allow(unused_imports)]
+use std::ffi::{
+    c_char, c_double, c_float, c_int, c_long, c_short, c_uchar, c_uint, c_ulong, c_ushort, c_void,
+};
 
 #[allow(unused_imports)]
 use glib::{gboolean, gconstpointer, gpointer, GType};
@@ -50,9 +56,9 @@ pub struct AstalNotifdAction {
 impl ::std::fmt::Debug for AstalNotifdAction {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalNotifdAction @ {self:p}"))
-         .field("id", &self.id)
-         .field("label", &self.label)
-         .finish()
+            .field("id", &self.id)
+            .field("label", &self.label)
+            .finish()
     }
 }
 
@@ -65,7 +71,7 @@ pub struct AstalNotifdNotifdClass {
 impl ::std::fmt::Debug for AstalNotifdNotifdClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalNotifdNotifdClass @ {self:p}"))
-         .finish()
+            .finish()
     }
 }
 
@@ -87,7 +93,7 @@ pub struct AstalNotifdNotificationClass {
 impl ::std::fmt::Debug for AstalNotifdNotificationClass {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalNotifdNotificationClass @ {self:p}"))
-         .finish()
+            .finish()
     }
 }
 
@@ -111,7 +117,7 @@ pub struct AstalNotifdNotifd {
 impl ::std::fmt::Debug for AstalNotifdNotifd {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalNotifdNotifd @ {self:p}"))
-         .finish()
+            .finish()
     }
 }
 
@@ -125,7 +131,7 @@ pub struct AstalNotifdNotification {
 impl ::std::fmt::Debug for AstalNotifdNotification {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalNotifdNotification @ {self:p}"))
-         .finish()
+            .finish()
     }
 }
 
@@ -151,45 +157,95 @@ extern "C" {
     //=========================================================================
     pub fn astal_notifd_notifd_get_type() -> GType;
     pub fn astal_notifd_notifd_get_default() -> *mut AstalNotifdNotifd;
-    pub fn astal_notifd_notifd_get_notification(self_: *mut AstalNotifdNotifd, id: c_uint) -> *mut AstalNotifdNotification;
+    pub fn astal_notifd_notifd_get_notification(
+        self_: *mut AstalNotifdNotifd,
+        id: c_uint,
+    ) -> *mut AstalNotifdNotification;
     pub fn astal_notifd_notifd_new() -> *mut AstalNotifdNotifd;
     pub fn astal_notifd_notifd_get_ignore_timeout(self_: *mut AstalNotifdNotifd) -> gboolean;
     pub fn astal_notifd_notifd_set_ignore_timeout(self_: *mut AstalNotifdNotifd, value: gboolean);
     pub fn astal_notifd_notifd_get_dont_disturb(self_: *mut AstalNotifdNotifd) -> gboolean;
     pub fn astal_notifd_notifd_set_dont_disturb(self_: *mut AstalNotifdNotifd, value: gboolean);
-    pub fn astal_notifd_notifd_get_notifications(self_: *mut AstalNotifdNotifd) -> *mut glib::GList;
+    pub fn astal_notifd_notifd_get_notifications(self_: *mut AstalNotifdNotifd)
+        -> *mut glib::GList;
 
     //=========================================================================
     // AstalNotifdNotification
     //=========================================================================
     pub fn astal_notifd_notification_get_type() -> GType;
-    pub fn astal_notifd_notification_get_hint(self_: *mut AstalNotifdNotification, hint: *const c_char) -> *mut glib::GVariant;
-    pub fn astal_notifd_notification_get_str_hint(self_: *mut AstalNotifdNotification, hint: *const c_char) -> *const c_char;
-    pub fn astal_notifd_notification_get_bool_hint(self_: *mut AstalNotifdNotification, hint: *const c_char) -> gboolean;
-    pub fn astal_notifd_notification_get_int_hint(self_: *mut AstalNotifdNotification, hint: *const c_char) -> c_int;
-    pub fn astal_notifd_notification_get_byte_hint(self_: *mut AstalNotifdNotification, hint: *const c_char) -> u8;
+    pub fn astal_notifd_notification_get_hint(
+        self_: *mut AstalNotifdNotification,
+        hint: *const c_char,
+    ) -> *mut glib::GVariant;
+    pub fn astal_notifd_notification_get_str_hint(
+        self_: *mut AstalNotifdNotification,
+        hint: *const c_char,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_bool_hint(
+        self_: *mut AstalNotifdNotification,
+        hint: *const c_char,
+    ) -> gboolean;
+    pub fn astal_notifd_notification_get_int_hint(
+        self_: *mut AstalNotifdNotification,
+        hint: *const c_char,
+    ) -> c_int;
+    pub fn astal_notifd_notification_get_byte_hint(
+        self_: *mut AstalNotifdNotification,
+        hint: *const c_char,
+    ) -> u8;
     pub fn astal_notifd_notification_dismiss(self_: *mut AstalNotifdNotification);
-    pub fn astal_notifd_notification_invoke(self_: *mut AstalNotifdNotification, action_id: *const c_char);
+    pub fn astal_notifd_notification_invoke(
+        self_: *mut AstalNotifdNotification,
+        action_id: *const c_char,
+    );
     pub fn astal_notifd_notification_get_time(self_: *mut AstalNotifdNotification) -> i64;
-    pub fn astal_notifd_notification_get_app_name(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_app_icon(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_summary(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_body(self_: *mut AstalNotifdNotification) -> *const c_char;
+    pub fn astal_notifd_notification_get_app_name(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_app_icon(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_summary(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_body(self_: *mut AstalNotifdNotification)
+        -> *const c_char;
     pub fn astal_notifd_notification_get_id(self_: *mut AstalNotifdNotification) -> c_uint;
-    pub fn astal_notifd_notification_get_expire_timeout(self_: *mut AstalNotifdNotification) -> c_int;
-    pub fn astal_notifd_notification_get_actions(self_: *mut AstalNotifdNotification) -> *mut glib::GList;
-    pub fn astal_notifd_notification_get_image(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_action_icons(self_: *mut AstalNotifdNotification) -> gboolean;
-    pub fn astal_notifd_notification_get_category(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_desktop_entry(self_: *mut AstalNotifdNotification) -> *const c_char;
+    pub fn astal_notifd_notification_get_expire_timeout(
+        self_: *mut AstalNotifdNotification,
+    ) -> c_int;
+    pub fn astal_notifd_notification_get_actions(
+        self_: *mut AstalNotifdNotification,
+    ) -> *mut glib::GList;
+    pub fn astal_notifd_notification_get_image(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_action_icons(
+        self_: *mut AstalNotifdNotification,
+    ) -> gboolean;
+    pub fn astal_notifd_notification_get_category(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_desktop_entry(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
     pub fn astal_notifd_notification_get_resident(self_: *mut AstalNotifdNotification) -> gboolean;
-    pub fn astal_notifd_notification_get_sound_file(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_sound_name(self_: *mut AstalNotifdNotification) -> *const c_char;
-    pub fn astal_notifd_notification_get_suppress_sound(self_: *mut AstalNotifdNotification) -> gboolean;
-    pub fn astal_notifd_notification_get_transient(self_: *mut AstalNotifdNotification) -> gboolean;
+    pub fn astal_notifd_notification_get_sound_file(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_sound_name(
+        self_: *mut AstalNotifdNotification,
+    ) -> *const c_char;
+    pub fn astal_notifd_notification_get_suppress_sound(
+        self_: *mut AstalNotifdNotification,
+    ) -> gboolean;
+    pub fn astal_notifd_notification_get_transient(self_: *mut AstalNotifdNotification)
+        -> gboolean;
     pub fn astal_notifd_notification_get_x(self_: *mut AstalNotifdNotification) -> c_int;
     pub fn astal_notifd_notification_get_y(self_: *mut AstalNotifdNotification) -> c_int;
-    pub fn astal_notifd_notification_get_urgency(self_: *mut AstalNotifdNotification) -> AstalNotifdUrgency;
+    pub fn astal_notifd_notification_get_urgency(
+        self_: *mut AstalNotifdNotification,
+    ) -> AstalNotifdUrgency;
 
     //=========================================================================
     // Other functions

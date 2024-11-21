@@ -13,10 +13,12 @@ macro_rules! assert_initialized_main_thread {
 
 pub use auto::*;
 use ffi;
+mod action;
 mod auto;
 
 pub mod prelude {
-    // pub use crate::auto::traits::*;
+    pub use crate::action::ActionExtManual;
+    pub use crate::auto::traits::*;
 }
 
 pub mod functions {
