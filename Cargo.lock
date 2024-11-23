@@ -17,6 +17,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "astal-apps"
+version = "0.1.0"
+dependencies = [
+ "astal-apps-sys",
+ "bitflags",
+ "glib",
+ "libc",
+]
+
+[[package]]
+name = "astal-apps-sys"
+version = "0.0.1"
+dependencies = [
+ "glib-sys",
+ "gobject-sys",
+ "libc",
+ "shell-words",
+ "system-deps",
+ "tempfile",
+]
+
+[[package]]
 name = "astal-cava"
 version = "0.1.0"
 dependencies = [

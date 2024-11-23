@@ -76,6 +76,7 @@
         mpris
         cava
         notifd
+        apps
       ];
 
       astalDevLibs = pkgs.lib.map (pkg: pkg.dev) astalLibs;
@@ -103,8 +104,10 @@
             xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_MAJOR_VERSION gir-astal/Astal-4.0.gir
             xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_MINOR_VERSION gir-astal/Astal-4.0.gir
             xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_MICRO_VERSION gir-astal/Astal-4.0.gir
-            # add repository -> include (name = AstalIO version = 0.1)
-            ${"xmlstarlet ed -L -s '//_:repository' -t elem -n include -v '' -i '//_:repository/include[not(@name)]' -t attr -n name -v AstalIO -i '//_:repository/include[@name=\"AstalIO\"]' -t attr -n version -v 0.1 gir-astal/Astal-4.0.gir"}
+            # add repository -> include (name = AstalIO version = 0.1) (make sure it's at the start of the include list)
+            xmlstarlet ed -L -i '//_:repository/_:include[1]' -t elem -n include -v ${"''"} gir-astal/Astal-4.0.gir
+            xmlstarlet ed -L -i '//_:repository/_:include[1]' -t attr -n name -v AstalIO gir-astal/Astal-4.0.gir
+            xmlstarlet ed -L -i '//_:repository/_:include[1]' -t attr -n version -v 0.1 gir-astal/Astal-4.0.gir
             # add shared-library to namespace
             xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-4.so gir-astal/Astal-4.0.gir
 
@@ -137,6 +140,15 @@
             xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_NOTIFD_MICRO_VERSION gir-astal/AstalNotifd-0.1.gir
             # add shared-library to namespace
             xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-notifd.so gir-astal/AstalNotifd-0.1.gir
+
+            # AstalApps-0.1.gir
+            echo "Updating AstalApps-0.1.gir"
+            # get constants with *_VERSION as name, and add type attribute
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MAJOR_VERSION"]' -t attr -n type -v ASTAL_APPS_MAJOR_VERSION gir-astal/AstalApps-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MINOR_VERSION"]' -t attr -n type -v ASTAL_APPS_MINOR_VERSION gir-astal/AstalApps-0.1.gir
+            xmlstarlet ed -L -i '//_:repository/_:namespace/_:constant[@name="MICRO_VERSION"]' -t attr -n type -v ASTAL_APPS_MICRO_VERSION gir-astal/AstalApps-0.1.gir
+            # add shared-library to namespace
+            xmlstarlet ed -L -i '//_:repository/_:namespace' -t attr -n shared-library -v libastal-apps.so gir-astal/AstalApps-0.1.gir
         '';
       };
 

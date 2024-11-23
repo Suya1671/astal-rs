@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<repository xmlns="http://www.gtk.org/introspection/core/1.0"
-  xmlns:c="http://www.gtk.org/introspection/c/1.0"
-  xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
-  <include name="Gtk" version="4.0" />
-  <include name="Gdk" version="4.0" />
-  <include name="Gio" version="2.0" />
-  <include name="GLib" version="2.0" />
-  <include name="AstalIO" version="0.1" />
-  <package name="astal-4" />
-  <c:include name="astal-4.h" />
-  <namespace name="Astal" version="4.0" c:prefix="Astal" c:identifier-prefixes="Astal"
-    c:symbol-prefixes="astal" shared-library="libastal-4.so">
-    <bitfield name="WindowAnchor" c:type="AstalWindowAnchor" glib:type-name="AstalWindowAnchor"
-      glib:get-type="astal_window_anchor_get_type">
-      <member name="none" c:identifier="ASTAL_WINDOW_ANCHOR_NONE" value="1" />
-      <member name="top" c:identifier="ASTAL_WINDOW_ANCHOR_TOP" value="2" />
-      <member name="right" c:identifier="ASTAL_WINDOW_ANCHOR_RIGHT" value="4" />
-      <member name="left" c:identifier="ASTAL_WINDOW_ANCHOR_LEFT" value="8" />
-      <member name="bottom" c:identifier="ASTAL_WINDOW_ANCHOR_BOTTOM" value="16" />
+<repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
+  <include name="AstalIO" version="0.1"/>
+  <include name="Gtk" version="4.0"/>
+  <include name="Gdk" version="4.0"/>
+  <include name="Gio" version="2.0"/>
+  <include name="GLib" version="2.0"/>
+  <package name="astal-4"/>
+  <c:include name="astal-4.h"/>
+  <namespace name="Astal" version="4.0" c:prefix="Astal" c:identifier-prefixes="Astal" c:symbol-prefixes="astal" shared-library="libastal-4.so">
+    <bitfield name="WindowAnchor" c:type="AstalWindowAnchor" glib:type-name="AstalWindowAnchor" glib:get-type="astal_window_anchor_get_type">
+      <member name="none" c:identifier="ASTAL_WINDOW_ANCHOR_NONE" value="1"/>
+      <member name="top" c:identifier="ASTAL_WINDOW_ANCHOR_TOP" value="2"/>
+      <member name="right" c:identifier="ASTAL_WINDOW_ANCHOR_RIGHT" value="4"/>
+      <member name="left" c:identifier="ASTAL_WINDOW_ANCHOR_LEFT" value="8"/>
+      <member name="bottom" c:identifier="ASTAL_WINDOW_ANCHOR_BOTTOM" value="16"/>
     </bitfield>
-    <enumeration name="Exclusivity" c:type="AstalExclusivity" glib:type-name="AstalExclusivity"
-      glib:get-type="astal_exclusivity_get_type">
-      <member name="normal" c:identifier="ASTAL_EXCLUSIVITY_NORMAL" value="0" />
+    <enumeration name="Exclusivity" c:type="AstalExclusivity" glib:type-name="AstalExclusivity" glib:get-type="astal_exclusivity_get_type">
+      <member name="normal" c:identifier="ASTAL_EXCLUSIVITY_NORMAL" value="0"/>
       <member name="exclusive" c:identifier="ASTAL_EXCLUSIVITY_EXCLUSIVE" value="1">
         <doc xml:whitespace="preserve">Request the compositor to allocate space for this window.</doc>
       </member>
@@ -29,642 +24,626 @@
         <doc xml:whitespace="preserve">Request the compositor to stack layers on top of each other.</doc>
       </member>
     </enumeration>
-    <enumeration name="Layer" c:type="AstalLayer" glib:type-name="AstalLayer"
-      glib:get-type="astal_layer_get_type">
-      <member name="background" c:identifier="ASTAL_LAYER_BACKGROUND" value="0" />
-      <member name="bottom" c:identifier="ASTAL_LAYER_BOTTOM" value="1" />
-      <member name="top" c:identifier="ASTAL_LAYER_TOP" value="2" />
-      <member name="overlay" c:identifier="ASTAL_LAYER_OVERLAY" value="3" />
+    <enumeration name="Layer" c:type="AstalLayer" glib:type-name="AstalLayer" glib:get-type="astal_layer_get_type">
+      <member name="background" c:identifier="ASTAL_LAYER_BACKGROUND" value="0"/>
+      <member name="bottom" c:identifier="ASTAL_LAYER_BOTTOM" value="1"/>
+      <member name="top" c:identifier="ASTAL_LAYER_TOP" value="2"/>
+      <member name="overlay" c:identifier="ASTAL_LAYER_OVERLAY" value="3"/>
     </enumeration>
-    <enumeration name="Keymode" c:type="AstalKeymode" glib:type-name="AstalKeymode"
-      glib:get-type="astal_keymode_get_type">
+    <enumeration name="Keymode" c:type="AstalKeymode" glib:type-name="AstalKeymode" glib:get-type="astal_keymode_get_type">
       <member name="none" c:identifier="ASTAL_KEYMODE_NONE" value="0">
         <doc xml:whitespace="preserve">Window should not receive keyboard events.</doc>
       </member>
       <member name="exclusive" c:identifier="ASTAL_KEYMODE_EXCLUSIVE" value="1">
-        <doc xml:whitespace="preserve">Window should have exclusive focus if it is on the top or
-          overlay layer.</doc>
+        <doc xml:whitespace="preserve">Window should have exclusive focus if it is on the top or overlay layer.</doc>
       </member>
       <member name="on_demand" c:identifier="ASTAL_KEYMODE_ON_DEMAND" value="2">
         <doc xml:whitespace="preserve">Focus and Unfocues the window as needed.</doc>
       </member>
     </enumeration>
-    <class name="Window" c:type="AstalWindow" c:symbol-prefix="window" glib:type-name="AstalWindow"
-      glib:get-type="astal_window_get_type" glib:type-struct="WindowClass" parent="Gtk.Window">
-      <doc xml:whitespace="preserve">Subclass of [class@Gtk.Window] which integrates GtkLayerShell
-        as class fields.</doc>
+    <class name="Window" c:type="AstalWindow" c:symbol-prefix="window" glib:type-name="AstalWindow" glib:get-type="astal_window_get_type" glib:type-struct="WindowClass" parent="Gtk.Window">
+      <doc xml:whitespace="preserve">Subclass of [class@Gtk.Window] which integrates GtkLayerShell as class fields.</doc>
       <field name="parent_instance" readable="0" private="1">
-        <type name="Gtk.Window" c:type="GtkWindow" />
+        <type name="Gtk.Window" c:type="GtkWindow"/>
       </field>
       <field name="priv" readable="0" private="1">
-        <type name="WindowPrivate" c:type="AstalWindowPrivate*" />
+        <type name="WindowPrivate" c:type="AstalWindowPrivate*"/>
       </field>
       <constructor name="new" c:identifier="astal_window_new">
         <return-value transfer-ownership="none">
-          <type name="Astal.Window" c:type="AstalWindow*" />
+          <type name="Astal.Window" c:type="AstalWindow*"/>
         </return-value>
       </constructor>
       <property name="namespace" writable="1">
-        <doc xml:whitespace="preserve">Namespace of this window. This can be used to target the
-          layer in compositor rules.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <doc xml:whitespace="preserve">Namespace of this window. This can be used to target the layer in compositor rules.</doc>
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_namespace" c:identifier="astal_window_get_namespace">
         <return-value transfer-ownership="none">
-          <type name="utf8" c:type="const gchar*" />
+          <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_namespace" c:identifier="astal_window_set_namespace">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <property name="anchor" writable="1">
         <doc xml:whitespace="preserve">Edges to anchor the window to.
-          If two perpendicular edges are anchored, the surface will be anchored to that corner. If
-          two opposite edges are anchored, the window will be
-          stretched across the screen in that direction.</doc>
-        <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor" />
+If two perpendicular edges are anchored, the surface will be anchored to that corner. If two opposite edges are anchored, the window will be 
+stretched across the screen in that direction.</doc>
+        <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor"/>
       </property>
       <method name="get_anchor" c:identifier="astal_window_get_anchor">
         <return-value transfer-ownership="none">
-          <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor" />
+          <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_anchor" c:identifier="astal_window_set_anchor">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor" />
+            <type name="Astal.WindowAnchor" c:type="AstalWindowAnchor"/>
           </parameter>
         </parameters>
       </method>
       <property name="exclusivity" writable="1">
         <doc xml:whitespace="preserve">Exclusivity of this window.</doc>
-        <type name="Astal.Exclusivity" c:type="AstalExclusivity" />
+        <type name="Astal.Exclusivity" c:type="AstalExclusivity"/>
       </property>
       <method name="get_exclusivity" c:identifier="astal_window_get_exclusivity">
         <return-value transfer-ownership="none">
-          <type name="Astal.Exclusivity" c:type="AstalExclusivity" />
+          <type name="Astal.Exclusivity" c:type="AstalExclusivity"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_exclusivity" c:identifier="astal_window_set_exclusivity">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="Astal.Exclusivity" c:type="AstalExclusivity" />
+            <type name="Astal.Exclusivity" c:type="AstalExclusivity"/>
           </parameter>
         </parameters>
       </method>
       <property name="layer" writable="1">
         <doc xml:whitespace="preserve">Which layer to appear this window on.</doc>
-        <type name="Astal.Layer" c:type="AstalLayer" />
+        <type name="Astal.Layer" c:type="AstalLayer"/>
       </property>
       <method name="get_layer" c:identifier="astal_window_get_layer">
         <return-value transfer-ownership="none">
-          <type name="Astal.Layer" c:type="AstalLayer" />
+          <type name="Astal.Layer" c:type="AstalLayer"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_layer" c:identifier="astal_window_set_layer">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="Astal.Layer" c:type="AstalLayer" />
+            <type name="Astal.Layer" c:type="AstalLayer"/>
           </parameter>
         </parameters>
       </method>
       <property name="keymode" writable="1">
         <doc xml:whitespace="preserve">Keyboard mode of this window.</doc>
-        <type name="Astal.Keymode" c:type="AstalKeymode" />
+        <type name="Astal.Keymode" c:type="AstalKeymode"/>
       </property>
       <method name="get_keymode" c:identifier="astal_window_get_keymode">
         <return-value transfer-ownership="none">
-          <type name="Astal.Keymode" c:type="AstalKeymode" />
+          <type name="Astal.Keymode" c:type="AstalKeymode"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_keymode" c:identifier="astal_window_set_keymode">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="Astal.Keymode" c:type="AstalKeymode" />
+            <type name="Astal.Keymode" c:type="AstalKeymode"/>
           </parameter>
         </parameters>
       </method>
       <property name="gdkmonitor" writable="1">
         <doc xml:whitespace="preserve">Which monitor to appear this window on.</doc>
-        <type name="Gdk.Monitor" c:type="GdkMonitor*" />
+        <type name="Gdk.Monitor" c:type="GdkMonitor*"/>
       </property>
       <method name="get_gdkmonitor" c:identifier="astal_window_get_gdkmonitor">
         <return-value transfer-ownership="none">
-          <type name="Gdk.Monitor" c:type="GdkMonitor*" />
+          <type name="Gdk.Monitor" c:type="GdkMonitor*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_gdkmonitor" c:identifier="astal_window_set_gdkmonitor">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="Gdk.Monitor" c:type="GdkMonitor*" />
+            <type name="Gdk.Monitor" c:type="GdkMonitor*"/>
           </parameter>
         </parameters>
       </method>
       <property name="margin-top" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_margin_top" c:identifier="astal_window_get_margin_top">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_margin_top" c:identifier="astal_window_set_margin_top">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="margin-bottom" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_margin_bottom" c:identifier="astal_window_get_margin_bottom">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_margin_bottom" c:identifier="astal_window_set_margin_bottom">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="margin-left" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_margin_left" c:identifier="astal_window_get_margin_left">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_margin_left" c:identifier="astal_window_set_margin_left">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="margin-right" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_margin_right" c:identifier="astal_window_get_margin_right">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_margin_right" c:identifier="astal_window_set_margin_right">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="margin" readable="0" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="set_margin" c:identifier="astal_window_set_margin">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="monitor" writable="1">
         <doc xml:whitespace="preserve">Which monitor to appear this window on.
-          CAUTION: the id might not be the same mapped by the compositor.</doc>
-        <type name="gint" c:type="gint" />
+CAUTION: the id might not be the same mapped by the compositor.</doc>
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_monitor" c:identifier="astal_window_get_monitor">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_monitor" c:identifier="astal_window_set_monitor">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Window" c:type="AstalWindow*" />
+            <type name="Astal.Window" c:type="AstalWindow*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
     </class>
     <record name="WindowClass" c:type="AstalWindowClass" glib:is-gtype-struct-for="Window">
       <field name="parent_class" readable="0" private="1">
-        <type name="Gtk.WindowClass" c:type="GtkWindowClass" />
+        <type name="Gtk.WindowClass" c:type="GtkWindowClass"/>
       </field>
     </record>
-    <record name="WindowPrivate" c:type="AstalWindowPrivate" disguised="1" />
-    <class name="Application" c:type="AstalApplication" c:symbol-prefix="application"
-      glib:type-name="AstalApplication" glib:get-type="astal_application_get_type"
-      glib:type-struct="ApplicationClass" parent="Gtk.Application">
-      <implements name="AstalIO.Application" />
+    <record name="WindowPrivate" c:type="AstalWindowPrivate" disguised="1"/>
+    <class name="Application" c:type="AstalApplication" c:symbol-prefix="application" glib:type-name="AstalApplication" glib:get-type="astal_application_get_type" glib:type-struct="ApplicationClass" parent="Gtk.Application">
+      <implements name="AstalIO.Application"/>
       <field name="parent_instance" readable="0" private="1">
-        <type name="Gtk.Application" c:type="GtkApplication" />
+        <type name="Gtk.Application" c:type="GtkApplication"/>
       </field>
       <field name="priv" readable="0" private="1">
-        <type name="ApplicationPrivate" c:type="AstalApplicationPrivate*" />
+        <type name="ApplicationPrivate" c:type="AstalApplicationPrivate*"/>
       </field>
       <method name="reset_css" c:identifier="astal_application_reset_css">
         <doc xml:whitespace="preserve">Remove all [class@Gtk.StyleContext] providers.</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="get_window" c:identifier="astal_application_get_window">
-        <doc xml:whitespace="preserve">Get a window by its [property@Gtk.Widget:name] that has been
-          added to this app using [method@Gtk.Application.add_window].</doc>
+        <doc xml:whitespace="preserve">Get a window by its [property@Gtk.Widget:name] that has been added to this app using [method@Gtk.Application.add_window].</doc>
         <return-value transfer-ownership="full" nullable="1">
-          <type name="Gtk.Window" c:type="GtkWindow*" />
+          <type name="Gtk.Window" c:type="GtkWindow*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="name" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="apply_css" c:identifier="astal_application_apply_css">
         <doc xml:whitespace="preserve">Add a new [class@Gtk.StyleContext] provider.</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="style" transfer-ownership="none">
             <doc xml:whitespace="preserve">Css string or a path to a css file. </doc>
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="reset" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean" />
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
       <method name="add_icons" c:identifier="astal_application_add_icons">
         <doc xml:whitespace="preserve">Shortcut for [method@Gtk.IconTheme.add_search_path].</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="path" transfer-ownership="none" nullable="1">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="request" c:identifier="astal_application_request">
         <doc xml:whitespace="preserve">Handler for an incoming request.</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="msg" transfer-ownership="none">
             <doc xml:whitespace="preserve">Body of the message </doc>
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="conn" transfer-ownership="none">
             <doc xml:whitespace="preserve">The connection which expects the response. </doc>
-            <type name="Gio.SocketConnection" c:type="GSocketConnection*" />
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
           </parameter>
         </parameters>
       </method>
       <virtual-method name="request" invoker="request">
         <doc xml:whitespace="preserve">Handler for an incoming request.</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="msg" transfer-ownership="none">
             <doc xml:whitespace="preserve">Body of the message </doc>
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="conn" transfer-ownership="none">
             <doc xml:whitespace="preserve">The connection which expects the response. </doc>
-            <type name="Gio.SocketConnection" c:type="GSocketConnection*" />
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
           </parameter>
         </parameters>
       </virtual-method>
       <constructor name="new" c:identifier="astal_application_new">
         <return-value transfer-ownership="full">
-          <type name="Astal.Application" c:type="AstalApplication*" />
+          <type name="Astal.Application" c:type="AstalApplication*"/>
         </return-value>
       </constructor>
       <property name="monitors">
         <doc xml:whitespace="preserve">Get all monitors from [class@Gdk.Display].</doc>
         <type name="GLib.List" c:type="GList*">
-          <type name="Gdk.Monitor" c:type="GdkMonitor*" />
+          <type name="Gdk.Monitor" c:type="GdkMonitor*"/>
         </type>
       </property>
       <method name="get_monitors" c:identifier="astal_application_get_monitors">
         <return-value transfer-ownership="container">
           <type name="GLib.List" c:type="GList*">
-            <type name="Gdk.Monitor" c:type="GdkMonitor*" />
+            <type name="Gdk.Monitor" c:type="GdkMonitor*"/>
           </type>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="windows">
-        <doc xml:whitespace="preserve">Windows that has been added to this app using
-          [method@Gtk.Application.add_window].</doc>
+        <doc xml:whitespace="preserve">Windows that has been added to this app using [method@Gtk.Application.add_window].</doc>
         <type name="GLib.List" c:type="GList*">
-          <type name="Gtk.Window" c:type="GtkWindow*" />
+          <type name="Gtk.Window" c:type="GtkWindow*"/>
         </type>
       </property>
       <method name="get_windows" c:identifier="astal_application_get_windows">
         <return-value transfer-ownership="none">
           <type name="GLib.List" c:type="GList*">
-            <type name="Gtk.Window" c:type="GtkWindow*" />
+            <type name="Gtk.Window" c:type="GtkWindow*"/>
           </type>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="gtk-theme" writable="1">
         <doc xml:whitespace="preserve">Shortcut for [property@Gtk.Settings:gtk_theme_name]</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_gtk_theme" c:identifier="astal_application_get_gtk_theme">
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_gtk_theme" c:identifier="astal_application_set_gtk_theme">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <property name="icon-theme" writable="1">
         <doc xml:whitespace="preserve">Shortcut for [property@Gtk.Settings:gtk_icon_theme_name]</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_icon_theme" c:identifier="astal_application_get_icon_theme">
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_icon_theme" c:identifier="astal_application_set_icon_theme">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <property name="cursor-theme" writable="1">
         <doc xml:whitespace="preserve">Shortcut for [property@Gtk.Settings:gtk_cursor_theme_name]</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_cursor_theme" c:identifier="astal_application_get_cursor_theme">
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_cursor_theme" c:identifier="astal_application_set_cursor_theme">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="Astal.Application" c:type="AstalApplication*" />
+            <type name="Astal.Application" c:type="AstalApplication*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <glib:signal name="window-toggled">
-        <doc xml:whitespace="preserve">Emitted when a window that has been added using
-          [method@Gtk.Application.add_window] changes its visibility .</doc>
+        <doc xml:whitespace="preserve">Emitted when a window that has been added using [method@Gtk.Application.add_window] changes its visibility .</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <parameter name="window" transfer-ownership="none">
-            <type name="Gtk.Window" c:type="GtkWindow*" />
+            <type name="Gtk.Window" c:type="GtkWindow*"/>
           </parameter>
         </parameters>
       </glib:signal>
     </class>
-    <record name="ApplicationClass" c:type="AstalApplicationClass"
-      glib:is-gtype-struct-for="Application">
+    <record name="ApplicationClass" c:type="AstalApplicationClass" glib:is-gtype-struct-for="Application">
       <field name="parent_class" readable="0" private="1">
-        <type name="Gtk.ApplicationClass" c:type="GtkApplicationClass" />
+        <type name="Gtk.ApplicationClass" c:type="GtkApplicationClass"/>
       </field>
       <field name="request">
         <callback name="request" c:type="request">
           <return-value transfer-ownership="full">
-            <type name="none" c:type="void" />
+            <type name="none" c:type="void"/>
           </return-value>
           <parameters>
             <parameter name="self" transfer-ownership="none">
-              <type name="Astal.Application" c:type="AstalApplication*" />
+              <type name="Astal.Application" c:type="AstalApplication*"/>
             </parameter>
             <parameter name="msg" transfer-ownership="none">
               <doc xml:whitespace="preserve">Body of the message </doc>
-              <type name="utf8" c:type="const gchar*" />
+              <type name="utf8" c:type="const gchar*"/>
             </parameter>
             <parameter name="conn" transfer-ownership="none">
               <doc xml:whitespace="preserve">The connection which expects the response. </doc>
-              <type name="Gio.SocketConnection" c:type="GSocketConnection*" />
+              <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
             </parameter>
           </parameters>
         </callback>
       </field>
     </record>
-    <record name="ApplicationPrivate" c:type="AstalApplicationPrivate" disguised="1" />
-    <constant name="MAJOR_VERSION" c:identifier="ASTAL_MAJOR_VERSION" value="4"
-      type="ASTAL_MAJOR_VERSION">
-      <type name="gint" c:type="gint" />
+    <record name="ApplicationPrivate" c:type="AstalApplicationPrivate" disguised="1"/>
+    <constant name="MAJOR_VERSION" c:identifier="ASTAL_MAJOR_VERSION" value="4" type="ASTAL_MAJOR_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" c:identifier="ASTAL_MINOR_VERSION" value="0"
-      type="ASTAL_MINOR_VERSION">
-      <type name="gint" c:type="gint" />
+    <constant name="MINOR_VERSION" c:identifier="ASTAL_MINOR_VERSION" value="0" type="ASTAL_MINOR_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" c:identifier="ASTAL_MICRO_VERSION" value="0"
-      type="ASTAL_MICRO_VERSION">
-      <type name="gint" c:type="gint" />
+    <constant name="MICRO_VERSION" c:identifier="ASTAL_MICRO_VERSION" value="0" type="ASTAL_MICRO_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
   </namespace>
 </repository>

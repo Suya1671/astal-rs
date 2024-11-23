@@ -22,3 +22,4 @@ to
 - [x] add shared-library declarations to namespaces
 
 - [ ] fixup package names to include the version number
+- [ ] Remove app, get_app, and set_app from AstalApps-0.1.gir
