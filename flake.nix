@@ -37,13 +37,13 @@
 
       gir-rs = pkgs.rustPlatform.buildRustPackage rec {
         pname = "gir-rs";
-        version = "0.20.3";
+        version = "0.20.4";
 
         src = pkgs.fetchFromGitHub {
           owner = "gtk-rs";
           repo = "gir";
           rev = version;
-          hash = "sha256-R5QNtkr0CvyF2IfC3dC7o2oEOiLvk9qBa2ED9gAXtOY=";
+          hash = "sha256-WVBKebMwUVGrxvzXYkqYFHQRnoawBSWwIEgVnnIfgMI=";
         };
 
         cargoLock = {

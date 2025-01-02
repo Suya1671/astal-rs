@@ -6,16 +6,16 @@
 #![cfg(unix)]
 
 use astal_sys::*;
+use std::mem::{align_of, size_of};
 use std::env;
 use std::error::Error;
 use std::ffi::OsString;
-use std::mem::{align_of, size_of};
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::str;
 use tempfile::Builder;
 
-static PACKAGES: &[&str] = &["astal-4-4.0"];
+static PACKAGES: &[&str] = &["astal-4"];
 
 #[derive(Clone, Debug)]
 struct Compiler {
@@ -67,7 +67,8 @@ fn pkg_config_cflags(packages: &[&str]) -> Result<Vec<String>, Box<dyn Error>> {
     if packages.is_empty() {
         return Ok(Vec::new());
     }
-    let pkg_config = env::var_os("PKG_CONFIG").unwrap_or_else(|| OsString::from("pkg-config"));
+    let pkg_config = env::var_os("PKG_CONFIG")
+        .unwrap_or_else(|| OsString::from("pkg-config"));
     let mut cmd = Command::new(pkg_config);
     cmd.arg("--cflags");
     cmd.args(packages);
@@ -80,6 +81,7 @@ fn pkg_config_cflags(packages: &[&str]) -> Result<Vec<String>, Box<dyn Error>> {
     let stdout = str::from_utf8(&out.stdout)?;
     Ok(shell_words::split(stdout.trim())?)
 }
+
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 struct Layout {
@@ -162,7 +164,8 @@ fn cross_validate_layout_with_c() {
 
     let mut results = Results::default();
 
-    for ((rust_name, rust_layout), (c_name, c_layout)) in RUST_LAYOUTS.iter().zip(c_layouts.iter())
+    for ((rust_name, rust_layout), (c_name, c_layout)) in
+        RUST_LAYOUTS.iter().zip(c_layouts.iter())
     {
         if rust_name != c_name {
             results.record_failed();
@@ -172,7 +175,9 @@ fn cross_validate_layout_with_c() {
 
         if rust_layout != c_layout {
             results.record_failed();
-            eprintln!("Layout mismatch for {rust_name}\nRust: {rust_layout:?}\nC:    {c_layout:?}",);
+            eprintln!(
+                "Layout mismatch for {rust_name}\nRust: {rust_layout:?}\nC:    {c_layout:?}",
+            );
             continue;
         }
 
@@ -202,62 +207,18 @@ fn get_c_output(name: &str) -> Result<String, Box<dyn Error>> {
 }
 
 const RUST_LAYOUTS: &[(&str, Layout)] = &[
-    (
-        "AstalApplication",
-        Layout {
-            size: size_of::<AstalApplication>(),
-            alignment: align_of::<AstalApplication>(),
-        },
-    ),
-    (
-        "AstalApplicationClass",
-        Layout {
-            size: size_of::<AstalApplicationClass>(),
-            alignment: align_of::<AstalApplicationClass>(),
-        },
-    ),
-    (
-        "AstalExclusivity",
-        Layout {
-            size: size_of::<AstalExclusivity>(),
-            alignment: align_of::<AstalExclusivity>(),
-        },
-    ),
-    (
-        "AstalKeymode",
-        Layout {
-            size: size_of::<AstalKeymode>(),
-            alignment: align_of::<AstalKeymode>(),
-        },
-    ),
-    (
-        "AstalLayer",
-        Layout {
-            size: size_of::<AstalLayer>(),
-            alignment: align_of::<AstalLayer>(),
-        },
-    ),
-    (
-        "AstalWindow",
-        Layout {
-            size: size_of::<AstalWindow>(),
-            alignment: align_of::<AstalWindow>(),
-        },
-    ),
-    (
-        "AstalWindowAnchor",
-        Layout {
-            size: size_of::<AstalWindowAnchor>(),
-            alignment: align_of::<AstalWindowAnchor>(),
-        },
-    ),
-    (
-        "AstalWindowClass",
-        Layout {
-            size: size_of::<AstalWindowClass>(),
-            alignment: align_of::<AstalWindowClass>(),
-        },
-    ),
+    ("AstalApplication", Layout {size: size_of::<AstalApplication>(), alignment: align_of::<AstalApplication>()}),
+    ("AstalApplicationClass", Layout {size: size_of::<AstalApplicationClass>(), alignment: align_of::<AstalApplicationClass>()}),
+    ("AstalBox", Layout {size: size_of::<AstalBox>(), alignment: align_of::<AstalBox>()}),
+    ("AstalBoxClass", Layout {size: size_of::<AstalBoxClass>(), alignment: align_of::<AstalBoxClass>()}),
+    ("AstalExclusivity", Layout {size: size_of::<AstalExclusivity>(), alignment: align_of::<AstalExclusivity>()}),
+    ("AstalKeymode", Layout {size: size_of::<AstalKeymode>(), alignment: align_of::<AstalKeymode>()}),
+    ("AstalLayer", Layout {size: size_of::<AstalLayer>(), alignment: align_of::<AstalLayer>()}),
+    ("AstalSlider", Layout {size: size_of::<AstalSlider>(), alignment: align_of::<AstalSlider>()}),
+    ("AstalSliderClass", Layout {size: size_of::<AstalSliderClass>(), alignment: align_of::<AstalSliderClass>()}),
+    ("AstalWindow", Layout {size: size_of::<AstalWindow>(), alignment: align_of::<AstalWindow>()}),
+    ("AstalWindowAnchor", Layout {size: size_of::<AstalWindowAnchor>(), alignment: align_of::<AstalWindowAnchor>()}),
+    ("AstalWindowClass", Layout {size: size_of::<AstalWindowClass>(), alignment: align_of::<AstalWindowClass>()}),
 ];
 
 const RUST_CONSTANTS: &[(&str, &str)] = &[
@@ -280,3 +241,5 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(guint) ASTAL_WINDOW_ANCHOR_RIGHT", "4"),
     ("(guint) ASTAL_WINDOW_ANCHOR_TOP", "2"),
 ];
+
+

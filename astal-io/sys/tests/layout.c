@@ -10,6 +10,8 @@
 int main() {
     printf("%s;%zu;%zu\n", "AstalIOAppError", sizeof(AstalIOAppError), alignof(AstalIOAppError));
     printf("%s;%zu;%zu\n", "AstalIOApplicationIface", sizeof(AstalIOApplicationIface), alignof(AstalIOApplicationIface));
+    printf("%s;%zu;%zu\n", "AstalIODaemon", sizeof(AstalIODaemon), alignof(AstalIODaemon));
+    printf("%s;%zu;%zu\n", "AstalIODaemonClass", sizeof(AstalIODaemonClass), alignof(AstalIODaemonClass));
     printf("%s;%zu;%zu\n", "AstalIOProcess", sizeof(AstalIOProcess), alignof(AstalIOProcess));
     printf("%s;%zu;%zu\n", "AstalIOProcessClass", sizeof(AstalIOProcessClass), alignof(AstalIOProcessClass));
     printf("%s;%zu;%zu\n", "AstalIOTime", sizeof(AstalIOTime), alignof(AstalIOTime));

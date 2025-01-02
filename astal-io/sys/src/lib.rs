@@ -63,6 +63,30 @@ impl ::std::fmt::Debug for AstalIOApplicationIface {
 
 #[derive(Copy, Clone)]
 #[repr(C)]
+pub struct AstalIODaemonClass {
+    pub parent_class: gio::GApplicationClass,
+    pub request: Option<unsafe extern "C" fn(*mut AstalIODaemon, *const c_char, *mut gio::GSocketConnection)>,
+}
+
+impl ::std::fmt::Debug for AstalIODaemonClass {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalIODaemonClass @ {self:p}"))
+         .field("request", &self.request)
+         .finish()
+    }
+}
+
+#[repr(C)]
+#[allow(dead_code)]
+pub struct _AstalIODaemonPrivate {
+    _data: [u8; 0],
+    _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
+}
+
+pub type AstalIODaemonPrivate = _AstalIODaemonPrivate;
+
+#[derive(Copy, Clone)]
+#[repr(C)]
 pub struct AstalIOProcessClass {
     pub parent_class: gobject::GObjectClass,
 }
@@ -152,6 +176,20 @@ pub type AstalIOVariablePrivate = _AstalIOVariablePrivate;
 // Classes
 #[derive(Copy, Clone)]
 #[repr(C)]
+pub struct AstalIODaemon {
+    pub parent_instance: gio::GApplication,
+    pub priv_: *mut AstalIODaemonPrivate,
+}
+
+impl ::std::fmt::Debug for AstalIODaemon {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalIODaemon @ {self:p}"))
+         .finish()
+    }
+}
+
+#[derive(Copy, Clone)]
+#[repr(C)]
 pub struct AstalIOProcess {
     pub parent_instance: gobject::GObject,
     pub priv_: *mut AstalIOProcessPrivate,
@@ -229,6 +267,13 @@ extern "C" {
     pub fn astal_io_app_error_get_type() -> GType;
 
     //=========================================================================
+    // AstalIODaemon
+    //=========================================================================
+    pub fn astal_io_daemon_get_type() -> GType;
+    pub fn astal_io_daemon_request(self_: *mut AstalIODaemon, msg: *const c_char, conn: *mut gio::GSocketConnection);
+    pub fn astal_io_daemon_new() -> *mut AstalIODaemon;
+
+    //=========================================================================
     // AstalIOProcess
     //=========================================================================
     pub fn astal_io_process_get_type() -> GType;
@@ -237,7 +282,8 @@ extern "C" {
     pub fn astal_io_process_write(self_: *mut AstalIOProcess, in_: *const c_char, error: *mut *mut glib::GError);
     pub fn astal_io_process_write_async(self_: *mut AstalIOProcess, in_: *const c_char, _callback_: gio::GAsyncReadyCallback, _callback__target: *mut c_void);
     pub fn astal_io_process_write_finish(self_: *mut AstalIOProcess, _res_: *mut gio::GAsyncResult);
-    pub fn astal_io_process_new_subprocessv(cmd: *mut *mut c_char, cmd_length1: c_int, error: *mut *mut glib::GError) -> *mut AstalIOProcess;
+    pub fn astal_io_process_new(cmd: *mut *mut c_char, cmd_length1: c_int, error: *mut *mut glib::GError) -> *mut AstalIOProcess;
+    pub fn astal_io_process_subprocessv(cmd: *mut *mut c_char, cmd_length1: c_int, error: *mut *mut glib::GError) -> *mut AstalIOProcess;
     pub fn astal_io_process_subprocess(cmd: *const c_char, error: *mut *mut glib::GError) -> *mut AstalIOProcess;
     pub fn astal_io_process_execv(cmd: *mut *mut c_char, cmd_length1: c_int, error: *mut *mut glib::GError) -> *mut c_char;
     pub fn astal_io_process_exec(cmd: *const c_char, error: *mut *mut glib::GError) -> *mut c_char;
@@ -245,7 +291,6 @@ extern "C" {
     pub fn astal_io_process_exec_asyncv_finish(_res_: *mut gio::GAsyncResult, error: *mut *mut glib::GError) -> *mut c_char;
     pub fn astal_io_process_exec_async(cmd: *const c_char, _callback_: gio::GAsyncReadyCallback, _callback__target: *mut c_void);
     pub fn astal_io_process_exec_finish(_res_: *mut gio::GAsyncResult, error: *mut *mut glib::GError) -> *mut c_char;
-    pub fn astal_io_process_new() -> *mut AstalIOProcess;
     pub fn astal_io_process_get_argv(self_: *mut AstalIOProcess, result_length1: *mut c_int) -> *mut *mut c_char;
 
     //=========================================================================

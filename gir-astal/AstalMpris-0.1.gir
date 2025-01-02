@@ -215,7 +215,7 @@ AstalMpris.Player:can_play] is `false` this method has no effect.</doc>
         </parameters>
       </method>
       <method name="open_uri" c:identifier="astal_mpris_player_open_uri">
-        <doc xml:whitespace="preserve">uri scheme should be an element of [property@AstalMpris.Player:supported_uri_schemas] and the mime-type should match one of the elements 
+        <doc xml:whitespace="preserve">uri scheme should be an element of [property@AstalMpris.Player:supported_uri_schemes] and the mime-type should match one of the elements 
 of [property@AstalMpris.Player:supported_mime_types].</doc>
         <return-value transfer-ownership="full">
           <type name="none" c:type="void"/>
@@ -393,7 +393,7 @@ to toggle fullscreen state.</doc>
           </instance-parameter>
         </parameters>
       </method>
-      <property name="supported-uri-schemas" writable="1">
+      <property name="supported-uri-schemes" writable="1">
         <doc xml:whitespace="preserve">The URI schemes supported by the media player.
 This can be viewed as protocols supported by the player in almost all cases. Almost every media player will include support for the "file
 " scheme. Other common schemes are "http" and "rtsp".</doc>
@@ -401,7 +401,7 @@ This can be viewed as protocols supported by the player in almost all cases. Alm
           <type name="utf8" c:type="gchar*"/>
         </array>
       </property>
-      <method name="get_supported_uri_schemas" c:identifier="astal_mpris_player_get_supported_uri_schemas">
+      <method name="get_supported_uri_schemes" c:identifier="astal_mpris_player_get_supported_uri_schemes">
         <return-value transfer-ownership="full">
           <array length="0" c:type="gchar**">
             <type name="utf8" c:type="gchar*"/>

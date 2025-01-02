@@ -27,11 +27,16 @@ manual = [
     "Gtk.Widget",
     "Gtk.Root",
     "Gtk.Align",
+    "Gtk.Scale",
+    "Gtk.Range",
+    "Gtk.AccessibleRange",
     "Gtk.ShortcutManager",
     "Gtk.LayoutManager",
     "Gtk.Overflow",
     "Gtk.AccessibleRole",
     "Gtk.Window",
+    "Gtk.Box",
+    "Gtk.Orientable",
     "Gio.SocketConnection",
     "Gio.ApplicationFlags",
     "Gio.Application",
@@ -50,5 +55,17 @@ generate_builder = true
 
 [[object]]
 name = "Astal.Application"
+status = "generate"
+generate_builder = true
+
+
+[[object]]
+name = "Astal.Box"
+status = "generate"
+# TODO: generate_builder = true when &[gtk4::Widget] implements Into<Value>
+generate_builder = false
+
+[[object]]
+name = "Astal.Slider"
 status = "generate"
 generate_builder = true

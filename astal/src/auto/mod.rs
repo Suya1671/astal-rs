@@ -6,6 +6,12 @@
 mod application;
 pub use self::application::Application;
 
+mod box_;
+pub use self::box_::Box;
+
+mod slider;
+pub use self::slider::Slider;
+
 mod window;
 pub use self::window::Window;
 
@@ -19,9 +25,12 @@ pub use self::flags::WindowAnchor;
 
 pub(crate) mod traits {
     pub use super::application::ApplicationExt;
+    pub use super::box_::BoxExt;
+    pub use super::slider::SliderExt;
     pub use super::window::WindowExt;
 }
 pub(crate) mod builders {
     pub use super::application::ApplicationBuilder;
+    pub use super::slider::SliderBuilder;
     pub use super::window::WindowBuilder;
 }

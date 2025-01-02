@@ -170,7 +170,7 @@ extern "C" {
     pub fn astal_mpris_player_get_can_raise(self_: *mut AstalMprisPlayer) -> gboolean;
     pub fn astal_mpris_player_get_identity(self_: *mut AstalMprisPlayer) -> *mut c_char;
     pub fn astal_mpris_player_get_entry(self_: *mut AstalMprisPlayer) -> *mut c_char;
-    pub fn astal_mpris_player_get_supported_uri_schemas(self_: *mut AstalMprisPlayer, result_length1: *mut c_int) -> *mut *mut c_char;
+    pub fn astal_mpris_player_get_supported_uri_schemes(self_: *mut AstalMprisPlayer, result_length1: *mut c_int) -> *mut *mut c_char;
     pub fn astal_mpris_player_get_supported_mime_types(self_: *mut AstalMprisPlayer, result_length1: *mut c_int) -> *mut *mut c_char;
     pub fn astal_mpris_player_get_loop_status(self_: *mut AstalMprisPlayer) -> AstalMprisLoop;
     pub fn astal_mpris_player_set_loop_status(self_: *mut AstalMprisPlayer, value: AstalMprisLoop);

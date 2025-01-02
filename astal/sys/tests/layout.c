@@ -10,9 +10,13 @@
 int main() {
     printf("%s;%zu;%zu\n", "AstalApplication", sizeof(AstalApplication), alignof(AstalApplication));
     printf("%s;%zu;%zu\n", "AstalApplicationClass", sizeof(AstalApplicationClass), alignof(AstalApplicationClass));
+    printf("%s;%zu;%zu\n", "AstalBox", sizeof(AstalBox), alignof(AstalBox));
+    printf("%s;%zu;%zu\n", "AstalBoxClass", sizeof(AstalBoxClass), alignof(AstalBoxClass));
     printf("%s;%zu;%zu\n", "AstalExclusivity", sizeof(AstalExclusivity), alignof(AstalExclusivity));
     printf("%s;%zu;%zu\n", "AstalKeymode", sizeof(AstalKeymode), alignof(AstalKeymode));
     printf("%s;%zu;%zu\n", "AstalLayer", sizeof(AstalLayer), alignof(AstalLayer));
+    printf("%s;%zu;%zu\n", "AstalSlider", sizeof(AstalSlider), alignof(AstalSlider));
+    printf("%s;%zu;%zu\n", "AstalSliderClass", sizeof(AstalSliderClass), alignof(AstalSliderClass));
     printf("%s;%zu;%zu\n", "AstalWindow", sizeof(AstalWindow), alignof(AstalWindow));
     printf("%s;%zu;%zu\n", "AstalWindowAnchor", sizeof(AstalWindowAnchor), alignof(AstalWindowAnchor));
     printf("%s;%zu;%zu\n", "AstalWindowClass", sizeof(AstalWindowClass), alignof(AstalWindowClass));

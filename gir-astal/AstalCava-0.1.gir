@@ -7,7 +7,7 @@ and/or use gtk-doc annotations.  -->
   <include name="Gio" version="2.0"/>
   <package name="astal-cava-0.1"/>
   <c:include name="astal-cava.h"/>
-  <namespace name="AstalCava" version="0.1" shared-library="/nix/store/zkfr94byb90mpgknv5giw5dlcphlms1y-astal-cava-0.1.0/lib/libastal-cava.so.0" c:identifier-prefixes="AstalCava" c:symbol-prefixes="astal_cava">
+  <namespace name="AstalCava" version="0.1" shared-library="/nix/store/65c4v4kb1w9y3b62dsvppxq9dy8fmkxa-astal-cava-0.1.0/lib/libastal-cava.so.0" c:identifier-prefixes="AstalCava" c:symbol-prefixes="astal_cava">
     <class name="Cava" c:symbol-prefix="cava" c:type="AstalCavaCava" parent="GObject.Object" glib:type-name="AstalCavaCava" glib:get-type="astal_cava_cava_get_type" glib:type-struct="CavaClass">
       <source-position filename="astal-cava.h" line="25"/>
       <function name="get_default" c:identifier="astal_cava_cava_get_default">
@@ -390,7 +390,7 @@ automatically if [property@AstalCava.Cava:autosens] is set. The array will have
 half of the array will represent the left channel and the second half the right channel, so
 there will be only bars/2 bars per channel. If the number of bars is odd, the last value will
 be 0.</doc>
-        <array name="GLib.Array" c:type="gpointer">
+        <array name="GLib.Array">
           <type name="gdouble"/>
         </array>
       </property>

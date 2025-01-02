@@ -2,9 +2,9 @@
 <repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
   <include name="AstalIO" version="0.1"/>
   <include name="Gtk" version="4.0"/>
+  <include name="GLib" version="2.0"/>
   <include name="Gdk" version="4.0"/>
   <include name="Gio" version="2.0"/>
-  <include name="GLib" version="2.0"/>
   <package name="astal-4"/>
   <c:include name="astal-4.h"/>
   <namespace name="Astal" version="4.0" c:prefix="Astal" c:identifier-prefixes="Astal" c:symbol-prefixes="astal" shared-library="libastal-4.so">
@@ -41,6 +41,237 @@
         <doc xml:whitespace="preserve">Focus and Unfocues the window as needed.</doc>
       </member>
     </enumeration>
+    <class name="Box" c:type="AstalBox" c:symbol-prefix="box" glib:type-name="AstalBox" glib:get-type="astal_box_get_type" glib:type-struct="BoxClass" parent="Gtk.Box">
+      <field name="parent_instance" readable="0" private="1">
+        <type name="Gtk.Box" c:type="GtkBox"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="BoxPrivate" c:type="AstalBoxPrivate*"/>
+      </field>
+      <constructor name="new" c:identifier="astal_box_new">
+        <return-value transfer-ownership="none">
+          <type name="Astal.Box" c:type="AstalBox*"/>
+        </return-value>
+      </constructor>
+      <property name="vertical" writable="1">
+        <doc xml:whitespace="preserve">Corresponds to [property@Gtk.Orientable :orientation].</doc>
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <method name="get_vertical" c:identifier="astal_box_get_vertical">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_vertical" c:identifier="astal_box_set_vertical">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="children" writable="1">
+        <type name="GLib.List" c:type="GList*">
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </type>
+      </property>
+      <method name="get_children" c:identifier="astal_box_get_children">
+        <return-value transfer-ownership="container">
+          <type name="GLib.List" c:type="GList*">
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </type>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_children" c:identifier="astal_box_set_children">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GLib.List" c:type="GList*">
+              <type name="Gtk.Widget" c:type="GtkWidget*"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="child" writable="1">
+        <type name="Gtk.Widget" c:type="GtkWidget*"/>
+      </property>
+      <method name="get_child" c:identifier="astal_box_get_child">
+        <return-value transfer-ownership="full" nullable="1">
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_child" c:identifier="astal_box_set_child">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Box" c:type="AstalBox*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none" nullable="1">
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </parameter>
+        </parameters>
+      </method>
+    </class>
+    <record name="BoxClass" c:type="AstalBoxClass" glib:is-gtype-struct-for="Box">
+      <field name="parent_class" readable="0" private="1">
+        <type name="Gtk.BoxClass" c:type="GtkBoxClass"/>
+      </field>
+    </record>
+    <record name="BoxPrivate" c:type="AstalBoxPrivate" disguised="1"/>
+    <class name="Slider" c:type="AstalSlider" c:symbol-prefix="slider" glib:type-name="AstalSlider" glib:get-type="astal_slider_get_type" glib:type-struct="SliderClass" parent="Gtk.Scale">
+      <field name="parent_instance" readable="0" private="1">
+        <type name="Gtk.Scale" c:type="GtkScale"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="SliderPrivate" c:type="AstalSliderPrivate*"/>
+      </field>
+      <constructor name="new" c:identifier="astal_slider_new">
+        <return-value transfer-ownership="none">
+          <type name="Astal.Slider" c:type="AstalSlider*"/>
+        </return-value>
+      </constructor>
+      <property name="value" writable="1">
+        <doc xml:whitespace="preserve">Value of this slider. Defaults to `0`.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_value" c:identifier="astal_slider_get_value">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_value" c:identifier="astal_slider_set_value">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="min" writable="1">
+        <doc xml:whitespace="preserve">Minimum possible value of this slider. Defaults to `0`.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_min" c:identifier="astal_slider_get_min">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_min" c:identifier="astal_slider_set_min">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="max" writable="1">
+        <doc xml:whitespace="preserve">Maximum possible value of this slider. Defaults to `1`.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_max" c:identifier="astal_slider_get_max">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_max" c:identifier="astal_slider_set_max">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="step" writable="1">
+        <doc xml:whitespace="preserve">Size of step increments. Defaults to `0.05`.</doc>
+        <type name="gdouble" c:type="gdouble"/>
+      </property>
+      <method name="get_step" c:identifier="astal_slider_get_step">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_step" c:identifier="astal_slider_set_step">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="Astal.Slider" c:type="AstalSlider*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+    </class>
+    <record name="SliderClass" c:type="AstalSliderClass" glib:is-gtype-struct-for="Slider">
+      <field name="parent_class" readable="0" private="1">
+        <type name="Gtk.ScaleClass" c:type="GtkScaleClass"/>
+      </field>
+    </record>
+    <record name="SliderPrivate" c:type="AstalSliderPrivate" disguised="1"/>
     <class name="Window" c:type="AstalWindow" c:symbol-prefix="window" glib:type-name="AstalWindow" glib:get-type="astal_window_get_type" glib:type-struct="WindowClass" parent="Gtk.Window">
       <doc xml:whitespace="preserve">Subclass of [class@Gtk.Window] which integrates GtkLayerShell as class fields.</doc>
       <field name="parent_instance" readable="0" private="1">

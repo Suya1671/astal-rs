@@ -16,6 +16,7 @@ generate = [
     "AstalIO.AppError",
     "AstalIO.Time",
     "AstalIO.VariableBase",
+    "AstalIO.Daemon",
 ]
 
 manual = [
@@ -26,6 +27,9 @@ manual = [
     "Gio.AsyncResult",
     "GObject.Closure",
     "Gio.FileMonitor",
+    "Gio.Application",
+    "Gio.ActionGroup",
+    "Gio.ActionMap",
     "GObject.Value",
 ]
 

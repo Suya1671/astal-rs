@@ -217,6 +217,20 @@ const RUST_LAYOUTS: &[(&str, Layout)] = &[
         },
     ),
     (
+        "AstalIODaemon",
+        Layout {
+            size: size_of::<AstalIODaemon>(),
+            alignment: align_of::<AstalIODaemon>(),
+        },
+    ),
+    (
+        "AstalIODaemonClass",
+        Layout {
+            size: size_of::<AstalIODaemonClass>(),
+            alignment: align_of::<AstalIODaemonClass>(),
+        },
+    ),
+    (
         "AstalIOProcess",
         Layout {
             size: size_of::<AstalIOProcess>(),

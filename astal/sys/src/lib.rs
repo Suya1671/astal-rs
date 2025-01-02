@@ -81,6 +81,50 @@ pub type AstalApplicationPrivate = _AstalApplicationPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
+pub struct AstalBoxClass {
+    pub parent_class: gtk::GtkBoxClass,
+}
+
+impl ::std::fmt::Debug for AstalBoxClass {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalBoxClass @ {self:p}"))
+         .finish()
+    }
+}
+
+#[repr(C)]
+#[allow(dead_code)]
+pub struct _AstalBoxPrivate {
+    _data: [u8; 0],
+    _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
+}
+
+pub type AstalBoxPrivate = _AstalBoxPrivate;
+
+#[derive(Copy, Clone)]
+#[repr(C)]
+pub struct AstalSliderClass {
+    pub parent_class: gtk::GtkScaleClass,
+}
+
+impl ::std::fmt::Debug for AstalSliderClass {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalSliderClass @ {self:p}"))
+         .finish()
+    }
+}
+
+#[repr(C)]
+#[allow(dead_code)]
+pub struct _AstalSliderPrivate {
+    _data: [u8; 0],
+    _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
+}
+
+pub type AstalSliderPrivate = _AstalSliderPrivate;
+
+#[derive(Copy, Clone)]
+#[repr(C)]
 pub struct AstalWindowClass {
     pub parent_class: gtk::GtkWindowClass,
 }
@@ -112,6 +156,34 @@ pub struct AstalApplication {
 impl ::std::fmt::Debug for AstalApplication {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         f.debug_struct(&format!("AstalApplication @ {self:p}"))
+         .finish()
+    }
+}
+
+#[derive(Copy, Clone)]
+#[repr(C)]
+pub struct AstalBox {
+    pub parent_instance: gtk::GtkBox,
+    pub priv_: *mut AstalBoxPrivate,
+}
+
+impl ::std::fmt::Debug for AstalBox {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalBox @ {self:p}"))
+         .finish()
+    }
+}
+
+#[derive(Copy, Clone)]
+#[repr(C)]
+pub struct AstalSlider {
+    pub parent_instance: gtk::GtkScale,
+    pub priv_: *mut AstalSliderPrivate,
+}
+
+impl ::std::fmt::Debug for AstalSlider {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("AstalSlider @ {self:p}"))
          .finish()
     }
 }
@@ -170,6 +242,32 @@ extern "C" {
     pub fn astal_application_set_icon_theme(self_: *mut AstalApplication, value: *const c_char);
     pub fn astal_application_get_cursor_theme(self_: *mut AstalApplication) -> *mut c_char;
     pub fn astal_application_set_cursor_theme(self_: *mut AstalApplication, value: *const c_char);
+
+    //=========================================================================
+    // AstalBox
+    //=========================================================================
+    pub fn astal_box_get_type() -> GType;
+    pub fn astal_box_new() -> *mut AstalBox;
+    pub fn astal_box_get_vertical(self_: *mut AstalBox) -> gboolean;
+    pub fn astal_box_set_vertical(self_: *mut AstalBox, value: gboolean);
+    pub fn astal_box_get_children(self_: *mut AstalBox) -> *mut glib::GList;
+    pub fn astal_box_set_children(self_: *mut AstalBox, value: *mut glib::GList);
+    pub fn astal_box_get_child(self_: *mut AstalBox) -> *mut gtk::GtkWidget;
+    pub fn astal_box_set_child(self_: *mut AstalBox, value: *mut gtk::GtkWidget);
+
+    //=========================================================================
+    // AstalSlider
+    //=========================================================================
+    pub fn astal_slider_get_type() -> GType;
+    pub fn astal_slider_new() -> *mut AstalSlider;
+    pub fn astal_slider_get_value(self_: *mut AstalSlider) -> c_double;
+    pub fn astal_slider_set_value(self_: *mut AstalSlider, value: c_double);
+    pub fn astal_slider_get_min(self_: *mut AstalSlider) -> c_double;
+    pub fn astal_slider_set_min(self_: *mut AstalSlider, value: c_double);
+    pub fn astal_slider_get_max(self_: *mut AstalSlider) -> c_double;
+    pub fn astal_slider_set_max(self_: *mut AstalSlider, value: c_double);
+    pub fn astal_slider_get_step(self_: *mut AstalSlider) -> c_double;
+    pub fn astal_slider_set_step(self_: *mut AstalSlider, value: c_double);
 
     //=========================================================================
     // AstalWindow

@@ -90,8 +90,8 @@ pub struct PlayerBuilder {
                             Self { builder: self.builder.property("entry", entry.into()), }
                         }
 
-                            pub fn supported_uri_schemas(self, supported_uri_schemas: impl Into<glib::StrV>) -> Self {
-                            Self { builder: self.builder.property("supported-uri-schemas", supported_uri_schemas.into()), }
+                            pub fn supported_uri_schemes(self, supported_uri_schemes: impl Into<glib::StrV>) -> Self {
+                            Self { builder: self.builder.property("supported-uri-schemes", supported_uri_schemes.into()), }
                         }
 
                             pub fn supported_mime_types(self, supported_mime_types: impl Into<glib::StrV>) -> Self {
@@ -373,12 +373,12 @@ pub trait PlayerExt: IsA<Player> + sealed::Sealed + 'static {
         }
     }
 
-    #[doc(alias = "astal_mpris_player_get_supported_uri_schemas")]
-    #[doc(alias = "get_supported_uri_schemas")]
-    fn supported_uri_schemas(&self) -> Vec<glib::GString> {
+    #[doc(alias = "astal_mpris_player_get_supported_uri_schemes")]
+    #[doc(alias = "get_supported_uri_schemes")]
+    fn supported_uri_schemes(&self) -> Vec<glib::GString> {
         unsafe {
             let mut result_length1 = std::mem::MaybeUninit::uninit();
-            let ret = FromGlibContainer::from_glib_full_num(ffi::astal_mpris_player_get_supported_uri_schemas(self.as_ref().to_glib_none().0, result_length1.as_mut_ptr()), result_length1.assume_init() as _);
+            let ret = FromGlibContainer::from_glib_full_num(ffi::astal_mpris_player_get_supported_uri_schemes(self.as_ref().to_glib_none().0, result_length1.as_mut_ptr()), result_length1.assume_init() as _);
             ret
         }
     }
@@ -670,9 +670,9 @@ pub trait PlayerExt: IsA<Player> + sealed::Sealed + 'static {
         ObjectExt::set_property(self.as_ref(),"entry", entry)
     }
 
-    #[doc(alias = "supported-uri-schemas")]
-    fn set_supported_uri_schemas(&self, supported_uri_schemas: &[&str]) {
-        ObjectExt::set_property(self.as_ref(),"supported-uri-schemas", supported_uri_schemas)
+    #[doc(alias = "supported-uri-schemes")]
+    fn set_supported_uri_schemes(&self, supported_uri_schemes: &[&str]) {
+        ObjectExt::set_property(self.as_ref(),"supported-uri-schemes", supported_uri_schemes)
     }
 
     #[doc(alias = "supported-mime-types")]
@@ -880,16 +880,16 @@ pub trait PlayerExt: IsA<Player> + sealed::Sealed + 'static {
         }
     }
 
-    #[doc(alias = "supported-uri-schemas")]
-    fn connect_supported_uri_schemas_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
-        unsafe extern "C" fn notify_supported_uri_schemas_trampoline<P: IsA<Player>, F: Fn(&P) + 'static>(this: *mut ffi::AstalMprisPlayer, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer) {
+    #[doc(alias = "supported-uri-schemes")]
+    fn connect_supported_uri_schemes_notify<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn notify_supported_uri_schemes_trampoline<P: IsA<Player>, F: Fn(&P) + 'static>(this: *mut ffi::AstalMprisPlayer, _param_spec: glib::ffi::gpointer, f: glib::ffi::gpointer) {
             let f: &F = &*(f as *const F);
             f(Player::from_glib_borrow(this).unsafe_cast_ref())
         }
         unsafe {
             let f: Box_<F> = Box_::new(f);
-            connect_raw(self.as_ptr() as *mut _, b"notify::supported-uri-schemas\0".as_ptr() as *const _,
-                Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(notify_supported_uri_schemas_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+            connect_raw(self.as_ptr() as *mut _, b"notify::supported-uri-schemes\0".as_ptr() as *const _,
+                Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(notify_supported_uri_schemes_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 

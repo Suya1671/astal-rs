@@ -25,11 +25,14 @@ path = "./sys"
 
 [dependencies.astal-io]
 path = "../astal-io"
+default-features = false
 
 [features]
-default = ["gio_v2_80", "gtk_v4_6"]
-gio_v2_28 = []
-gio_v2_32 = ["gio_v2_28"]
+default = ["gio_v2_80", "gtk_v4_12"]
+gio_v2_28 = ["astal-io/gio_v2_28"]
+gio_v2_32 = ["gio_v2_28", "astal-io/gio_v2_32"]
 gio_v2_80 = ["gio_v2_32", "gio/v2_80"]
 gtk_v4_2 = ["gtk/v4_2"]
 gtk_v4_6 = ["gtk_v4_2", "gtk/v4_6"]
+gtk_v4_10 = ["gtk_v4_6", "gtk/v4_10"]
+gtk_v4_12 = ["gtk_v4_10", "gtk/v4_12"]

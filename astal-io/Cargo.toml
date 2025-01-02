@@ -20,3 +20,8 @@ gio.workspace = true
 [dependencies.ffi]
 package = "astal-io-sys"
 path = "./sys"
+
+[features]
+default = ["gio_v2_32"]
+gio_v2_28 = []
+gio_v2_32 = ["gio_v2_28"]

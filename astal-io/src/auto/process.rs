@@ -20,22 +20,14 @@ impl Process {
         pub const NONE: Option<&'static Process> = None;
     
 
-    #[doc(alias = "astal_io_process_new_subprocessv")]
-    pub fn subprocessv(cmd: &[&str]) -> Result<Process, glib::Error> {
+    #[doc(alias = "astal_io_process_new")]
+    pub fn new(cmd: &[&str]) -> Result<Process, glib::Error> {
         assert_initialized_main_thread!();
         let cmd_length1 = cmd.len() as _;
         unsafe {
             let mut error = std::ptr::null_mut();
-            let ret = ffi::astal_io_process_new_subprocessv(cmd.to_glib_none().0, cmd_length1, &mut error);
+            let ret = ffi::astal_io_process_new(cmd.to_glib_none().0, cmd_length1, &mut error);
             if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
-        }
-    }
-
-    #[doc(alias = "astal_io_process_new")]
-    pub fn new() -> Process {
-        assert_initialized_main_thread!();
-        unsafe {
-            from_glib_full(ffi::astal_io_process_new())
         }
     }
 
@@ -47,6 +39,17 @@ impl Process {
                 ProcessBuilder::new()
             }
         
+
+    #[doc(alias = "astal_io_process_subprocessv")]
+    pub fn subprocessv(cmd: &[&str]) -> Result<Process, glib::Error> {
+        assert_initialized_main_thread!();
+        let cmd_length1 = cmd.len() as _;
+        unsafe {
+            let mut error = std::ptr::null_mut();
+            let ret = ffi::astal_io_process_subprocessv(cmd.to_glib_none().0, cmd_length1, &mut error);
+            if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
+        }
+    }
 
     #[doc(alias = "astal_io_process_subprocess")]
     pub fn subprocess(cmd: &str) -> Result<Process, glib::Error> {
@@ -92,7 +95,7 @@ impl Process {
 
 impl Default for Process {
                      fn default() -> Self {
-                         Self::new()
+                         glib::object::Object::new::<Self>()
                      }
                  }
 
@@ -189,6 +192,19 @@ pub trait ProcessExt: IsA<Process> + sealed::Sealed + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"stderr\0".as_ptr() as *const _,
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(stderr_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+        }
+    }
+
+    #[doc(alias = "exit")]
+    fn connect_exit<F: Fn(&Self, i32, bool) + 'static>(&self, f: F) -> SignalHandlerId {
+        unsafe extern "C" fn exit_trampoline<P: IsA<Process>, F: Fn(&P, i32, bool) + 'static>(this: *mut ffi::AstalIOProcess, code: std::ffi::c_int, terminated: glib::ffi::gboolean, f: glib::ffi::gpointer) {
+            let f: &F = &*(f as *const F);
+            f(Process::from_glib_borrow(this).unsafe_cast_ref(), code, from_glib(terminated))
+        }
+        unsafe {
+            let f: Box_<F> = Box_::new(f);
+            connect_raw(self.as_ptr() as *mut _, b"exit\0".as_ptr() as *const _,
+                Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(exit_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }

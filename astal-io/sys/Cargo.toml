@@ -17,10 +17,16 @@ all-features = true
 name = "astal_io_sys"
 
 [dependencies]
-libc.workspace = true
-gobject-sys.workspace = true
-gio-sys.workspace = true
-glib-sys.workspace = true
+libc = "0.2"
+
+[dependencies.gobject-sys]
+workspace = true
+
+[dependencies.gio-sys]
+workspace = true
+
+[dependencies.glib-sys]
+workspace = true
 
 [build-dependencies]
 system-deps = "7"

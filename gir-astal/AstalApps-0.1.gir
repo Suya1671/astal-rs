@@ -1,634 +1,625 @@
 <?xml version="1.0" encoding="utf-8"?>
-<repository xmlns="http://www.gtk.org/introspection/core/1.0"
-  xmlns:c="http://www.gtk.org/introspection/c/1.0"
-  xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
-  <include name="GObject" version="2.0" />
-  <include name="GLib" version="2.0" />
-  <package name="astal-apps" />
-  <c:include name="astal-apps.h" />
-  <namespace name="AstalApps" version="0.1" c:prefix="AstalApps" c:identifier-prefixes="AstalApps"
-    c:symbol-prefixes="astal_apps" shared-library="libastal-apps.so">
-    <class name="Application" c:type="AstalAppsApplication" c:symbol-prefix="application"
-      glib:type-name="AstalAppsApplication" glib:get-type="astal_apps_application_get_type"
-      glib:type-struct="ApplicationClass" parent="GObject.Object">
+<repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
+  <include name="GObject" version="2.0"/>
+  <include name="GLib" version="2.0"/>
+  <package name="astal-apps"/>
+  <c:include name="astal-apps.h"/>
+  <namespace name="AstalApps" version="0.1" c:prefix="AstalApps" c:identifier-prefixes="AstalApps" c:symbol-prefixes="astal_apps" shared-library="libastal-apps.so">
+    <class name="Application" c:type="AstalAppsApplication" c:symbol-prefix="application" glib:type-name="AstalAppsApplication" glib:get-type="astal_apps_application_get_type" glib:type-struct="ApplicationClass" parent="GObject.Object">
       <doc xml:whitespace="preserve">Object representing an applications .desktop file.</doc>
       <field name="parent_instance" readable="0" private="1">
-        <type name="GObject.Object" c:type="GObject" />
+        <type name="GObject.Object" c:type="GObject"/>
       </field>
       <field name="priv" readable="0" private="1">
-        <type name="ApplicationPrivate" c:type="AstalAppsApplicationPrivate*" />
+        <type name="ApplicationPrivate" c:type="AstalAppsApplicationPrivate*"/>
       </field>
       <method name="get_key" c:identifier="astal_apps_application_get_key">
         <doc xml:whitespace="preserve">Get a value from the .desktop file by its key.</doc>
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="key" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="launch" c:identifier="astal_apps_application_launch">
-        <doc xml:whitespace="preserve">Launches this application. The launched application inherits
-          the environment of the launching process</doc>
+        <doc xml:whitespace="preserve">Launches this application. The launched application inherits the environment of the launching process</doc>
         <return-value transfer-ownership="full">
-          <type name="gboolean" c:type="gboolean" />
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="fuzzy_match" c:identifier="astal_apps_application_fuzzy_match">
-        <doc xml:whitespace="preserve">Calculate a score for an application using fuzzy matching
-          algorithm.</doc>
+        <doc xml:whitespace="preserve">Calculate a score for an application using fuzzy matching algorithm.</doc>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="term" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="result" direction="out" transfer-ownership="full" caller-allocates="1">
-            <type name="AstalApps.Score" c:type="AstalAppsScore*" />
+            <type name="AstalApps.Score" c:type="AstalAppsScore*"/>
           </parameter>
         </parameters>
       </method>
       <method name="exact_match" c:identifier="astal_apps_application_exact_match">
         <doc xml:whitespace="preserve">Calculate a score using exact string algorithm.</doc>
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="term" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="result" direction="out" transfer-ownership="full" caller-allocates="1">
-            <type name="AstalApps.Score" c:type="AstalAppsScore*" />
+            <type name="AstalApps.Score" c:type="AstalAppsScore*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="app" writable="1" construct="1">
+        <doc xml:whitespace="preserve">The underlying DesktopAppInfo.</doc>
+        <type name="GLib.DesktopAppInfo" c:type="GDesktopAppInfo*"/>
+      </property>
+      <method name="get_app" c:identifier="astal_apps_application_get_app">
+        <return-value transfer-ownership="none">
+          <type name="GLib.DesktopAppInfo" c:type="GDesktopAppInfo*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_app" c:identifier="astal_apps_application_set_app">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GLib.DesktopAppInfo" c:type="GDesktopAppInfo*"/>
           </parameter>
         </parameters>
       </method>
       <property name="frequency" writable="1">
-        <doc xml:whitespace="preserve">The number of times [method@AstalApps.Application.launch] was
-          called on this Application.</doc>
-        <type name="gint" c:type="gint" />
+        <doc xml:whitespace="preserve">The number of times [method@AstalApps.Application.launch] was called on this Application.</doc>
+        <type name="gint" c:type="gint"/>
       </property>
       <method name="get_frequency" c:identifier="astal_apps_application_get_frequency">
         <return-value transfer-ownership="none">
-          <type name="gint" c:type="gint" />
+          <type name="gint" c:type="gint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_frequency" c:identifier="astal_apps_application_set_frequency">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gint" c:type="gint" />
+            <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <property name="name">
         <doc xml:whitespace="preserve">The name of this Application.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_name" c:identifier="astal_apps_application_get_name">
         <return-value transfer-ownership="none">
-          <type name="utf8" c:type="const gchar*" />
+          <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="entry">
         <doc xml:whitespace="preserve">Name of the .desktop of this Application.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_entry" c:identifier="astal_apps_application_get_entry">
         <return-value transfer-ownership="none">
-          <type name="utf8" c:type="const gchar*" />
+          <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="description">
         <doc xml:whitespace="preserve">Description of this Application.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_description" c:identifier="astal_apps_application_get_description">
         <return-value transfer-ownership="none">
-          <type name="utf8" c:type="const gchar*" />
+          <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="wm-class">
-        <doc xml:whitespace="preserve">`StartupWMClass` field from the desktop file. This represents
-          the `WM_CLASS` property of the main window of the application.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <doc xml:whitespace="preserve">`StartupWMClass` field from the desktop file. This represents the `WM_CLASS` property of the main window of the application.</doc>
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_wm_class" c:identifier="astal_apps_application_get_wm_class">
         <return-value transfer-ownership="none">
-          <type name="utf8" c:type="const gchar*" />
+          <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="executable">
-        <doc xml:whitespace="preserve">`Exec` field from the desktop file. Note that if you want to
-          launch this Application you should use the [method@
-          AstalApps.Application.launch] method.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <doc xml:whitespace="preserve">`Exec` field from the desktop file. Note that if you want to launch this Application you should use the [method@
+AstalApps.Application.launch] method.</doc>
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_executable" c:identifier="astal_apps_application_get_executable">
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="icon-name">
-        <doc xml:whitespace="preserve">`Icon` field from the desktop file. This is usually a named
-          icon or a path to a file.</doc>
-        <type name="utf8" c:type="gchar*" />
+        <doc xml:whitespace="preserve">`Icon` field from the desktop file. This is usually a named icon or a path to a file.</doc>
+        <type name="utf8" c:type="gchar*"/>
       </property>
       <method name="get_icon_name" c:identifier="astal_apps_application_get_icon_name">
         <return-value transfer-ownership="full">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="keywords">
         <doc xml:whitespace="preserve">`Keywords` field from the desktop file.</doc>
         <array c:type="gchar**">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </array>
       </property>
       <method name="get_keywords" c:identifier="astal_apps_application_get_keywords">
         <return-value transfer-ownership="full">
           <array length="0" c:type="gchar**">
-            <type name="utf8" c:type="gchar*" />
+            <type name="utf8" c:type="gchar*"/>
           </array>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="result_length1" direction="out" transfer-ownership="none">
-            <type name="gint" c:type="gint*" />
+            <type name="gint" c:type="gint*"/>
           </parameter>
         </parameters>
       </method>
       <property name="categories">
         <doc xml:whitespace="preserve">`Categories` field from the desktop file.</doc>
         <array c:type="gchar**">
-          <type name="utf8" c:type="gchar*" />
+          <type name="utf8" c:type="gchar*"/>
         </array>
       </property>
       <method name="get_categories" c:identifier="astal_apps_application_get_categories">
         <return-value transfer-ownership="full">
           <array length="0" c:type="gchar**">
-            <type name="utf8" c:type="gchar*" />
+            <type name="utf8" c:type="gchar*"/>
           </array>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </instance-parameter>
           <parameter name="result_length1" direction="out" transfer-ownership="none">
-            <type name="gint" c:type="gint*" />
+            <type name="gint" c:type="gint*"/>
           </parameter>
         </parameters>
       </method>
     </class>
-    <record name="ApplicationClass" c:type="AstalAppsApplicationClass"
-      glib:is-gtype-struct-for="Application">
+    <record name="ApplicationClass" c:type="AstalAppsApplicationClass" glib:is-gtype-struct-for="Application">
       <field name="parent_class" readable="0" private="1">
-        <type name="GObject.ObjectClass" c:type="GObjectClass" />
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
       </field>
     </record>
-    <record name="ApplicationPrivate" c:type="AstalAppsApplicationPrivate" disguised="1" />
-    <class name="Apps" c:type="AstalAppsApps" c:symbol-prefix="apps" glib:type-name="AstalAppsApps"
-      glib:get-type="astal_apps_apps_get_type" glib:type-struct="AppsClass" parent="GObject.Object">
-      <doc xml:whitespace="preserve">This object can be used to query applications. Multipliers can
-        be set to customize [struct@AstalApps.Score] results from queries which
-        then are summed and sorted accordingly.</doc>
+    <record name="ApplicationPrivate" c:type="AstalAppsApplicationPrivate" disguised="1"/>
+    <class name="Apps" c:type="AstalAppsApps" c:symbol-prefix="apps" glib:type-name="AstalAppsApps" glib:get-type="astal_apps_apps_get_type" glib:type-struct="AppsClass" parent="GObject.Object">
+      <doc xml:whitespace="preserve">This object can be used to query applications. Multipliers can be set to customize [struct@AstalApps.Score] results from queries which 
+then are summed and sorted accordingly.</doc>
       <field name="parent_instance" readable="0" private="1">
-        <type name="GObject.Object" c:type="GObject" />
+        <type name="GObject.Object" c:type="GObject"/>
       </field>
       <field name="priv" readable="0" private="1">
-        <type name="AppsPrivate" c:type="AstalAppsAppsPrivate*" />
+        <type name="AppsPrivate" c:type="AstalAppsAppsPrivate*"/>
       </field>
       <method name="fuzzy_score" c:identifier="astal_apps_apps_fuzzy_score">
-        <doc xml:whitespace="preserve">Calculate a score for an application using fuzzy matching
-          algorithm. Taking this Apps' include settings into consideration .</doc>
+        <doc xml:whitespace="preserve">Calculate a score for an application using fuzzy matching algorithm. Taking this Apps' include settings into consideration .</doc>
         <return-value transfer-ownership="full">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="search" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="a" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </parameter>
         </parameters>
       </method>
       <method name="exact_score" c:identifier="astal_apps_apps_exact_score">
-        <doc xml:whitespace="preserve">Calculate a score for an application using exact string
-          algorithm. Taking this Apps' include settings into consideration .</doc>
+        <doc xml:whitespace="preserve">Calculate a score for an application using exact string algorithm. Taking this Apps' include settings into consideration .</doc>
         <return-value transfer-ownership="full">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="search" transfer-ownership="none">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="a" transfer-ownership="none">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </parameter>
         </parameters>
       </method>
       <method name="fuzzy_query" c:identifier="astal_apps_apps_fuzzy_query">
-        <doc xml:whitespace="preserve">Query the `list` of applications with a fuzzy matching
-          algorithm.</doc>
+        <doc xml:whitespace="preserve">Query the `list` of applications with a fuzzy matching algorithm.</doc>
         <return-value transfer-ownership="container">
           <type name="GLib.List" c:type="GList*">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </type>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="search" transfer-ownership="none" nullable="1">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="exact_query" c:identifier="astal_apps_apps_exact_query">
-        <doc xml:whitespace="preserve">Query the `list` of applications with a simple string
-          matching algorithm.</doc>
+        <doc xml:whitespace="preserve">Query the `list` of applications with a simple string matching algorithm.</doc>
         <return-value transfer-ownership="container">
           <type name="GLib.List" c:type="GList*">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </type>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="search" transfer-ownership="none" nullable="1">
-            <type name="utf8" c:type="const gchar*" />
+            <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </method>
       <method name="reload" c:identifier="astal_apps_apps_reload">
         <doc xml:whitespace="preserve">Reload the `list` of Applications.</doc>
         <return-value transfer-ownership="full">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <constructor name="new" c:identifier="astal_apps_apps_new">
         <return-value transfer-ownership="full">
-          <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+          <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
         </return-value>
       </constructor>
       <property name="show-hidden" writable="1">
-        <doc xml:whitespace="preserve">Indicates wether hidden applications should included in
-          queries.</doc>
-        <type name="gboolean" c:type="gboolean" />
+        <doc xml:whitespace="preserve">Indicates wether hidden applications should included in queries.</doc>
+        <type name="gboolean" c:type="gboolean"/>
       </property>
       <method name="get_show_hidden" c:identifier="astal_apps_apps_get_show_hidden">
         <return-value transfer-ownership="none">
-          <type name="gboolean" c:type="gboolean" />
+          <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_show_hidden" c:identifier="astal_apps_apps_set_show_hidden">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gboolean" c:type="gboolean" />
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </method>
       <property name="list">
         <doc xml:whitespace="preserve">Full list of available applications.</doc>
         <type name="GLib.List" c:type="GList*">
-          <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+          <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
         </type>
       </property>
       <method name="get_list" c:identifier="astal_apps_apps_get_list">
         <return-value transfer-ownership="container">
           <type name="GLib.List" c:type="GList*">
-            <type name="AstalApps.Application" c:type="AstalAppsApplication*" />
+            <type name="AstalApps.Application" c:type="AstalAppsApplication*"/>
           </type>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <property name="min-score" writable="1">
-        <doc xml:whitespace="preserve">The minimum score the application has to meet in order to be
-          included in queries.</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">The minimum score the application has to meet in order to be included in queries.</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
       <method name="get_min_score" c:identifier="astal_apps_apps_get_min_score">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_min_score" c:identifier="astal_apps_apps_set_min_score">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="name-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the `name` of an
-          application. Defaults to `2`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the `name` of an application. Defaults to `2`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
       <method name="get_name_multiplier" c:identifier="astal_apps_apps_get_name_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_name_multiplier" c:identifier="astal_apps_apps_set_name_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="entry-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the entry of an
-          application. Defaults to `0`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the entry of an application. Defaults to `0`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
       <method name="get_entry_multiplier" c:identifier="astal_apps_apps_get_entry_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_entry_multiplier" c:identifier="astal_apps_apps_set_entry_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="executable-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the executable of an
-          application. Defaults to `0.5`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the executable of an application. Defaults to `0.5`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
-      <method name="get_executable_multiplier"
-        c:identifier="astal_apps_apps_get_executable_multiplier">
+      <method name="get_executable_multiplier" c:identifier="astal_apps_apps_get_executable_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_executable_multiplier"
-        c:identifier="astal_apps_apps_set_executable_multiplier">
+      <method name="set_executable_multiplier" c:identifier="astal_apps_apps_set_executable_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="description-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the description of an
-          application. Defaults to `0`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the description of an application. Defaults to `0`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
-      <method name="get_description_multiplier"
-        c:identifier="astal_apps_apps_get_description_multiplier">
+      <method name="get_description_multiplier" c:identifier="astal_apps_apps_get_description_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_description_multiplier"
-        c:identifier="astal_apps_apps_set_description_multiplier">
+      <method name="set_description_multiplier" c:identifier="astal_apps_apps_set_description_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="keywords-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the keywords of an
-          application. Defaults to `0.5`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the keywords of an application. Defaults to `0.5`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
       <method name="get_keywords_multiplier" c:identifier="astal_apps_apps_get_keywords_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="set_keywords_multiplier" c:identifier="astal_apps_apps_set_keywords_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
       <property name="categories-multiplier" writable="1">
-        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the categories of an
-          application. Defaults to `0`</doc>
-        <type name="gdouble" c:type="gdouble" />
+        <doc xml:whitespace="preserve">Extra multiplier to apply when matching the categories of an application. Defaults to `0`</doc>
+        <type name="gdouble" c:type="gdouble"/>
       </property>
-      <method name="get_categories_multiplier"
-        c:identifier="astal_apps_apps_get_categories_multiplier">
+      <method name="get_categories_multiplier" c:identifier="astal_apps_apps_get_categories_multiplier">
         <return-value transfer-ownership="none">
-          <type name="gdouble" c:type="gdouble" />
+          <type name="gdouble" c:type="gdouble"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
         </parameters>
       </method>
-      <method name="set_categories_multiplier"
-        c:identifier="astal_apps_apps_set_categories_multiplier">
+      <method name="set_categories_multiplier" c:identifier="astal_apps_apps_set_categories_multiplier">
         <return-value transfer-ownership="none">
-          <type name="none" c:type="void" />
+          <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
-            <type name="AstalApps.Apps" c:type="AstalAppsApps*" />
+            <type name="AstalApps.Apps" c:type="AstalAppsApps*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
-            <type name="gdouble" c:type="gdouble" />
+            <type name="gdouble" c:type="gdouble"/>
           </parameter>
         </parameters>
       </method>
     </class>
     <record name="AppsClass" c:type="AstalAppsAppsClass" glib:is-gtype-struct-for="Apps">
       <field name="parent_class" readable="0" private="1">
-        <type name="GObject.ObjectClass" c:type="GObjectClass" />
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
       </field>
     </record>
-    <record name="AppsPrivate" c:type="AstalAppsAppsPrivate" disguised="1" />
-    <record name="Score" c:type="AstalAppsScore" c:symbol-prefix="score"
-      glib:type-name="AstalAppsScore" glib:get-type="astal_apps_score_get_type">
+    <record name="AppsPrivate" c:type="AstalAppsAppsPrivate" disguised="1"/>
+    <record name="Score" c:type="AstalAppsScore" c:symbol-prefix="score" glib:type-name="AstalAppsScore" glib:get-type="astal_apps_score_get_type">
       <field name="name" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
       <field name="entry" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
       <field name="executable" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
       <field name="description" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
       <field name="keywords" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
       <field name="categories" writable="1">
-        <type name="gint" c:type="gint" />
+        <type name="gint" c:type="gint"/>
       </field>
     </record>
-    <constant name="MAJOR_VERSION" c:identifier="ASTAL_APPS_MAJOR_VERSION" value="0"
-      type="ASTAL_APPS_MAJOR_VERSION">
-      <type name="gint" c:type="gint" />
+    <constant name="MAJOR_VERSION" c:identifier="ASTAL_APPS_MAJOR_VERSION" value="0" type="ASTAL_APPS_MAJOR_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MINOR_VERSION" c:identifier="ASTAL_APPS_MINOR_VERSION" value="1"
-      type="ASTAL_APPS_MINOR_VERSION">
-      <type name="gint" c:type="gint" />
+    <constant name="MINOR_VERSION" c:identifier="ASTAL_APPS_MINOR_VERSION" value="1" type="ASTAL_APPS_MINOR_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
-    <constant name="MICRO_VERSION" c:identifier="ASTAL_APPS_MICRO_VERSION" value="0"
-      type="ASTAL_APPS_MICRO_VERSION">
-      <type name="gint" c:type="gint" />
+    <constant name="MICRO_VERSION" c:identifier="ASTAL_APPS_MICRO_VERSION" value="0" type="ASTAL_APPS_MICRO_VERSION">
+      <type name="gint" c:type="gint"/>
     </constant>
   </namespace>
 </repository>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <repository xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0" version="1.2">
-  <include name="GObject" version="2.0"/>
   <include name="Gio" version="2.0"/>
+  <include name="GObject" version="2.0"/>
   <include name="GLib" version="2.0"/>
   <package name="astal-io"/>
   <c:include name="astal-io.h"/>
@@ -10,6 +10,84 @@
       <member name="name_occupied" c:identifier="ASTAL_IO_APP_ERROR_NAME_OCCUPIED" value="0"/>
       <member name="takeover_failed" c:identifier="ASTAL_IO_APP_ERROR_TAKEOVER_FAILED" value="1"/>
     </enumeration>
+    <class name="Daemon" c:type="AstalIODaemon" c:symbol-prefix="daemon" glib:type-name="AstalIODaemon" glib:get-type="astal_io_daemon_get_type" glib:type-struct="DaemonClass" parent="Gio.Application">
+      <implements name="AstalIO.Application"/>
+      <field name="parent_instance" readable="0" private="1">
+        <type name="Gio.Application" c:type="GApplication"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="DaemonPrivate" c:type="AstalIODaemonPrivate*"/>
+      </field>
+      <method name="request" c:identifier="astal_io_daemon_request">
+        <doc xml:whitespace="preserve">Handler for an incoming request.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Daemon" c:type="AstalIODaemon*"/>
+          </instance-parameter>
+          <parameter name="msg" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Body of the message </doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="conn" transfer-ownership="none">
+            <doc xml:whitespace="preserve">The connection which expects the response. </doc>
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <virtual-method name="request" invoker="request">
+        <doc xml:whitespace="preserve">Handler for an incoming request.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="self" transfer-ownership="none">
+            <type name="AstalIO.Daemon" c:type="AstalIODaemon*"/>
+          </instance-parameter>
+          <parameter name="msg" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Body of the message </doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="conn" transfer-ownership="none">
+            <doc xml:whitespace="preserve">The connection which expects the response. </doc>
+            <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <constructor name="new" c:identifier="astal_io_daemon_new">
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Daemon" c:type="AstalIODaemon*"/>
+        </return-value>
+      </constructor>
+    </class>
+    <record name="DaemonClass" c:type="AstalIODaemonClass" glib:is-gtype-struct-for="Daemon">
+      <field name="parent_class" readable="0" private="1">
+        <type name="Gio.ApplicationClass" c:type="GApplicationClass"/>
+      </field>
+      <field name="request">
+        <callback name="request" c:type="request">
+          <return-value transfer-ownership="full">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="self" transfer-ownership="none">
+              <type name="AstalIO.Daemon" c:type="AstalIODaemon*"/>
+            </parameter>
+            <parameter name="msg" transfer-ownership="none">
+              <doc xml:whitespace="preserve">Body of the message </doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+            <parameter name="conn" transfer-ownership="none">
+              <doc xml:whitespace="preserve">The connection which expects the response. </doc>
+              <type name="Gio.SocketConnection" c:type="GSocketConnection*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
+    <record name="DaemonPrivate" c:type="AstalIODaemonPrivate" disguised="1"/>
     <class name="Process" c:type="AstalIOProcess" c:symbol-prefix="process" glib:type-name="AstalIOProcess" glib:get-type="astal_io_process_get_type" glib:type-struct="ProcessClass" parent="GObject.Object">
       <doc xml:whitespace="preserve">`Process` provides shortcuts for [class@Gio.Subprocess] with sane defaults.</doc>
       <field name="parent_instance" readable="0" private="1">
@@ -39,12 +117,13 @@
             <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
           </instance-parameter>
           <parameter name="signal_num" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Signal number to be sent </doc>
             <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
       </method>
       <method name="write" c:identifier="astal_io_process_write" throws="1">
-        <doc xml:whitespace="preserve">Write a line to the subprocess' stdin synchronously.</doc>
+        <doc xml:whitespace="preserve">Write a line to the subprocess' stdin synchronously. hat is the issue</doc>
         <return-value transfer-ownership="full">
           <type name="none" c:type="void"/>
         </return-value>
@@ -53,6 +132,7 @@
             <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
           </instance-parameter>
           <parameter name="in" transfer-ownership="none">
+            <doc xml:whitespace="preserve">String to be written to stdin </doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
@@ -67,6 +147,7 @@
             <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
           </instance-parameter>
           <parameter name="in" transfer-ownership="none">
+            <doc xml:whitespace="preserve">String to be written to stdin </doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
           <parameter name="_callback_" transfer-ownership="none" nullable="1" closure="2" scope="async">
@@ -90,7 +171,23 @@
           </parameter>
         </parameters>
       </method>
-      <constructor name="subprocessv" c:identifier="astal_io_process_new_subprocessv" throws="1">
+      <constructor name="new" c:identifier="astal_io_process_new" throws="1">
+        <doc xml:whitespace="preserve">See [func@AstalIO.Process.subprocessv]</doc>
+        <return-value transfer-ownership="full">
+          <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
+        </return-value>
+        <parameters>
+          <parameter name="cmd" transfer-ownership="none">
+            <array length="1" c:type="gchar**">
+              <type name="utf8" c:type="gchar*"/>
+            </array>
+          </parameter>
+          <parameter name="cmd_length1" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <function name="subprocessv" c:identifier="astal_io_process_subprocessv" throws="1">
         <doc xml:whitespace="preserve">Start a new subprocess with the given command.
 The first element of the vector is executed with the remaining elements as the argument list.</doc>
         <return-value transfer-ownership="full">
@@ -106,7 +203,7 @@ The first element of the vector is executed with the remaining elements as the a
             <type name="gint" c:type="gint"/>
           </parameter>
         </parameters>
-      </constructor>
+      </function>
       <function name="subprocess" c:identifier="astal_io_process_subprocess" throws="1">
         <doc xml:whitespace="preserve">Start a new subprocess with the given command which is parsed using [func@GLib.shell_parse_argv].</doc>
         <return-value transfer-ownership="full">
@@ -208,11 +305,6 @@ The first element of the vector is executed with the remaining elements as the a
           </parameter>
         </parameters>
       </function>
-      <constructor name="new" c:identifier="astal_io_process_new">
-        <return-value transfer-ownership="full">
-          <type name="AstalIO.Process" c:type="AstalIOProcess*"/>
-        </return-value>
-      </constructor>
       <property name="argv" writable="1" construct-only="1">
         <array c:type="gchar**">
           <type name="utf8" c:type="gchar*"/>
@@ -234,24 +326,41 @@ The first element of the vector is executed with the remaining elements as the a
         </parameters>
       </method>
       <glib:signal name="stdout">
-        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stdout this signal is emitted with that line.</doc>
+        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stdout.</doc>
         <return-value transfer-ownership="full">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <parameter name="out" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Line written to stdout </doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </glib:signal>
       <glib:signal name="stderr">
-        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stderr this signal is emitted with that line.</doc>
+        <doc xml:whitespace="preserve">When the underlying subprocess writes to its stderr.</doc>
         <return-value transfer-ownership="full">
           <type name="none" c:type="void"/>
         </return-value>
         <parameters>
           <parameter name="err" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Line written to stderr </doc>
             <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+      <glib:signal name="exit">
+        <doc xml:whitespace="preserve">When the underlying subprocess exits or is terminated.</doc>
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="code" transfer-ownership="none">
+            <doc xml:whitespace="preserve">Exit code or signal number if terminated </doc>
+            <type name="gint" c:type="gint"/>
+          </parameter>
+          <parameter name="terminated" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
       </glib:signal>
